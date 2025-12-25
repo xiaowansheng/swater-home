@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { MapPin, Briefcase, Sparkles } from "lucide-react";
 import { useConfig } from "../context/ConfigContext";
 import { useState, useRef } from "react";
+import { ClockWidget, WeatherWidget } from "./Widgets";
 
 export const ProfileCard = () => {
   const { config, currentContent } = useConfig();
@@ -26,12 +27,18 @@ export const ProfileCard = () => {
     >
       <audio ref={audioRef} src="https://www.myinstants.com/media/sounds/pop-sound-effect.mp3" />
       
-      <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-primary to-secondary" />
+      <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-primary to-secondary" />
+
+      {/* Internal Widgets Integration */}
+      <div className="absolute top-4 left-6 right-6 flex justify-between items-center pointer-events-none opacity-50">
+        <WeatherWidget />
+        <ClockWidget />
+      </div>
 
       <motion.div
         whileHover={{ rotate: 5, scale: 1.1 }}
         onClick={nextQuote}
-        className="w-32 h-32 mx-auto rounded-full border-4 border-primary p-1 cursor-pointer bg-white overflow-hidden shadow-lg mb-6 relative group"
+        className="w-32 h-32 mx-auto rounded-full border-4 border-primary p-1 cursor-pointer bg-white overflow-hidden shadow-lg mb-6 relative group mt-2"
       >
         {config?.avatar ? (
           <img src={config.avatar} alt="Avatar" className="w-full h-full object-cover rounded-full" />

@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Clock, Cloud, Sun, CloudRain, Wind, Eye } from "lucide-react";
+import { Clock, Sun, Eye } from "lucide-react";
 import { useConfig } from "../context/ConfigContext";
+
+const widgetBaseClass = "flex items-center gap-1.5 font-bold";
 
 export const ClockWidget = () => {
   const { config } = useConfig();
@@ -15,16 +17,12 @@ export const ClockWidget = () => {
   if (!config?.features.clock) return null;
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: -10 }}
-      animate={{ opacity: 1, y: 0 }}
-      className="glass px-4 py-2 rounded-full flex items-center gap-2 text-primary font-bold shadow-sm"
-    >
-      <Clock size={16} />
-      <span className="text-sm font-mono">
-        {time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
+    <div className={`${widgetBaseClass} text-primary/60`}>
+      <Clock size={12} />
+      <span className="text-[10px] font-mono leading-none">
+        {time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
       </span>
-    </motion.div>
+    </div>
   );
 };
 
@@ -34,24 +32,16 @@ export const WeatherWidget = () => {
 
   useEffect(() => {
     if (!config?.features.weather) return;
-    
-    // Simulate weather or fetch if API key provided
-    // For now, let's just show a cute anime-style static weather
     setWeather({ temp: 24, icon: "sun" });
   }, [config?.features.weather]);
 
   if (!config?.features.weather || !weather) return null;
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: -10 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 0.1 }}
-      className="glass px-4 py-2 rounded-full flex items-center gap-2 text-secondary font-bold shadow-sm"
-    >
-      <Sun size={16} />
-      <span className="text-sm">{config.widgets.weather.city} · {weather.temp}°C</span>
-    </motion.div>
+    <div className={`${widgetBaseClass} text-secondary/60`}>
+      <Sun size={12} />
+      <span className="text-[10px] leading-none">{config.widgets.weather.city} · {weather.temp}°C</span>
+    </div>
   );
 };
 
@@ -61,15 +51,12 @@ export const VisitorCounter = () => {
 
   useEffect(() => {
     if (!config?.features.visitorCounter) return;
-
-    // Use countapi-js or similar, or just mock it for this example
     const fetchCount = async () => {
       try {
         const res = await fetch(`https://api.countapi.xyz/hit/${config.widgets.visitor.siteId}/visits`);
         const data = await res.json();
         setCount(data.value);
       } catch (e) {
-        // Fallback to random/mock
         setCount(Math.floor(Math.random() * 1000) + 500);
       }
     };
@@ -79,15 +66,9 @@ export const VisitorCounter = () => {
   if (!config?.features.visitorCounter) return null;
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: -10 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 0.2 }}
-      className="glass px-4 py-2 rounded-full flex items-center gap-2 text-slate-500 font-bold shadow-sm"
-    >
-      <Eye size={16} />
-      <span className="text-sm">{count ?? '---'}</span>
-    </motion.div>
+    <div className="flex items-center gap-2 text-slate-400 font-bold opacity-60 hover:opacity-100 transition-opacity">
+      <Eye size={14} />
+      <span className="text-[10px] tracking-widest uppercase">Visitors: {count ?? '---'}</span>
+    </div>
   );
 };
-
