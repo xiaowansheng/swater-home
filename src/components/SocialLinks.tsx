@@ -43,7 +43,10 @@ export const SocialLinks = () => {
             whileTap={{ scale: 0.95 }}
             className="glass p-4 rounded-2xl flex items-center justify-center transition-all duration-300 group"
           >
-            <IconComponent size={24} className="group-hover:text-primary transition-colors text-slate-600" />
+            <IconComponent 
+              size={24} 
+              className="group-hover:text-primary transition-colors text-slate-600 dark:text-slate-300 group-hover:dark:text-primary" 
+            />
           </motion.a>
         );
       })}
@@ -76,12 +79,16 @@ export const FeaturedLinks = () => {
             whileTap={{ scale: 0.98 }}
             className="glass p-5 rounded-2xl flex items-center gap-4 transition-all duration-300 group"
           >
-            <div className="p-3 bg-white rounded-xl shadow-sm group-hover:bg-primary group-hover:text-white transition-colors">
-              <IconComponent size={20} />
+            <div className="p-3 bg-white dark:bg-slate-700 rounded-xl shadow-sm group-hover:bg-primary group-hover:text-white transition-colors">
+              <IconComponent size={20} className="text-slate-700 dark:text-slate-200 group-hover:text-white" />
             </div>
             <div className="text-left">
-              <span className="block font-bold text-slate-700">{link.name}</span>
-              <span className="text-[10px] text-slate-400 uppercase tracking-wider">Visit Link</span>
+              <span className="block font-bold text-slate-700 dark:text-slate-200 group-hover:text-slate-800 dark:group-hover:text-slate-100">
+                {link.name}
+              </span>
+              <span className="text-[10px] text-slate-400 dark:text-slate-500 uppercase tracking-wider">
+                Visit Link
+              </span>
             </div>
           </motion.a>
         );

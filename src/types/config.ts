@@ -26,6 +26,7 @@ export interface ThemeConfig {
   primary: string;
   secondary: string;
   backgroundAlpha: number;
+  mode?: 'light' | 'dark' | 'auto';
 }
 
 export interface FeaturesConfig {
@@ -54,6 +55,9 @@ export interface SEOConfig {
   title: string;
   description: string;
   keywords: string;
+  ogImage?: string;
+  twitterHandle?: string;
+  siteUrl?: string;
 }
 
 export interface Config {

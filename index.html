@@ -5,18 +5,31 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
+    <!-- Preconnect to external domains for better performance -->
+    <link rel="preconnect" href="https://api.dicebear.com" />
+    <link rel="preconnect" href="https://images.unsplash.com" />
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    
     <!-- Primary Meta Tags -->
     <title>Yume's Dimension | Personal Homepage</title>
     <meta name="title" content="Yume's Dimension | Personal Homepage" />
-    <meta name="description" content="A magical personal homepage weaving dreams and code. Explore the dimension of an independent developer." />
-    <meta name="keywords" content="Indie Developer, Anime, React, TypeScript, Personal Website, Portfolio" />
+    <meta name="description" content="A magical personal homepage weaving dreams and code. Explore the dimension of an independent developer passionate about anime and technology." />
+    <meta name="keywords" content="Indie Developer, Anime, React, TypeScript, Personal Website, Portfolio, Full Stack Developer, Web Development" />
+    <meta name="author" content="Yume" />
+    <meta name="robots" content="index, follow" />
+    <meta name="language" content="English" />
+    <meta name="revisit-after" content="7 days" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://yume.example.com/" />
     <meta property="og:title" content="Yume's Dimension | Personal Homepage" />
-    <meta property="og:description" content="A magical personal homepage weaving dreams and code." />
+    <meta property="og:description" content="A magical personal homepage weaving dreams and code. Explore the dimension of an independent developer passionate about anime and technology." />
     <meta property="og:image" content="/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="Yume's Dimension" />
+    <meta property="og:locale" content="en_US" />
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
@@ -24,9 +37,63 @@
     <meta property="twitter:title" content="Yume's Dimension | Personal Homepage" />
     <meta property="twitter:description" content="A magical personal homepage weaving dreams and code." />
     <meta property="twitter:image" content="/og-image.png" />
+    <meta property="twitter:creator" content="@yume_dev" />
+
+    <!-- Additional Meta Tags -->
+    <meta name="theme-color" content="#ff6b9d" />
+    <meta name="msapplication-TileColor" content="#ff6b9d" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Yume's Dimension" />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://yume.example.com/" />
+
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- Performance hints -->
+    <link rel="preload" href="/config.json" as="fetch" crossorigin="anonymous" />
+    
+    <!-- Critical CSS inlined for better performance -->
+    <style>
+      /* Critical above-the-fold styles */
+      body { 
+        margin: 0; 
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        background: linear-gradient(135deg, #fdf2f8 0%, #fef3e2 100%);
+        min-height: 100vh;
+      }
+      .dark body {
+        background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      }
+      #root { min-height: 100vh; }
+      .loading-spinner {
+        width: 40px;
+        height: 40px;
+        border: 4px solid #f3f4f6;
+        border-top: 4px solid #ff6b9d;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin: 20px auto;
+      }
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+    </style>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <!-- Fallback loading indicator -->
+      <div style="display: flex; align-items: center; justify-content: center; min-height: 100vh; flex-direction: column;">
+        <div class="loading-spinner"></div>
+        <p style="color: #64748b; font-size: 14px; margin-top: 16px;">Loading dimension...</p>
+      </div>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

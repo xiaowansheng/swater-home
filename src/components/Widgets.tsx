@@ -17,7 +17,7 @@ export const ClockWidget = () => {
   if (!config?.features.clock) return null;
 
   return (
-    <div className={`${widgetBaseClass} text-primary/60`}>
+    <div className={`${widgetBaseClass} text-primary/60 dark:text-primary/80`}>
       <Clock size={12} />
       <span className="text-[10px] font-mono leading-none">
         {time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
@@ -38,7 +38,7 @@ export const WeatherWidget = () => {
   if (!config?.features.weather || !weather) return null;
 
   return (
-    <div className={`${widgetBaseClass} text-secondary/60`}>
+    <div className={`${widgetBaseClass} text-secondary/60 dark:text-secondary/80`}>
       <Sun size={12} />
       <span className="text-[10px] leading-none">{config.widgets.weather.city} · {weather.temp}°C</span>
     </div>
@@ -66,7 +66,7 @@ export const VisitorCounter = () => {
   if (!config?.features.visitorCounter) return null;
 
   return (
-    <div className="flex items-center gap-2 text-slate-400 font-bold opacity-60 hover:opacity-100 transition-opacity">
+    <div className="flex items-center gap-2 text-slate-400 dark:text-slate-500 font-bold opacity-60 hover:opacity-100 transition-opacity">
       <Eye size={14} />
       <span className="text-[10px] tracking-widest uppercase">Visitors: {count ?? '---'}</span>
     </div>

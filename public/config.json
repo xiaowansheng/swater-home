@@ -6,7 +6,8 @@
   "theme": {
     "primary": "#ff6b9d",
     "secondary": "#fb923c",
-    "backgroundAlpha": 0.4
+    "backgroundAlpha": 0.4,
+    "mode": "auto"
   },
   "features": {
     "customCursor": true,
@@ -40,8 +41,11 @@
   },
   "seo": {
     "title": "Yume's Dimension | Personal Homepage",
-    "description": "A magical personal homepage weaving dreams and code.",
-    "keywords": "Indie Developer, Anime, React, TypeScript, Personal Website"
+    "description": "A magical personal homepage weaving dreams and code. Explore the dimension of an independent developer passionate about anime and technology.",
+    "keywords": "Indie Developer, Anime, React, TypeScript, Personal Website, Portfolio, Full Stack Developer, Web Development",
+    "ogImage": "/og-image.png",
+    "twitterHandle": "@yume_dev",
+    "siteUrl": "https://yume.example.com"
   },
   "content": {
     "zh": {

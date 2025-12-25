@@ -38,12 +38,12 @@ export const ProfileCard = () => {
       <motion.div
         whileHover={{ rotate: 5, scale: 1.1 }}
         onClick={nextQuote}
-        className="w-32 h-32 mx-auto rounded-full border-4 border-primary p-1 cursor-pointer bg-white overflow-hidden shadow-lg mb-6 relative group mt-2"
+        className="w-32 h-32 mx-auto rounded-full border-4 border-primary p-1 cursor-pointer bg-white dark:bg-slate-700 overflow-hidden shadow-lg mb-6 relative group mt-2"
       >
         {config?.avatar ? (
           <img src={config.avatar} alt="Avatar" className="w-full h-full object-cover rounded-full" />
         ) : (
-          <div className="w-full h-full rounded-full bg-gradient-to-br from-pink-100 to-orange-50 flex items-center justify-center text-4xl">
+          <div className="w-full h-full rounded-full bg-gradient-to-br from-pink-100 to-orange-50 dark:from-pink-900/30 dark:to-orange-900/30 flex items-center justify-center text-4xl">
             ✨
           </div>
         )}
@@ -55,18 +55,18 @@ export const ProfileCard = () => {
       <h1 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary mb-2">
         {currentContent.name}
       </h1>
-      <p className="text-slate-500 font-medium mb-4">@{currentContent.nickname}</p>
+      <p className="text-slate-500 dark:text-slate-400 font-medium mb-4">@{currentContent.nickname}</p>
       
-      <p className="text-slate-700 leading-relaxed mb-6">
+      <p className="text-slate-700 dark:text-slate-300 leading-relaxed mb-6">
         {currentContent.bio}
       </p>
 
-      <div className="flex justify-center gap-6 text-sm text-slate-500 mb-8">
-        <span className="flex items-center gap-1.5 bg-slate-100/50 px-3 py-1 rounded-full border border-slate-200">
+      <div className="flex justify-center gap-6 text-sm text-slate-500 dark:text-slate-400 mb-8">
+        <span className="flex items-center gap-1.5 bg-slate-100/50 dark:bg-slate-800/50 px-3 py-1 rounded-full border border-slate-200 dark:border-slate-700">
           <MapPin size={16} className="text-primary" />
           {currentContent.location}
         </span>
-        <span className="flex items-center gap-1.5 bg-slate-100/50 px-3 py-1 rounded-full border border-slate-200">
+        <span className="flex items-center gap-1.5 bg-slate-100/50 dark:bg-slate-800/50 px-3 py-1 rounded-full border border-slate-200 dark:border-slate-700">
           <Briefcase size={16} className="text-secondary" />
           {currentContent.occupation}
         </span>
@@ -76,7 +76,7 @@ export const ProfileCard = () => {
         {currentContent.skills.map((skill, index) => (
           <span 
             key={index} 
-            className="px-3 py-1 bg-primary/10 text-primary text-xs font-bold rounded-full border border-primary/20"
+            className="px-3 py-1 bg-primary/10 dark:bg-primary/20 text-primary dark:text-primary text-xs font-bold rounded-full border border-primary/20 dark:border-primary/30"
           >
             {skill}
           </span>
@@ -87,7 +87,7 @@ export const ProfileCard = () => {
         key={quoteIndex}
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
-        className="bg-white/40 backdrop-blur-sm rounded-2xl p-6 italic text-slate-600 border border-primary/10 relative shadow-inner group cursor-pointer"
+        className="bg-white/40 dark:bg-black/20 backdrop-blur-sm rounded-2xl p-6 italic text-slate-600 dark:text-slate-300 border border-primary/10 dark:border-primary/20 relative shadow-inner group cursor-pointer"
         onClick={nextQuote}
       >
         <span className="absolute -top-3 left-6 bg-primary text-white px-3 py-0.5 text-[10px] font-black rounded-full shadow-md transform -rotate-2 group-hover:rotate-0 transition-transform">
