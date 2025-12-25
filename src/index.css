@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary-color: #ff6b9d;
+  --secondary-color: #fb923c;
+}
+
+body {
+  @apply bg-slate-50 text-slate-900 transition-colors duration-300;
+  font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+}
+
+.glass {
+  @apply bg-white/60 backdrop-blur-md border border-white/40 shadow-xl;
+}
+
+.btn-bounce {
+  @apply transition-transform active:scale-95 hover:scale-105;
+}

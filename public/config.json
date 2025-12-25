@@ -1,0 +1,51 @@
+{
+  "activeLang": "auto",
+  "background": "sakura",
+  "theme": {
+    "primary": "#ff6b9d",
+    "secondary": "#fb923c",
+    "backgroundAlpha": 0.6
+  },
+  "content": {
+    "zh": {
+      "name": "梦之守望者",
+      "nickname": "Yume",
+      "bio": "在数字世界的边缘，编织着色彩斑斓的梦境 ✨",
+      "location": "次元裂缝",
+      "occupation": "全栈魔法师",
+      "quotes": [
+        "今天的风儿，略微有些喧嚣呢...",
+        "只要微笑就好了，不是吗？",
+        "在虚幻与现实的交界处，寻找属于自己的光。"
+      ],
+      "links": [
+        { "name": "个人博客", "url": "https://blog.example.com", "icon": "Globe" },
+        { "name": "项目演示", "url": "https://demo.example.com", "icon": "Zap" }
+      ],
+      "footer": "由 爱与代码 驱动"
+    },
+    "en": {
+      "name": "Dream Watcher",
+      "nickname": "Yume",
+      "bio": "Weaving colorful dreams on the edge of the digital world ✨",
+      "location": "Dimension Rift",
+      "occupation": "Fullstack Mage",
+      "quotes": [
+        "The wind is troubled today...",
+        "Just smile, okay?",
+        "Finding my own light at the intersection of illusion and reality."
+      ],
+      "links": [
+        { "name": "Blog", "url": "https://blog.example.com", "icon": "Globe" },
+        { "name": "Demo", "url": "https://demo.example.com", "icon": "Zap" }
+      ],
+      "footer": "Powered by Love & Code"
+    }
+  },
+  "social": [
+    { "platform": "GitHub", "url": "https://github.com", "icon": "Github" },
+    { "platform": "Twitter", "url": "https://twitter.com", "icon": "Twitter" },
+    { "platform": "Email", "url": "mailto:hello@example.com", "icon": "Mail" }
+  ]
+}
+
