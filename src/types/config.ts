@@ -28,12 +28,44 @@ export interface ThemeConfig {
   backgroundAlpha: number;
 }
 
+export interface FeaturesConfig {
+  customCursor: boolean;
+  parallax: boolean;
+  floatingDecorations: boolean;
+  musicPlayer: boolean;
+  clock: boolean;
+  weather: boolean;
+  visitorCounter: boolean;
+}
+
+export interface WidgetsConfig {
+  music: { url: string; title: string };
+  weather: { city: string; apiKey?: string };
+  visitor: { siteId: string };
+}
+
+export interface LoadingConfig {
+  type: string;
+  image: string;
+  text: { zh: string; en: string };
+}
+
+export interface SEOConfig {
+  title: string;
+  description: string;
+  keywords: string;
+}
+
 export interface Config {
   activeLang: 'auto' | 'zh' | 'en';
   background: 'sakura' | 'stars';
   avatar?: string;
   backgroundImage?: string;
   theme: ThemeConfig;
+  features: FeaturesConfig;
+  widgets: WidgetsConfig;
+  loading: LoadingConfig;
+  seo: SEOConfig;
   content: {
     zh: LanguageContent;
     en: LanguageContent;

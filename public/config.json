@@ -8,6 +8,41 @@
     "secondary": "#fb923c",
     "backgroundAlpha": 0.4
   },
+  "features": {
+    "customCursor": true,
+    "parallax": true,
+    "floatingDecorations": true,
+    "musicPlayer": true,
+    "clock": true,
+    "weather": true,
+    "visitorCounter": true
+  },
+  "widgets": {
+    "music": {
+      "url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+      "title": "Anime BGM"
+    },
+    "weather": {
+      "city": "Tokyo",
+      "apiKey": "optional_api_key"
+    },
+    "visitor": {
+      "siteId": "yume-homepage"
+    }
+  },
+  "loading": {
+    "type": "character",
+    "image": "https://api.dicebear.com/7.x/adventurer/svg?seed=Loading&backgroundColor=ffdfbf",
+    "text": {
+      "zh": "正在打开次元通道...",
+      "en": "Opening dimension rift..."
+    }
+  },
+  "seo": {
+    "title": "Yume's Dimension | Personal Homepage",
+    "description": "A magical personal homepage weaving dreams and code.",
+    "keywords": "Indie Developer, Anime, React, TypeScript, Personal Website"
+  },
   "content": {
     "zh": {
       "name": "梦之守望者",
