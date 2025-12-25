@@ -1,51 +1,62 @@
 {
   "activeLang": "auto",
   "background": "sakura",
+  "avatar": "https://api.dicebear.com/7.x/adventurer/svg?seed=Yume&backgroundColor=ffdfbf",
+  "backgroundImage": "https://images.unsplash.com/photo-1578632738908-45244a390141?q=80&w=2070&auto=format&fit=crop",
   "theme": {
     "primary": "#ff6b9d",
     "secondary": "#fb923c",
-    "backgroundAlpha": 0.6
+    "backgroundAlpha": 0.4
   },
   "content": {
     "zh": {
       "name": "梦之守望者",
       "nickname": "Yume",
-      "bio": "在数字世界的边缘，编织着色彩斑斓的梦境 ✨",
+      "bio": "在数字世界的边缘，编织着色彩斑斓的梦境 ✨。热爱二次元文化，致力于通过代码将幻想变为现实。",
       "location": "次元裂缝",
-      "occupation": "全栈魔法师",
+      "occupation": "全栈魔法师 / 独立开发者",
+      "skills": ["TypeScript", "React", "Node.js", "Python", "魔法少女修行中"],
       "quotes": [
         "今天的风儿，略微有些喧嚣呢...",
         "只要微笑就好了，不是吗？",
-        "在虚幻与现实的交界处，寻找属于自己的光。"
+        "在虚幻与现实的交界处，寻找属于自己的光。",
+        "隐藏着星星力量的钥匙啊，在我面前显示你真正的力量！"
       ],
       "links": [
         { "name": "个人博客", "url": "https://blog.example.com", "icon": "Globe" },
-        { "name": "项目演示", "url": "https://demo.example.com", "icon": "Zap" }
+        { "name": "项目演示", "url": "https://demo.example.com", "icon": "Zap" },
+        { "name": "我的画廊", "url": "https://gallery.example.com", "icon": "Palette" },
+        { "name": "实验室", "url": "https://lab.example.com", "icon": "FlaskConical" }
       ],
-      "footer": "由 爱与代码 驱动"
+      "footer": "由 爱与代码 驱动 | © 2025 Yume"
     },
     "en": {
       "name": "Dream Watcher",
       "nickname": "Yume",
-      "bio": "Weaving colorful dreams on the edge of the digital world ✨",
+      "bio": "Weaving colorful dreams on the edge of the digital world ✨. Anime enthusiast, turning fantasy into reality through code.",
       "location": "Dimension Rift",
-      "occupation": "Fullstack Mage",
+      "occupation": "Fullstack Mage / Indie Dev",
+      "skills": ["TypeScript", "React", "Node.js", "Python", "Magical Girl Training"],
       "quotes": [
         "The wind is troubled today...",
         "Just smile, okay?",
-        "Finding my own light at the intersection of illusion and reality."
+        "Finding my own light at the intersection of illusion and reality.",
+        "Key that hides the power of the stars, show your true form before me!"
       ],
       "links": [
         { "name": "Blog", "url": "https://blog.example.com", "icon": "Globe" },
-        { "name": "Demo", "url": "https://demo.example.com", "icon": "Zap" }
+        { "name": "Demo", "url": "https://demo.example.com", "icon": "Zap" },
+        { "name": "Gallery", "url": "https://gallery.example.com", "icon": "Palette" },
+        { "name": "Lab", "url": "https://lab.example.com", "icon": "FlaskConical" }
       ],
-      "footer": "Powered by Love & Code"
+      "footer": "Powered by Love & Code | © 2025 Yume"
     }
   },
   "social": [
     { "platform": "GitHub", "url": "https://github.com", "icon": "Github" },
     { "platform": "Twitter", "url": "https://twitter.com", "icon": "Twitter" },
+    { "platform": "Discord", "url": "https://discord.com", "icon": "MessageCircle" },
+    { "platform": "Bilibili", "url": "https://bilibili.com", "icon": "Tv" },
     { "platform": "Email", "url": "mailto:hello@example.com", "icon": "Mail" }
   ]
 }
-

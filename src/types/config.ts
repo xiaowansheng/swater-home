@@ -10,6 +10,7 @@ export interface LanguageContent {
   bio: string;
   location: string;
   occupation: string;
+  skills: string[];
   quotes: string[];
   links: LinkItem[];
   footer: string;
@@ -30,6 +31,8 @@ export interface ThemeConfig {
 export interface Config {
   activeLang: 'auto' | 'zh' | 'en';
   background: 'sakura' | 'stars';
+  avatar?: string;
+  backgroundImage?: string;
   theme: ThemeConfig;
   content: {
     zh: LanguageContent;
@@ -37,4 +40,3 @@ export interface Config {
   };
   social: SocialItem[];
 }
-

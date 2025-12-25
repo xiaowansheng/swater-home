@@ -49,7 +49,7 @@ export const DynamicBackground = () => {
       background: { color: { value: "transparent" } },
       fpsLimit: 120,
       particles: {
-        number: { value: 100, density: { enable: true, area: 800 } },
+        number: { value: 80, density: { enable: true, area: 800 } },
         color: { value: "#ffffff" },
         shape: { type: "circle" },
         opacity: {
@@ -77,12 +77,21 @@ export const DynamicBackground = () => {
     };
   }, [config?.background]);
 
-  if (!init) return null;
-
   return (
-    <div className="fixed inset-0 -z-10">
-      <Particles id="tsparticles" options={options} />
-    </div>
+    <>
+      {config?.backgroundImage && (
+        <div 
+          className="fixed inset-0 -z-20 bg-cover bg-center bg-no-repeat transition-opacity duration-1000"
+          style={{ 
+            backgroundImage: `url(${config.backgroundImage})`,
+            opacity: config.theme?.backgroundAlpha ?? 0.5
+          }}
+        />
+      )}
+      <div className="fixed inset-0 -z-10">
+        {init && <Particles id="tsparticles" options={options} />}
+      </div>
+      <div className="fixed inset-0 -z-15 bg-gradient-to-b from-white/10 to-white/30 backdrop-blur-[2px]" />
+    </>
   );
 };
-
