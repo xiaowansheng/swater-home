@@ -17,144 +17,164 @@ const Hero: React.FC = () => {
   };
 
   return (
-    <section className="min-h-screen pt-12 pb-24 px-4 flex items-center justify-center max-w-7xl mx-auto overflow-hidden">
+    <section className="min-h-screen pt-12 pb-24 px-4 flex flex-col items-center justify-center max-w-7xl mx-auto overflow-hidden">
       
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 w-full h-full items-center">
+      <div className="w-full flex flex-col gap-8">
         
-        {/* Left Column: Avatar UI */}
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, type: "spring", bounce: 0.4 }}
-          className="lg:col-span-4 flex justify-center lg:justify-end"
-        >
-          <div className="relative">
-            {/* Background Glows */}
-            <div className="absolute -inset-4 bg-gradient-to-tr from-sky-400 to-indigo-400 rounded-full opacity-20 blur-2xl animate-pulse"></div>
-            <div className="absolute -inset-1 bg-gradient-to-tr from-sky-400 to-indigo-400 rounded-full opacity-40 blur-md"></div>
-            
-            {/* Avatar Container */}
-            <div className="relative w-64 h-64 md:w-80 md:h-80 bg-white p-2 rounded-full shadow-2xl border-4 border-white overflow-hidden group">
-              <div className="w-full h-full rounded-full overflow-hidden bg-sky-50 relative">
-                <img 
-                  src={identity.avatarUrl} 
-                  alt="Avatar" 
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                />
-                
-                {/* Border effect on hover */}
-                <div className="absolute inset-0 rounded-full border-0 group-hover:border-[12px] border-white/20 transition-all duration-300"></div>
-              </div>
+        {/* Row 1: Avatar + Identity */}
+        <div className="flex flex-col md:flex-row items-center gap-6 md:gap-10">
+          {/* Avatar Section */}
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, type: "spring", bounce: 0.4 }}
+            className="flex-shrink-0"
+          >
+            <div className="relative">
+              {/* Background Glows */}
+              <div className="absolute -inset-4 bg-gradient-to-tr from-sky-400 to-indigo-400 rounded-full opacity-20 blur-2xl animate-pulse"></div>
+              <div className="absolute -inset-1 bg-gradient-to-tr from-sky-400 to-indigo-400 rounded-full opacity-40 blur-md"></div>
               
-              {/* Rarity & Level Badges */}
-              <div className="absolute top-4 right-4 flex flex-col gap-2 z-30">
+              {/* Avatar Container */}
+              <div className="relative w-40 h-40 md:w-48 md:h-48 bg-white p-1.5 rounded-full shadow-2xl border-4 border-white overflow-hidden group">
+                <div className="w-full h-full rounded-full overflow-hidden bg-sky-50 relative">
+                  <img 
+                    src={identity.avatarUrl} 
+                    alt="Avatar" 
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 rounded-full border-0 group-hover:border-[8px] border-white/20 transition-all duration-300"></div>
+                </div>
+                
+                {/* SSR Badge */}
                 <motion.div 
                   animate={{ y: [0, -5, 0] }}
                   transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                  className="bg-gradient-to-r from-yellow-400 to-orange-500 text-white text-[10px] font-black px-2 py-0.5 rounded shadow-lg border border-white self-end"
+                  className="absolute top-2 right-2 bg-gradient-to-r from-yellow-400 to-orange-500 text-white text-[9px] font-black px-1.5 py-0.5 rounded shadow-lg border border-white z-30"
                 >
                   {identity.rarity}
                 </motion.div>
-                <motion.div 
-                  animate={{ y: [0, -10, 0] }}
-                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-                  className="bg-sky-500 text-white text-xs font-black px-3 py-1.5 rounded-full shadow-lg border-2 border-white"
-                >
-                  {identity.level}
-                </motion.div>
               </div>
             </div>
-          </div>
-        </motion.div>
+          </motion.div>
 
-        {/* Right Column: Status Panel (Info) */}
+          {/* Identity Section */}
+          <motion.div 
+            initial={{ opacity: 0, x: 30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="flex-1 flex flex-col items-center md:items-start text-center md:text-left pt-4"
+          >
+            <h4 className="text-sky-500 font-bold tracking-widest text-sm mb-2">{identity.title}</h4>
+            <h1 className="text-5xl md:text-7xl font-rounded font-black text-gray-800 leading-none mb-3">
+              {identity.nickname}<span className="text-sky-400">{identity.suffix}</span>
+            </h1>
+            <div className="flex items-center gap-3">
+              <span className="bg-sky-500 text-white text-xs font-black px-3 py-1 rounded-full shadow-md">
+                {identity.level}
+              </span>
+              <p className="text-gray-500 font-bold tracking-wide">{identity.role}</p>
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Row 2: Social Links */}
         <motion.div 
-          initial={{ opacity: 0, x: 50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="lg:col-span-8 flex flex-col gap-4 max-w-2xl mx-auto lg:mx-0"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+          className="flex flex-wrap justify-center md:justify-start gap-4 p-4 glass-panel rounded-2xl border-l-8 border-sky-400"
         >
-          {/* Header Name Plate */}
-          <div className="glass-panel p-6 rounded-3xl border-l-8 border-sky-400">
-            <div className="flex flex-col md:flex-row md:items-end gap-4 justify-between">
-              <div>
-                <h4 className="text-sky-500 font-bold tracking-widest text-sm mb-1">{identity.title}</h4>
-                <h1 className="text-5xl md:text-6xl font-rounded font-black text-gray-800 leading-none">
-                  {identity.nickname}<span className="text-sky-400">{identity.suffix}</span>
-                </h1>
-              </div>
-              <div className="flex gap-2">
-                 {socials.map((social) => (
-                   <SocialBtn 
-                      key={social.platform} 
-                      href={social.url} 
-                      icon={getSocialIcon(social.platform)} 
-                      label={social.label}
-                    />
-                 ))}
-              </div>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-             {/* Stats Box */}
-             <div className="glass-panel p-5 rounded-3xl">
-                <h3 className="font-bold text-gray-700 mb-4 flex items-center gap-2">
-                  <Star size={18} className="text-yellow-400 fill-yellow-400" /> Stats
-                </h3>
-                
-                <div className="space-y-3">
-                  {stats.map(stat => (
-                    <StatBar key={stat.label} label={stat.label} val={stat.val} color={stat.color} />
-                  ))}
-                </div>
-             </div>
-
-             {/* Info/Attributes */}
-             <div className="flex flex-col gap-4">
-                {/* Location & Role */}
-                <div className="glass-panel p-5 rounded-3xl flex-1 flex flex-col justify-center">
-                   <div className="flex items-center gap-3 mb-3">
-                     <div className="w-10 h-10 rounded-full bg-teal-50 flex items-center justify-center text-teal-500">
-                       <MapPin size={20} />
-                     </div>
-                     <div>
-                       <p className="text-xs text-gray-500 font-bold uppercase">Base</p>
-                       <p className="font-bold text-gray-800">{status.location}</p>
-                     </div>
-                   </div>
-                   <div className="flex items-center gap-3">
-                     <div className="w-10 h-10 rounded-full bg-indigo-50 flex items-center justify-center text-indigo-500">
-                       <Zap size={20} />
-                     </div>
-                     <div>
-                       <p className="text-xs text-gray-500 font-bold uppercase">Class</p>
-                       <p className="font-bold text-gray-800">{status.occupation}</p>
-                     </div>
-                   </div>
-                </div>
-
-                {/* Current Status */}
-                <div className="glass-panel p-5 rounded-3xl bg-gradient-to-r from-sky-400 to-indigo-400 text-white shadow-lg shadow-sky-200">
-                   <div className="flex justify-between items-start">
-                     <div>
-                       <p className="text-xs opacity-80 font-bold uppercase mb-1">Current Quest</p>
-                       <p className="font-bold text-lg leading-tight">{status.currentQuest}</p>
-                     </div>
-                     <Heart className="fill-white/20 text-white" />
-                   </div>
-                </div>
-             </div>
-          </div>
-
-          {/* Description */}
-          <div className="glass-panel p-6 rounded-3xl">
-             <p className="text-gray-600 leading-relaxed font-medium">
-               "{bio}"
-             </p>
-          </div>
-
+          <span className="flex items-center text-gray-400 text-xs font-black uppercase tracking-widest mr-2 border-r pr-4 border-gray-200">Connect</span>
+          {socials.map((social) => (
+            <SocialBtn 
+              key={social.platform} 
+              href={social.url} 
+              icon={getSocialIcon(social.platform)} 
+              label={social.label}
+            />
+          ))}
         </motion.div>
+
+        {/* Row 3: Main Stats & Status */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+           {/* Stats Box */}
+           <motion.div 
+             initial={{ opacity: 0, scale: 0.95 }}
+             animate={{ opacity: 1, scale: 1 }}
+             transition={{ duration: 0.5, delay: 0.4 }}
+             className="glass-panel p-6 rounded-3xl"
+           >
+              <h3 className="font-bold text-gray-700 mb-6 flex items-center gap-2">
+                <Star size={18} className="text-yellow-400 fill-yellow-400" /> Attributes
+              </h3>
+              
+              <div className="space-y-4">
+                {stats.map(stat => (
+                  <StatBar key={stat.label} label={stat.label} val={stat.val} color={stat.color} />
+                ))}
+              </div>
+           </motion.div>
+
+           {/* Info/Attributes */}
+           <div className="flex flex-col gap-6">
+              {/* Location & Role */}
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5, delay: 0.5 }}
+                className="glass-panel p-6 rounded-3xl flex-1 flex flex-col justify-center gap-4"
+              >
+                 <div className="flex items-center gap-4">
+                   <div className="w-12 h-12 rounded-full bg-teal-50 flex items-center justify-center text-teal-500 shadow-inner">
+                     <MapPin size={24} />
+                   </div>
+                   <div>
+                     <p className="text-xs text-gray-400 font-bold uppercase">Base Location</p>
+                     <p className="font-bold text-gray-800 text-lg">{status.location}</p>
+                   </div>
+                 </div>
+                 <div className="flex items-center gap-4">
+                   <div className="w-12 h-12 rounded-full bg-indigo-50 flex items-center justify-center text-indigo-500 shadow-inner">
+                     <Zap size={24} />
+                   </div>
+                   <div>
+                     <p className="text-xs text-gray-400 font-bold uppercase">Class Specialization</p>
+                     <p className="font-bold text-gray-800 text-lg">{status.occupation}</p>
+                   </div>
+                 </div>
+              </motion.div>
+
+              {/* Current Status */}
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5, delay: 0.6 }}
+                className="glass-panel p-6 rounded-3xl bg-gradient-to-r from-sky-400 to-indigo-400 text-white shadow-xl shadow-sky-200"
+              >
+                 <div className="flex justify-between items-start">
+                   <div>
+                     <p className="text-xs opacity-80 font-bold uppercase mb-2">Current Activity</p>
+                     <p className="font-bold text-xl leading-tight">{status.currentQuest}</p>
+                   </div>
+                   <Heart className="fill-white/20 text-white" />
+                 </div>
+              </motion.div>
+           </div>
+        </div>
+
+        {/* Row 4: Biography */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.7 }}
+          className="glass-panel p-8 rounded-3xl border-t-4 border-sky-400"
+        >
+           <p className="text-gray-600 leading-relaxed font-semibold italic text-lg text-center md:text-left">
+             "{bio}"
+           </p>
+        </motion.div>
+
       </div>
     </section>
   );
@@ -166,24 +186,25 @@ const SocialBtn: React.FC<{ icon: React.ReactNode; href: string; label: string }
     target="_blank"
     rel="noopener noreferrer"
     title={label}
-    className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-gray-500 hover:text-white hover:bg-sky-400 transition-all shadow-sm border border-sky-50"
+    className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white text-gray-500 hover:text-white hover:bg-sky-500 transition-all shadow-sm border border-sky-50 font-bold text-sm"
   >
-    {icon}
+    {icon} 
+    <span className="hidden sm:inline">{label}</span>
   </a>
 );
 
 const StatBar: React.FC<{ label: string; val: number; color: string }> = ({ label, val, color }) => (
-  <div className="flex items-center gap-3">
-    <span className="w-12 text-xs font-bold text-gray-500 text-right">{label}</span>
-    <div className="flex-1 h-2 bg-gray-100 rounded-full overflow-hidden">
+  <div className="flex items-center gap-4">
+    <span className="w-16 text-xs font-black text-gray-400 text-right uppercase tracking-tighter">{label}</span>
+    <div className="flex-1 h-3 bg-gray-100 rounded-full overflow-hidden shadow-inner">
       <motion.div 
         initial={{ width: 0 }}
         animate={{ width: `${val}%` }}
-        transition={{ duration: 1, delay: 0.5 }}
+        transition={{ duration: 1, delay: 1 }}
         className={`h-full ${color} rounded-full`}
       />
     </div>
-    <span className="w-8 text-xs font-bold text-gray-400">{val}</span>
+    <span className="w-10 text-xs font-black text-gray-800">{val}%</span>
   </div>
 );
 
