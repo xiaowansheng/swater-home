@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavItem, ViewState } from '@types';
 import { NAV_ITEMS } from '@constants';
-import { Home, User, Image as ImageIcon, BookOpen } from 'lucide-react';
+import { Home, User, Globe, BookOpen } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 interface NavbarProps {
@@ -15,7 +15,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, setCurrentView }) => {
     switch(id) {
       case ViewState.HOME: return <Home size={20} />;
       case ViewState.ABOUT: return <User size={20} />;
-      case ViewState.GALLERY: return <ImageIcon size={20} />;
+      case ViewState.WEBSITES: return <Globe size={20} />;
       case ViewState.BLOG: return <BookOpen size={20} />;
       default: return <Home size={20} />;
     }

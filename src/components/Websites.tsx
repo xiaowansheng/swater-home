@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { PROJECTS } from '@constants';
 import { ExternalLink, Heart } from 'lucide-react';
 
-const Gallery: React.FC = () => {
+const Websites: React.FC = () => {
   return (
     <section className="min-h-screen pt-24 px-6 max-w-7xl mx-auto">
       <motion.div
@@ -11,9 +11,9 @@ const Gallery: React.FC = () => {
         animate={{ opacity: 1, y: 0 }}
         className="text-center mb-12"
       >
-        <h2 className="text-4xl font-bold text-gray-800 mb-4">My Gallery</h2>
+        <h2 className="text-4xl font-bold text-gray-800 mb-4">My Websites</h2>
         <p className="text-gray-600 max-w-2xl mx-auto">
-          A collection of my recent coding projects, designs, and experiments.
+          A collection of my developed websites and applications.
         </p>
       </motion.div>
 
@@ -47,9 +47,14 @@ const Gallery: React.FC = () => {
                 </div>
 
                 <div className="flex gap-3">
-                  <button className="flex items-center gap-2 bg-sky-400 hover:bg-sky-500 text-white px-4 py-2 rounded-xl text-sm font-bold transition-colors">
-                    <ExternalLink size={16} /> View
-                  </button>
+                  <a 
+                    href={project.url || '#'} 
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 bg-sky-400 hover:bg-sky-500 text-white px-4 py-2 rounded-xl text-sm font-bold transition-colors"
+                  >
+                    <ExternalLink size={16} /> Visit Website
+                  </a>
                   <button className="flex items-center gap-2 bg-white/20 hover:bg-white/30 text-white px-4 py-2 rounded-xl text-sm font-bold transition-colors backdrop-blur-sm">
                     <Heart size={16} /> 24
                   </button>
@@ -63,4 +68,4 @@ const Gallery: React.FC = () => {
   );
 };
 
-export default Gallery;
+export default Websites;

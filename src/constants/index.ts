@@ -6,38 +6,42 @@ export const APP_NAME = "SakuraSpace";
 export const NAV_ITEMS: NavItem[] = [
   { label: 'Home', id: ViewState.HOME },
   { label: 'About', id: ViewState.ABOUT },
-  { label: 'Gallery', id: ViewState.GALLERY },
+  { label: 'Websites', id: ViewState.WEBSITES },
   // { label: 'Blog', id: ViewState.BLOG },
 ];
 
 export const PROJECTS: Project[] = [
   {
     id: 1,
-    title: "Neon Genesis Code",
-    description: "A cyberpunk-themed IDE theme extension for VS Code with over 10k downloads.",
-    image: "https://picsum.photos/id/133/600/400",
-    tags: ["VS Code", "Theme", "Design"]
+    title: "Project 1",
+    description: "My awesome personal blog built with Next.js and Notion API.",
+    image: "https://picsum.photos/id/180/600/400",
+    tags: ["Next.js", "Notion", "Blog"],
+    url: "https://example.com/blog"
   },
   {
     id: 2,
     title: "Kanban Waifu",
     description: "Productivity app that gamifies your tasks with collectible characters.",
     image: "https://picsum.photos/id/119/600/400",
-    tags: ["React", "Firebase", "GameDev"]
+    tags: ["React", "Firebase", "GameDev"],
+    url: "https://example.com/kanban"
   },
   {
     id: 3,
     title: "EtherDream",
     description: "Generative art platform built on Ethereum.",
     image: "https://picsum.photos/id/106/600/400",
-    tags: ["Web3", "Solidity", "Three.js"]
+    tags: ["Web3", "Solidity", "Three.js"],
+    url: "https://example.com/etherdream"
   },
   {
     id: 4,
     title: "Sakura UI",
     description: "A lightweight component library for building anime-style websites.",
     image: "https://picsum.photos/id/20/600/400",
-    tags: ["TypeScript", "Tailwind", "NPM"]
+    tags: ["TypeScript", "Tailwind", "NPM"],
+    url: "https://example.com/sakura-ui"
   }
 ];
 

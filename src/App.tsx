@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import Navbar from '@components/Navbar';
 import Hero from '@components/Hero';
 import About from '@components/About';
-import Gallery from '@components/Gallery';
+import Websites from '@components/Websites';
 import ChatWidget from '@components/ChatWidget';
+import Footer from '@components/Footer';
 import { ViewState } from '@types';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -16,8 +17,8 @@ const App: React.FC = () => {
         return <Hero key="hero" />;
       case ViewState.ABOUT:
         return <About key="about" />;
-      case ViewState.GALLERY:
-        return <Gallery key="gallery" />;
+      case ViewState.WEBSITES:
+        return <Websites key="websites" />;
       default:
         return <Hero key="default" />;
     }
@@ -42,6 +43,8 @@ const App: React.FC = () => {
           </motion.div>
         </AnimatePresence>
       </main>
+
+      <Footer />
 
       <ChatWidget />
     </div>

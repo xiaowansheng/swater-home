@@ -9,6 +9,7 @@ export interface Project {
   description: string;
   image: string;
   tags: string[];
+  url?: string;
 }
 
 export interface ChatMessage {
@@ -21,6 +22,6 @@ export interface ChatMessage {
 export enum ViewState {
   HOME = 'HOME',
   ABOUT = 'ABOUT',
-  GALLERY = 'GALLERY',
+  WEBSITES = 'WEBSITES',
   BLOG = 'BLOG'
 }
