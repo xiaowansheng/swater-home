@@ -82,6 +82,7 @@ export default defineConfig({
   },
   // Optimize dev server
   server: {
+    port: 3002,
     hmr: {
       overlay: false,
     },
