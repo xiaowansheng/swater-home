@@ -150,7 +150,7 @@ const Hero: React.FC = () => {
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5, delay: 0.6 }}
-                className="glass-panel p-6 rounded-3xl bg-gradient-to-r from-sky-400 to-indigo-400 text-white shadow-xl shadow-sky-200"
+                className="p-6 rounded-3xl bg-gradient-to-r from-sky-400 to-indigo-400 text-white shadow-xl shadow-sky-200"
               >
                  <div className="flex justify-between items-start">
                    <div>
