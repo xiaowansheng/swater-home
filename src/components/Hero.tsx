@@ -8,32 +8,39 @@ const Hero: React.FC = () => {
       
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 w-full h-full items-center">
         
-        {/* Left Column: Character Card (Avatar) */}
+        {/* Left Column: Avatar UI */}
         <motion.div 
-          initial={{ opacity: 0, scale: 0.9 }}
+          initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5 }}
-          className="lg:col-span-5 flex justify-center lg:justify-end"
+          transition={{ duration: 0.8, type: "spring", bounce: 0.4 }}
+          className="lg:col-span-4 flex justify-center lg:justify-end"
         >
-          <div className="relative w-[320px] h-[500px] md:w-[380px] md:h-[600px] bg-white p-3 rounded-[2rem] shadow-2xl rotate-[-2deg] hover:rotate-0 transition-all duration-500 border-4 border-white">
-            {/* Holographic effect overlay */}
-            <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-tr from-sky-500/10 to-transparent pointer-events-none z-20"></div>
+          <div className="relative">
+            {/* Background Glows */}
+            <div className="absolute -inset-4 bg-gradient-to-tr from-sky-400 to-indigo-400 rounded-full opacity-20 blur-2xl animate-pulse"></div>
+            <div className="absolute -inset-1 bg-gradient-to-tr from-sky-400 to-indigo-400 rounded-full opacity-40 blur-md"></div>
             
-            <div className="w-full h-full bg-sky-100 rounded-[1.5rem] overflow-hidden relative">
-              <img 
-                src="https://picsum.photos/id/433/800/1200" 
-                alt="Character" 
-                className="w-full h-full object-cover"
-              />
-              
-              {/* Card Footer Info */}
-              <div className="absolute bottom-0 left-0 right-0 bg-white/90 backdrop-blur-md p-4 m-2 rounded-xl border border-sky-100">
-                 <div className="flex justify-between items-center mb-1">
-                   <h2 className="font-rounded font-extrabold text-2xl text-gray-800">HIKARI</h2>
-                   <span className="px-2 py-0.5 bg-sky-400 text-white text-xs font-bold rounded-md">SSR</span>
-                 </div>
-                 <p className="text-xs font-bold text-gray-500 tracking-wider">LEGENDARY DEVELOPER</p>
+            {/* Avatar Container */}
+            <div className="relative w-64 h-64 md:w-80 md:h-80 bg-white p-2 rounded-full shadow-2xl border-4 border-white overflow-hidden group">
+              <div className="w-full h-full rounded-full overflow-hidden bg-sky-50 relative">
+                <img 
+                  src="https://picsum.photos/id/64/800/800" 
+                  alt="Avatar" 
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+                
+                {/* Border effect on hover */}
+                <div className="absolute inset-0 rounded-full border-0 group-hover:border-[12px] border-white/20 transition-all duration-300"></div>
               </div>
+              
+              {/* Floating Badge */}
+              <motion.div 
+                animate={{ y: [0, -10, 0] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                className="absolute top-4 right-4 bg-sky-500 text-white text-xs font-black px-3 py-1.5 rounded-full shadow-lg border-2 border-white z-30"
+              >
+                LEVEL 99
+              </motion.div>
             </div>
           </div>
         </motion.div>
@@ -43,7 +50,7 @@ const Hero: React.FC = () => {
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="lg:col-span-7 flex flex-col gap-4 max-w-2xl mx-auto lg:mx-0"
+          className="lg:col-span-8 flex flex-col gap-4 max-w-2xl mx-auto lg:mx-0"
         >
           {/* Header Name Plate */}
           <div className="glass-panel p-6 rounded-3xl border-l-8 border-sky-400">

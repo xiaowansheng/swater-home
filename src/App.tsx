@@ -1,3 +1,4 @@
+import React from 'react';
 import { createBrowserRouter, RouterProvider, useOutlet, useLocation, ScrollRestoration } from 'react-router-dom';
 import Layout from '@components/Layout';
 import Home from '@pages/Home';
