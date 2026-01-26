@@ -1,6 +1,6 @@
 import React from 'react';
-import { NavItem, ViewState } from '../types';
-import { NAV_ITEMS } from '../constants';
+import { NavItem, ViewState } from '@types';
+import { NAV_ITEMS } from '@constants';
 import { Home, User, Image as ImageIcon, BookOpen } from 'lucide-react';
 import { motion } from 'framer-motion';
 

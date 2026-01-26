@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import About from './components/About';
-import Gallery from './components/Gallery';
-import ChatWidget from './components/ChatWidget';
-import { ViewState } from './types';
+import Navbar from '@components/Navbar';
+import Hero from '@components/Hero';
+import About from '@components/About';
+import Gallery from '@components/Gallery';
+import ChatWidget from '@components/ChatWidget';
+import { ViewState } from '@types';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const App: React.FC = () => {

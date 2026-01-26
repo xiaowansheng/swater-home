@@ -1,5 +1,5 @@
 import { GoogleGenAI, Chat, GenerateContentResponse } from "@google/genai";
-import { AIKO_SYSTEM_INSTRUCTION } from "../constants";
+import { AIKO_SYSTEM_INSTRUCTION } from "@constants";
 
 let chatSession: Chat | null = null;
 let genAI: GoogleGenAI | null = null;

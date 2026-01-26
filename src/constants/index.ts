@@ -1,5 +1,5 @@
-import { NavItem, Project } from './types';
-import { ViewState } from './types';
+import { NavItem, Project } from '@types';
+import { ViewState } from '@types';
 
 export const APP_NAME = "SakuraSpace";
 
