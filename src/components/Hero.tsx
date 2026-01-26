@@ -1,10 +1,20 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Github, Twitter, Instagram, Mail, Zap, Heart, Star, MapPin } from 'lucide-react';
-import { SITE_CONFIG } from '@constants';
+import { HOME_CONFIG } from '@constants';
 
 const Hero: React.FC = () => {
-  const { socials } = SITE_CONFIG;
+  const { identity, socials, stats, status, bio } = HOME_CONFIG;
+
+  const getSocialIcon = (platform: string) => {
+    switch (platform) {
+      case 'github': return <Github size={18} />;
+      case 'twitter': return <Twitter size={18} />;
+      case 'instagram': return <Instagram size={18} />;
+      case 'mail': return <Mail size={18} />;
+      default: return <Github size={18} />;
+    }
+  };
 
   return (
     <section className="min-h-screen pt-12 pb-24 px-4 flex items-center justify-center max-w-7xl mx-auto overflow-hidden">
@@ -27,7 +37,7 @@ const Hero: React.FC = () => {
             <div className="relative w-64 h-64 md:w-80 md:h-80 bg-white p-2 rounded-full shadow-2xl border-4 border-white overflow-hidden group">
               <div className="w-full h-full rounded-full overflow-hidden bg-sky-50 relative">
                 <img 
-                  src={SITE_CONFIG.avatarUrl} 
+                  src={identity.avatarUrl} 
                   alt="Avatar" 
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
@@ -36,14 +46,23 @@ const Hero: React.FC = () => {
                 <div className="absolute inset-0 rounded-full border-0 group-hover:border-[12px] border-white/20 transition-all duration-300"></div>
               </div>
               
-              {/* Floating Badge */}
-              <motion.div 
-                animate={{ y: [0, -10, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute top-4 right-4 bg-sky-500 text-white text-xs font-black px-3 py-1.5 rounded-full shadow-lg border-2 border-white z-30"
-              >
-                {SITE_CONFIG.level}
-              </motion.div>
+              {/* Rarity & Level Badges */}
+              <div className="absolute top-4 right-4 flex flex-col gap-2 z-30">
+                <motion.div 
+                  animate={{ y: [0, -5, 0] }}
+                  transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                  className="bg-gradient-to-r from-yellow-400 to-orange-500 text-white text-[10px] font-black px-2 py-0.5 rounded shadow-lg border border-white self-end"
+                >
+                  {identity.rarity}
+                </motion.div>
+                <motion.div 
+                  animate={{ y: [0, -10, 0] }}
+                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+                  className="bg-sky-500 text-white text-xs font-black px-3 py-1.5 rounded-full shadow-lg border-2 border-white"
+                >
+                  {identity.level}
+                </motion.div>
+              </div>
             </div>
           </div>
         </motion.div>
@@ -59,16 +78,20 @@ const Hero: React.FC = () => {
           <div className="glass-panel p-6 rounded-3xl border-l-8 border-sky-400">
             <div className="flex flex-col md:flex-row md:items-end gap-4 justify-between">
               <div>
-                <h4 className="text-sky-500 font-bold tracking-widest text-sm mb-1">{SITE_CONFIG.title}</h4>
+                <h4 className="text-sky-500 font-bold tracking-widest text-sm mb-1">{identity.title}</h4>
                 <h1 className="text-5xl md:text-6xl font-rounded font-black text-gray-800 leading-none">
-                  {SITE_CONFIG.name.split('.')[0]}<span className="text-sky-400">.{SITE_CONFIG.name.split('.')[1]}</span>
+                  {identity.nickname}<span className="text-sky-400">{identity.suffix}</span>
                 </h1>
               </div>
               <div className="flex gap-2">
-                 <SocialBtn href={socials.github} icon={<Github size={18} />} />
-                 <SocialBtn href={socials.twitter} icon={<Twitter size={18} />} />
-                 <SocialBtn href={socials.instagram} icon={<Instagram size={18} />} />
-                 <SocialBtn href={socials.mail} icon={<Mail size={18} />} />
+                 {socials.map((social) => (
+                   <SocialBtn 
+                      key={social.platform} 
+                      href={social.url} 
+                      icon={getSocialIcon(social.platform)} 
+                      label={social.label}
+                    />
+                 ))}
               </div>
             </div>
           </div>
@@ -81,7 +104,7 @@ const Hero: React.FC = () => {
                 </h3>
                 
                 <div className="space-y-3">
-                  {SITE_CONFIG.stats.map(stat => (
+                  {stats.map(stat => (
                     <StatBar key={stat.label} label={stat.label} val={stat.val} color={stat.color} />
                   ))}
                 </div>
@@ -97,7 +120,7 @@ const Hero: React.FC = () => {
                      </div>
                      <div>
                        <p className="text-xs text-gray-500 font-bold uppercase">Base</p>
-                       <p className="font-bold text-gray-800">{SITE_CONFIG.location}</p>
+                       <p className="font-bold text-gray-800">{status.location}</p>
                      </div>
                    </div>
                    <div className="flex items-center gap-3">
@@ -106,7 +129,7 @@ const Hero: React.FC = () => {
                      </div>
                      <div>
                        <p className="text-xs text-gray-500 font-bold uppercase">Class</p>
-                       <p className="font-bold text-gray-800">{SITE_CONFIG.role}</p>
+                       <p className="font-bold text-gray-800">{status.occupation}</p>
                      </div>
                    </div>
                 </div>
@@ -116,7 +139,7 @@ const Hero: React.FC = () => {
                    <div className="flex justify-between items-start">
                      <div>
                        <p className="text-xs opacity-80 font-bold uppercase mb-1">Current Quest</p>
-                       <p className="font-bold text-lg leading-tight">{SITE_CONFIG.currentQuest}</p>
+                       <p className="font-bold text-lg leading-tight">{status.currentQuest}</p>
                      </div>
                      <Heart className="fill-white/20 text-white" />
                    </div>
@@ -127,7 +150,7 @@ const Hero: React.FC = () => {
           {/* Description */}
           <div className="glass-panel p-6 rounded-3xl">
              <p className="text-gray-600 leading-relaxed font-medium">
-               "{SITE_CONFIG.bio}"
+               "{bio}"
              </p>
           </div>
 
@@ -137,11 +160,12 @@ const Hero: React.FC = () => {
   );
 };
 
-const SocialBtn: React.FC<{ icon: React.ReactNode; href: string }> = ({ icon, href }) => (
+const SocialBtn: React.FC<{ icon: React.ReactNode; href: string; label: string }> = ({ icon, href, label }) => (
   <a 
     href={href}
     target="_blank"
     rel="noopener noreferrer"
+    title={label}
     className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-gray-500 hover:text-white hover:bg-sky-400 transition-all shadow-sm border border-sky-50"
   >
     {icon}

@@ -1,29 +1,49 @@
-import { NavItem, Project, ViewState } from '@types';
+import { NavItem, Project } from '@types';
 
 export const APP_NAME = "SakuraSpace";
 export const OWNER_NAME = "Hikari";
 
-export const SITE_CONFIG = {
-  name: "Hikari.Dev",
-  title: "PLAYER PROFILE",
-  role: "Full Stack Sorcerer",
-  location: "Tokyo, Internet",
-  avatarUrl: "https://picsum.photos/id/64/800/800",
-  level: "LEVEL 99",
-  currentQuest: "Building the ultimate waifu website generator.",
-  bio: "Hello! I craft digital experiences that spark joy. Whether it's complex web apps or cute animations, I put my heart into every pixel. Let's make something amazing together!",
+/**
+ * 首页内容配置 (Home Page Configuration)
+ * 采用“角色卡片/个人档案”式结构
+ */
+export const HOME_CONFIG = {
+  // 1. 身份识别 (Identity)
+  identity: {
+    nickname: "Hikari",
+    suffix: ".Dev",
+    title: "PLAYER PROFILE",
+    role: "Full Stack Sorcerer",
+    level: "LEVEL 99",
+    rarity: "SSR",
+    avatarUrl: "https://picsum.photos/id/64/800/800",
+  },
+
+  // 2. 社交链接 (Socials)
+  socials: [
+    { platform: "github", url: "https://github.com/swater-home", label: "GitHub" },
+    { platform: "twitter", url: "https://twitter.com", label: "Twitter" },
+    { platform: "instagram", url: "https://instagram.com", label: "Instagram" },
+    { platform: "mail", url: "mailto:hello@example.com", label: "Mail" },
+  ],
+
+  // 3. 属性数值 (Stats)
   stats: [
     { label: "Coding", val: 95, color: "bg-blue-400" },
     { label: "Design", val: 80, color: "bg-teal-300" },
     { label: "Coffee", val: 100, color: "bg-amber-500" },
     { label: "Sleep", val: 25, color: "bg-indigo-400" },
   ],
-  socials: {
-    github: "https://github.com",
-    twitter: "https://twitter.com",
-    instagram: "https://instagram.com",
-    mail: "mailto:hello@example.com"
-  }
+
+  // 4. 当前状态 (Status)
+  status: {
+    location: "Tokyo, Internet",
+    occupation: "Frontend Sorcerer",
+    currentQuest: "Building the ultimate waifu website generator.",
+  },
+
+  // 5. 个人简介 (Biography)
+  bio: "Hello! I craft digital experiences that spark joy. Whether it's complex web apps or cute animations, I put my heart into every pixel. Let's make something amazing together!"
 };
 
 export const ABOUT_CONFIG = {
