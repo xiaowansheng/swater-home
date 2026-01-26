@@ -31,24 +31,17 @@ const Hero: React.FC = () => {
             className="flex-shrink-0"
           >
             <div className="relative">
-              {/* Background Glows */}
               <div className="absolute -inset-4 bg-gradient-to-tr from-sky-400 to-indigo-400 rounded-full opacity-20 blur-2xl animate-pulse"></div>
-              <div className="absolute -inset-1 bg-gradient-to-tr from-sky-400 to-indigo-400 rounded-full opacity-40 blur-md"></div>
+              <div className="absolute -inset-1 bg-gradient-to-tr from-sky-400 to-indigo-400 rounded-full opacity-30 blur-md"></div>
               
-              {/* Avatar Container */}
-              <div className="relative w-40 h-40 md:w-48 md:h-48 bg-white p-1.5 rounded-full shadow-2xl border-4 border-white overflow-hidden group">
+              <div className="relative w-40 h-40 md:w-48 md:h-48 bg-white p-1 rounded-full shadow-2xl border-4 border-white overflow-hidden group">
                 <div className="w-full h-full rounded-full overflow-hidden bg-sky-50 relative">
-                  <img 
-                    src={identity.avatarUrl} 
-                    alt="Avatar" 
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 rounded-full border-0 group-hover:border-[8px] border-white/20 transition-all duration-300"></div>
+                  <img src={identity.avatarUrl} alt="Avatar" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                 </div>
                 
                 {/* SSR Badge */}
                 <motion.div 
-                  animate={{ y: [0, -5, 0] }}
+                  animate={{ y: [0, -4, 0] }}
                   transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                   className="absolute top-2 right-2 bg-gradient-to-r from-yellow-400 to-orange-500 text-white text-[9px] font-black px-1.5 py-0.5 rounded shadow-lg border border-white z-30"
                 >
@@ -63,17 +56,17 @@ const Hero: React.FC = () => {
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="flex-1 flex flex-col items-center md:items-start text-center md:text-left pt-4"
+            className="flex-1 flex flex-col items-center md:items-start text-center md:text-left"
           >
-            <h4 className="text-sky-500 font-bold tracking-widest text-sm mb-2">{identity.title}</h4>
-            <h1 className="text-5xl md:text-7xl font-rounded font-black text-gray-800 leading-none mb-3">
+            <h4 className="text-sky-500 font-bold tracking-widest text-xs mb-2">{identity.title}</h4>
+            <h1 className="text-5xl md:text-7xl font-rounded font-black text-slate-800 leading-none mb-4">
               {identity.nickname}<span className="text-sky-400">{identity.suffix}</span>
             </h1>
-            <div className="flex items-center gap-3">
-              <span className="bg-sky-500 text-white text-xs font-black px-3 py-1 rounded-full shadow-md">
+            <div className="flex flex-wrap justify-center md:justify-start items-center gap-3">
+              <span className="bg-sky-500 text-white text-[10px] font-black px-2.5 py-1 rounded-md shadow-lg shadow-sky-200 uppercase">
                 {identity.level}
               </span>
-              <p className="text-gray-500 font-bold tracking-wide">{identity.role}</p>
+              <p className="text-slate-500 font-bold tracking-wide text-lg">{identity.role}</p>
             </div>
           </motion.div>
         </div>
@@ -83,16 +76,10 @@ const Hero: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
-          className="flex flex-wrap justify-center md:justify-start gap-4 p-4 glass-panel rounded-2xl border-l-8 border-sky-400"
+          className="flex flex-wrap justify-center md:justify-start gap-3 p-4 glass-panel rounded-2xl border-l-[6px] border-sky-400"
         >
-          <span className="flex items-center text-gray-400 text-xs font-black uppercase tracking-widest mr-2 border-r pr-4 border-gray-200">Connect</span>
           {socials.map((social) => (
-            <SocialBtn 
-              key={social.platform} 
-              href={social.url} 
-              icon={getSocialIcon(social.platform)} 
-              label={social.label}
-            />
+            <SocialBtn key={social.platform} href={social.url} icon={getSocialIcon(social.platform)} label={social.label} />
           ))}
         </motion.div>
 
@@ -103,12 +90,11 @@ const Hero: React.FC = () => {
              initial={{ opacity: 0, scale: 0.95 }}
              animate={{ opacity: 1, scale: 1 }}
              transition={{ duration: 0.5, delay: 0.4 }}
-             className="glass-panel p-6 rounded-3xl"
+             className="glass-panel p-6 rounded-3xl border-l-[6px] border-teal-400"
            >
-              <h3 className="font-bold text-gray-700 mb-6 flex items-center gap-2">
-                <Star size={18} className="text-yellow-400 fill-yellow-400" /> Attributes
+              <h3 className="font-bold text-slate-700 mb-6 flex items-center gap-2">
+                <Star size={18} className="text-teal-400 fill-teal-400" /> Attributes
               </h3>
-              
               <div className="space-y-4">
                 {stats.map(stat => (
                   <StatBar key={stat.label} label={stat.label} val={stat.val} color={stat.color} />
@@ -116,31 +102,31 @@ const Hero: React.FC = () => {
               </div>
            </motion.div>
 
-           {/* Info/Attributes */}
+           {/* Info/Status */}
            <div className="flex flex-col gap-6">
               {/* Location & Role */}
               <motion.div 
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5, delay: 0.5 }}
-                className="glass-panel p-6 rounded-3xl flex-1 flex flex-col justify-center gap-4"
+                className="glass-panel p-6 rounded-3xl flex-1 flex flex-col justify-center gap-5 border-l-[6px] border-indigo-400"
               >
                  <div className="flex items-center gap-4">
-                   <div className="w-12 h-12 rounded-full bg-teal-50 flex items-center justify-center text-teal-500 shadow-inner">
+                   <div className="w-12 h-12 rounded-2xl bg-slate-50 flex items-center justify-center text-indigo-400 border border-slate-100 shadow-sm">
                      <MapPin size={24} />
                    </div>
                    <div>
-                     <p className="text-xs text-gray-400 font-bold uppercase">Base Location</p>
-                     <p className="font-bold text-gray-800 text-lg">{status.location}</p>
+                     <p className="text-[10px] text-slate-400 font-black uppercase tracking-wider">Base Location</p>
+                     <p className="font-bold text-slate-700 text-lg leading-tight">{status.location}</p>
                    </div>
                  </div>
                  <div className="flex items-center gap-4">
-                   <div className="w-12 h-12 rounded-full bg-indigo-50 flex items-center justify-center text-indigo-500 shadow-inner">
+                   <div className="w-12 h-12 rounded-2xl bg-slate-50 flex items-center justify-center text-indigo-400 border border-slate-100 shadow-sm">
                      <Zap size={24} />
                    </div>
                    <div>
-                     <p className="text-xs text-gray-400 font-bold uppercase">Class Specialization</p>
-                     <p className="font-bold text-gray-800 text-lg">{status.occupation}</p>
+                     <p className="text-[10px] text-slate-400 font-black uppercase tracking-wider">Class Specialization</p>
+                     <p className="font-bold text-slate-700 text-lg leading-tight">{status.occupation}</p>
                    </div>
                  </div>
               </motion.div>
@@ -150,14 +136,14 @@ const Hero: React.FC = () => {
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5, delay: 0.6 }}
-                className="p-6 rounded-3xl bg-gradient-to-r from-sky-400 to-indigo-400 text-white shadow-xl shadow-sky-200"
+                className="glass-panel p-6 rounded-3xl border-l-[6px] border-rose-400"
               >
                  <div className="flex justify-between items-start">
                    <div>
-                     <p className="text-xs opacity-80 font-bold uppercase mb-2">Current Activity</p>
-                     <p className="font-bold text-xl leading-tight">{status.currentQuest}</p>
+                     <p className="text-[10px] text-rose-400 font-black uppercase tracking-wider mb-2">Current Activity</p>
+                     <p className="font-bold text-slate-700 text-xl leading-tight">{status.currentQuest}</p>
                    </div>
-                   <Heart className="fill-white/20 text-white" />
+                   <Heart className="text-rose-400 fill-rose-100" />
                  </div>
               </motion.div>
            </div>
@@ -168,9 +154,9 @@ const Hero: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.7 }}
-          className="glass-panel p-8 rounded-3xl border-t-4 border-sky-400"
+          className="glass-panel p-8 rounded-3xl border-l-[6px] border-slate-300"
         >
-           <p className="text-gray-600 leading-relaxed font-semibold italic text-lg text-center md:text-left">
+           <p className="text-slate-600 leading-relaxed font-medium italic text-lg opacity-80">
              "{bio}"
            </p>
         </motion.div>
@@ -186,7 +172,7 @@ const SocialBtn: React.FC<{ icon: React.ReactNode; href: string; label: string }
     target="_blank"
     rel="noopener noreferrer"
     title={label}
-    className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white text-gray-500 hover:text-white hover:bg-sky-500 transition-all shadow-sm border border-sky-50 font-bold text-sm"
+    className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white/40 text-slate-500 hover:text-white hover:bg-sky-400 transition-all border border-white/60 font-bold text-sm shadow-sm"
   >
     {icon} 
     <span className="hidden sm:inline">{label}</span>
@@ -195,16 +181,16 @@ const SocialBtn: React.FC<{ icon: React.ReactNode; href: string; label: string }
 
 const StatBar: React.FC<{ label: string; val: number; color: string }> = ({ label, val, color }) => (
   <div className="flex items-center gap-4">
-    <span className="w-16 text-xs font-black text-gray-400 text-right uppercase tracking-tighter">{label}</span>
-    <div className="flex-1 h-3 bg-gray-100 rounded-full overflow-hidden shadow-inner">
+    <span className="w-16 text-[10px] font-black text-slate-400 text-right uppercase tracking-wider">{label}</span>
+    <div className="flex-1 h-3 bg-slate-100/50 rounded-full overflow-hidden shadow-inner border border-white/30">
       <motion.div 
         initial={{ width: 0 }}
         animate={{ width: `${val}%` }}
-        transition={{ duration: 1, delay: 1 }}
-        className={`h-full ${color} rounded-full`}
+        transition={{ duration: 1.2, delay: 1 }}
+        className={`h-full ${color} rounded-full opacity-90`}
       />
     </div>
-    <span className="w-10 text-xs font-black text-gray-800">{val}%</span>
+    <span className="w-10 text-[10px] font-black text-slate-500">{val}%</span>
   </div>
 );
 

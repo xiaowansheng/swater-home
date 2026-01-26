@@ -138,7 +138,7 @@ const ChatWidget: React.FC = () => {
                 <button
                   onClick={handleSend}
                   disabled={isLoading || !input.trim()}
-                  className="bg-sky-400 hover:bg-sky-500 disabled:opacity-50 text-white p-2 rounded-xl transition-colors"
+                  className="bg-sky-500 hover:bg-sky-600 disabled:opacity-50 text-white p-2 rounded-xl transition-all shadow-md shadow-sky-100"
                 >
                   <Send size={18} />
                 </button>

@@ -25,7 +25,7 @@ const Navbar: React.FC = () => {
               `relative flex items-center gap-2 px-4 py-2 rounded-full transition-all duration-300 ${
                 isActive 
                   ? 'text-white' 
-                  : 'text-gray-500 hover:bg-sky-50 hover:text-sky-500'
+                  : 'text-slate-500 hover:bg-white/40 hover:text-sky-500'
               }`
             }
           >
