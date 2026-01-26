@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@300;400;500;700;800;900&family=Quicksand:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary-color: #38bdf8; /* sky-400 */
+  --secondary-color: #818cf8; /* indigo-400 */
+  --accent-color: #5eead4; /* teal-300 */
+}
+
+body {
+  font-family: 'Quicksand', 'M PLUS Rounded 1c', sans-serif;
+  background-color: #f0f9ff;
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(56, 189, 248, 0.1) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, rgba(94, 234, 212, 0.1) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(129, 140, 248, 0.1) 0px, transparent 50%),
+    radial-gradient(at 0% 100%, rgba(192, 132, 252, 0.05) 0px, transparent 50%);
+  background-attachment: fixed;
+  background-size: cover;
+  overflow-x: hidden;
+  color: #334155; /* slate-700 */
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(56, 189, 248, 0.3);
+  border-radius: 10px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(56, 189, 248, 0.6);
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+.font-rounded {
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+}
+
+.glass-panel {
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 
+    0 4px 6px -1px rgba(0, 0, 0, 0.02),
+    0 2px 4px -1px rgba(0, 0, 0, 0.02),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+}
+
+/* Sakura/Cloud Animation */
+.sakura-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+.sakura {
+  position: absolute;
+  /* Switched to a lighter, possibly white/pale blue petal for fresh look */
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 100% 0 100% 0;
+  opacity: 0.6;
+  animation: fall linear infinite;
+  box-shadow: 0 0 2px rgba(255, 255, 255, 0.5);
+}
+@keyframes fall {
+  0% { opacity: 0; top: -10%; transform: translateX(0) rotate(0deg); }
+  10% { opacity: 0.6; }
+  100% { opacity: 0; top: 110%; transform: translateX(50px) rotate(360deg); }
+}

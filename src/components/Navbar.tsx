@@ -37,13 +37,13 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, setCurrentView }) => {
               className={`relative flex items-center gap-2 px-4 py-2 rounded-full transition-all duration-300 ${
                 isActive 
                   ? 'text-white' 
-                  : 'text-gray-500 hover:bg-pink-100 hover:text-pink-500'
+                  : 'text-gray-500 hover:bg-sky-50 hover:text-sky-500'
               }`}
             >
               {isActive && (
                 <motion.div
                   layoutId="nav-pill"
-                  className="absolute inset-0 bg-gradient-to-r from-pink-400 to-purple-400 rounded-full shadow-lg shadow-pink-200"
+                  className="absolute inset-0 bg-gradient-to-r from-sky-400 to-indigo-400 rounded-full shadow-lg shadow-sky-200"
                   transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                 />
               )}

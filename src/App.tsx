@@ -24,7 +24,7 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen relative text-gray-800 selection:bg-pink-300 selection:text-pink-900 pb-20 md:pb-0">
+    <div className="min-h-screen relative text-gray-700 selection:bg-sky-200 selection:text-sky-900 pb-20 md:pb-0">
       
       {/* Navbar is now fixed at bottom */}
       <Navbar currentView={currentView} setCurrentView={setCurrentView} />

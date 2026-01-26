@@ -4,8 +4,8 @@ import { Code, Palette, Terminal, Coffee } from 'lucide-react';
 
 const About: React.FC = () => {
   const skills = [
-    { name: "Frontend", level: 90, icon: <Palette size={18} />, color: "bg-pink-400" },
-    { name: "Backend", level: 75, icon: <Terminal size={18} />, color: "bg-purple-400" },
+    { name: "Frontend", level: 90, icon: <Palette size={18} />, color: "bg-sky-400" },
+    { name: "Backend", level: 75, icon: <Terminal size={18} />, color: "bg-indigo-400" },
     { name: "React", level: 95, icon: <Code size={18} />, color: "bg-blue-400" },
     { name: "Coffee", level: 100, icon: <Coffee size={18} />, color: "bg-amber-500" },
   ];
@@ -18,7 +18,7 @@ const About: React.FC = () => {
         className="text-center mb-16"
       >
         <h2 className="text-4xl font-bold text-gray-800 mb-4">About Me</h2>
-        <div className="w-20 h-1 bg-gradient-to-r from-pink-400 to-purple-400 mx-auto rounded-full"></div>
+        <div className="w-20 h-1 bg-gradient-to-r from-sky-300 to-indigo-300 mx-auto rounded-full"></div>
       </motion.div>
 
       <div className="grid md:grid-cols-2 gap-12 items-start">
@@ -38,12 +38,12 @@ const About: React.FC = () => {
             When I'm not coding, you can find me watching anime, drawing digital art, or exploring new cafes in the city. I believe that good design is not just about how things look, but how they work.
           </p>
           <div className="grid grid-cols-2 gap-4">
-             <div className="bg-pink-50 p-4 rounded-2xl border border-pink-100">
-               <h4 className="font-bold text-pink-600 mb-1">3+ Years</h4>
+             <div className="bg-sky-50 p-4 rounded-2xl border border-sky-100">
+               <h4 className="font-bold text-sky-600 mb-1">3+ Years</h4>
                <p className="text-sm text-gray-500">Experience</p>
              </div>
-             <div className="bg-purple-50 p-4 rounded-2xl border border-purple-100">
-               <h4 className="font-bold text-purple-600 mb-1">50+ Projects</h4>
+             <div className="bg-indigo-50 p-4 rounded-2xl border border-indigo-100">
+               <h4 className="font-bold text-indigo-600 mb-1">50+ Projects</h4>
                <p className="text-sm text-gray-500">Completed</p>
              </div>
           </div>

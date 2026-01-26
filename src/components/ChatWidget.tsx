@@ -71,7 +71,7 @@ const ChatWidget: React.FC = () => {
             className="mb-4 w-[90vw] sm:w-96 h-[500px] glass-panel rounded-3xl flex flex-col overflow-hidden shadow-2xl border border-white/60"
           >
             {/* Header */}
-            <div className="bg-gradient-to-r from-pink-500 to-purple-500 p-4 flex justify-between items-center text-white">
+            <div className="bg-gradient-to-r from-sky-400 to-indigo-400 p-4 flex justify-between items-center text-white">
               <div className="flex items-center gap-2">
                 <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center">
                     <Bot size={18} />
@@ -104,7 +104,7 @@ const ChatWidget: React.FC = () => {
                   <div 
                     className={`max-w-[80%] p-3 rounded-2xl text-sm ${
                       msg.role === 'user' 
-                        ? 'bg-pink-500 text-white rounded-br-none' 
+                        ? 'bg-sky-400 text-white rounded-br-none' 
                         : 'bg-white text-gray-700 shadow-sm rounded-bl-none'
                     }`}
                   >
@@ -115,9 +115,9 @@ const ChatWidget: React.FC = () => {
               {isLoading && (
                  <div className="flex justify-start">
                   <div className="bg-white px-4 py-2 rounded-2xl rounded-bl-none shadow-sm flex gap-1 items-center">
-                    <span className="w-2 h-2 bg-pink-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></span>
-                    <span className="w-2 h-2 bg-pink-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></span>
-                    <span className="w-2 h-2 bg-pink-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></span>
+                    <span className="w-2 h-2 bg-sky-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></span>
+                    <span className="w-2 h-2 bg-sky-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></span>
+                    <span className="w-2 h-2 bg-sky-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></span>
                   </div>
                  </div>
               )}
@@ -133,12 +133,12 @@ const ChatWidget: React.FC = () => {
                   onChange={(e) => setInput(e.target.value)}
                   onKeyDown={handleKeyPress}
                   placeholder="Ask Aiko anything..."
-                  className="flex-1 bg-white/80 border-0 rounded-xl px-4 py-2 focus:ring-2 focus:ring-pink-400 focus:outline-none text-sm placeholder-gray-400"
+                  className="flex-1 bg-white/80 border-0 rounded-xl px-4 py-2 focus:ring-2 focus:ring-sky-400 focus:outline-none text-sm placeholder-gray-400"
                 />
                 <button
                   onClick={handleSend}
                   disabled={isLoading || !input.trim()}
-                  className="bg-pink-500 hover:bg-pink-600 disabled:opacity-50 text-white p-2 rounded-xl transition-colors"
+                  className="bg-sky-400 hover:bg-sky-500 disabled:opacity-50 text-white p-2 rounded-xl transition-colors"
                 >
                   <Send size={18} />
                 </button>
@@ -152,8 +152,8 @@ const ChatWidget: React.FC = () => {
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
         onClick={() => setIsOpen(!isOpen)}
-        className={`w-14 h-14 rounded-full shadow-lg shadow-pink-500/40 flex items-center justify-center transition-all duration-300 ${
-          isOpen ? 'bg-gray-100 text-gray-600' : 'bg-gradient-to-r from-pink-500 to-purple-600 text-white'
+        className={`w-14 h-14 rounded-full shadow-lg shadow-sky-500/40 flex items-center justify-center transition-all duration-300 ${
+          isOpen ? 'bg-gray-100 text-gray-600' : 'bg-gradient-to-r from-sky-400 to-indigo-500 text-white'
         }`}
       >
         {isOpen ? <X size={24} /> : <MessageCircle size={28} />}
