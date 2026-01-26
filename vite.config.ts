@@ -21,6 +21,7 @@ export default defineConfig(({ mode }) => {
             '@services': path.resolve(__dirname, 'src/services'),
             '@constants': path.resolve(__dirname, 'src/constants'),
             '@types': path.resolve(__dirname, 'src/types'),
+            '@pages': path.resolve(__dirname, 'src/pages'),
         }
       }
     };
