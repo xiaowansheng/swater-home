@@ -1,13 +1,53 @@
-import { NavItem, Project } from '@types';
-import { ViewState } from '@types';
+import { NavItem, Project, ViewState } from '@types';
 
 export const APP_NAME = "SakuraSpace";
+export const OWNER_NAME = "Hikari";
+
+export const SITE_CONFIG = {
+  name: "Hikari.Dev",
+  title: "PLAYER PROFILE",
+  role: "Full Stack Sorcerer",
+  location: "Tokyo, Internet",
+  avatarUrl: "https://picsum.photos/id/64/800/800",
+  level: "LEVEL 99",
+  currentQuest: "Building the ultimate waifu website generator.",
+  bio: "Hello! I craft digital experiences that spark joy. Whether it's complex web apps or cute animations, I put my heart into every pixel. Let's make something amazing together!",
+  stats: [
+    { label: "Coding", val: 95, color: "bg-blue-400" },
+    { label: "Design", val: 80, color: "bg-teal-300" },
+    { label: "Coffee", val: 100, color: "bg-amber-500" },
+    { label: "Sleep", val: 25, color: "bg-indigo-400" },
+  ],
+  socials: {
+    github: "https://github.com",
+    twitter: "https://twitter.com",
+    instagram: "https://instagram.com",
+    mail: "mailto:hello@example.com"
+  }
+};
+
+export const ABOUT_CONFIG = {
+  title: "About Me",
+  subtitle: "👋 Who am I?",
+  description1: "I'm a passionate developer based in the cloud. I specialize in building beautiful, functional, and user-friendly websites. My goal is to bridge the gap between engineering and art.",
+  description2: "When I'm not coding, you can find me watching anime, drawing digital art, or exploring new cafes in the city. I believe that good design is not just about how things look, but how they work.",
+  metrics: [
+    { label: "Experience", value: "3+ Years", color: "bg-sky-50", textColor: "text-sky-600", borderColor: "border-sky-100" },
+    { label: "Completed", value: "50+ Projects", color: "bg-indigo-50", textColor: "text-indigo-600", borderColor: "border-indigo-100" }
+  ],
+  skills: [
+    { name: "Frontend", level: 90, color: "bg-sky-400" },
+    { name: "Backend", level: 75, color: "bg-indigo-400" },
+    { name: "React", level: 95, color: "bg-blue-400" },
+    { name: "Coffee", level: 100, color: "bg-amber-500" },
+  ],
+  learning: ['Three.js', 'Rust', 'Japanese', 'Piano']
+};
 
 export const NAV_ITEMS: NavItem[] = [
-  { label: 'Home', id: ViewState.HOME },
-  { label: 'About', id: ViewState.ABOUT },
-  { label: 'Websites', id: ViewState.WEBSITES },
-  // { label: 'Blog', id: ViewState.BLOG },
+  { label: '首页', id: '/' },
+  { label: '关于', id: '/about' },
+  { label: '作品', id: '/websites' },
 ];
 
 export const PROJECTS: Project[] = [

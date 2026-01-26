@@ -1,8 +1,11 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Github, Twitter, Instagram, Mail, Zap, Heart, Star, MapPin } from 'lucide-react';
+import { SITE_CONFIG } from '@constants';
 
 const Hero: React.FC = () => {
+  const { socials } = SITE_CONFIG;
+
   return (
     <section className="min-h-screen pt-12 pb-24 px-4 flex items-center justify-center max-w-7xl mx-auto overflow-hidden">
       
@@ -24,7 +27,7 @@ const Hero: React.FC = () => {
             <div className="relative w-64 h-64 md:w-80 md:h-80 bg-white p-2 rounded-full shadow-2xl border-4 border-white overflow-hidden group">
               <div className="w-full h-full rounded-full overflow-hidden bg-sky-50 relative">
                 <img 
-                  src="https://picsum.photos/id/64/800/800" 
+                  src={SITE_CONFIG.avatarUrl} 
                   alt="Avatar" 
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
@@ -39,7 +42,7 @@ const Hero: React.FC = () => {
                 transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
                 className="absolute top-4 right-4 bg-sky-500 text-white text-xs font-black px-3 py-1.5 rounded-full shadow-lg border-2 border-white z-30"
               >
-                LEVEL 99
+                {SITE_CONFIG.level}
               </motion.div>
             </div>
           </div>
@@ -56,16 +59,16 @@ const Hero: React.FC = () => {
           <div className="glass-panel p-6 rounded-3xl border-l-8 border-sky-400">
             <div className="flex flex-col md:flex-row md:items-end gap-4 justify-between">
               <div>
-                <h4 className="text-sky-500 font-bold tracking-widest text-sm mb-1">PLAYER PROFILE</h4>
+                <h4 className="text-sky-500 font-bold tracking-widest text-sm mb-1">{SITE_CONFIG.title}</h4>
                 <h1 className="text-5xl md:text-6xl font-rounded font-black text-gray-800 leading-none">
-                  Hikari<span className="text-sky-400">.Dev</span>
+                  {SITE_CONFIG.name.split('.')[0]}<span className="text-sky-400">.{SITE_CONFIG.name.split('.')[1]}</span>
                 </h1>
               </div>
               <div className="flex gap-2">
-                 <SocialBtn icon={<Github size={18} />} />
-                 <SocialBtn icon={<Twitter size={18} />} />
-                 <SocialBtn icon={<Instagram size={18} />} />
-                 <SocialBtn icon={<Mail size={18} />} />
+                 <SocialBtn href={socials.github} icon={<Github size={18} />} />
+                 <SocialBtn href={socials.twitter} icon={<Twitter size={18} />} />
+                 <SocialBtn href={socials.instagram} icon={<Instagram size={18} />} />
+                 <SocialBtn href={socials.mail} icon={<Mail size={18} />} />
               </div>
             </div>
           </div>
@@ -78,54 +81,53 @@ const Hero: React.FC = () => {
                 </h3>
                 
                 <div className="space-y-3">
-                  <StatBar label="Coding" val={95} color="bg-blue-400" />
-                  <StatBar label="Design" val={80} color="bg-teal-300" />
-                  <StatBar label="Coffee" val={100} color="bg-amber-500" />
-                  <StatBar label="Sleep" val={25} color="bg-indigo-400" />
+                  {SITE_CONFIG.stats.map(stat => (
+                    <StatBar key={stat.label} label={stat.label} val={stat.val} color={stat.color} />
+                  ))}
                 </div>
              </div>
 
              {/* Info/Attributes */}
              <div className="flex flex-col gap-4">
-               {/* Location & Role */}
-               <div className="glass-panel p-5 rounded-3xl flex-1 flex flex-col justify-center">
-                  <div className="flex items-center gap-3 mb-3">
-                    <div className="w-10 h-10 rounded-full bg-teal-50 flex items-center justify-center text-teal-500">
-                      <MapPin size={20} />
-                    </div>
-                    <div>
-                      <p className="text-xs text-gray-500 font-bold uppercase">Base</p>
-                      <p className="font-bold text-gray-800">Tokyo, Internet</p>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-indigo-50 flex items-center justify-center text-indigo-500">
-                      <Zap size={20} />
-                    </div>
-                    <div>
-                      <p className="text-xs text-gray-500 font-bold uppercase">Class</p>
-                      <p className="font-bold text-gray-800">Full Stack Sorcerer</p>
-                    </div>
-                  </div>
-               </div>
+                {/* Location & Role */}
+                <div className="glass-panel p-5 rounded-3xl flex-1 flex flex-col justify-center">
+                   <div className="flex items-center gap-3 mb-3">
+                     <div className="w-10 h-10 rounded-full bg-teal-50 flex items-center justify-center text-teal-500">
+                       <MapPin size={20} />
+                     </div>
+                     <div>
+                       <p className="text-xs text-gray-500 font-bold uppercase">Base</p>
+                       <p className="font-bold text-gray-800">{SITE_CONFIG.location}</p>
+                     </div>
+                   </div>
+                   <div className="flex items-center gap-3">
+                     <div className="w-10 h-10 rounded-full bg-indigo-50 flex items-center justify-center text-indigo-500">
+                       <Zap size={20} />
+                     </div>
+                     <div>
+                       <p className="text-xs text-gray-500 font-bold uppercase">Class</p>
+                       <p className="font-bold text-gray-800">{SITE_CONFIG.role}</p>
+                     </div>
+                   </div>
+                </div>
 
-               {/* Current Status */}
-               <div className="glass-panel p-5 rounded-3xl bg-gradient-to-r from-sky-400 to-indigo-400 text-white shadow-lg shadow-sky-200">
-                  <div className="flex justify-between items-start">
-                    <div>
-                      <p className="text-xs opacity-80 font-bold uppercase mb-1">Current Quest</p>
-                      <p className="font-bold text-lg leading-tight">Building the ultimate waifu website generator.</p>
-                    </div>
-                    <Heart className="fill-white/20 text-white" />
-                  </div>
-               </div>
+                {/* Current Status */}
+                <div className="glass-panel p-5 rounded-3xl bg-gradient-to-r from-sky-400 to-indigo-400 text-white shadow-lg shadow-sky-200">
+                   <div className="flex justify-between items-start">
+                     <div>
+                       <p className="text-xs opacity-80 font-bold uppercase mb-1">Current Quest</p>
+                       <p className="font-bold text-lg leading-tight">{SITE_CONFIG.currentQuest}</p>
+                     </div>
+                     <Heart className="fill-white/20 text-white" />
+                   </div>
+                </div>
              </div>
           </div>
 
           {/* Description */}
           <div className="glass-panel p-6 rounded-3xl">
              <p className="text-gray-600 leading-relaxed font-medium">
-               "Hello! I craft digital experiences that spark joy. Whether it's complex web apps or cute animations, I put my heart into every pixel. Let's make something amazing together!"
+               "{SITE_CONFIG.bio}"
              </p>
           </div>
 
@@ -135,10 +137,15 @@ const Hero: React.FC = () => {
   );
 };
 
-const SocialBtn: React.FC<{ icon: React.ReactNode }> = ({ icon }) => (
-  <button className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-gray-500 hover:text-white hover:bg-sky-400 transition-all shadow-sm border border-sky-50">
+const SocialBtn: React.FC<{ icon: React.ReactNode; href: string }> = ({ icon, href }) => (
+  <a 
+    href={href}
+    target="_blank"
+    rel="noopener noreferrer"
+    className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-gray-500 hover:text-white hover:bg-sky-400 transition-all shadow-sm border border-sky-50"
+  >
     {icon}
-  </button>
+  </a>
 );
 
 const StatBar: React.FC<{ label: string; val: number; color: string }> = ({ label, val, color }) => (

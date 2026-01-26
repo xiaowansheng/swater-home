@@ -1,8 +1,10 @@
 import React from 'react';
 import { Github, Twitter, Mail, Heart } from 'lucide-react';
+import { SITE_CONFIG, APP_NAME } from '@constants';
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
+  const { socials } = SITE_CONFIG;
 
   return (
     <footer className="relative z-10 w-full py-8 mt-12 text-sm text-center text-slate-500">
@@ -10,13 +12,26 @@ const Footer: React.FC = () => {
         
         {/* Social Links */}
         <div className="flex items-center gap-6">
-          <a href="#" className="p-2 transition-transform hover:scale-110 hover:text-sky-500">
+          <a 
+            href={socials.github} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="p-2 transition-transform hover:scale-110 hover:text-sky-500"
+          >
             <Github size={20} />
           </a>
-          <a href="#" className="p-2 transition-transform hover:scale-110 hover:text-sky-500">
+          <a 
+            href={socials.twitter} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="p-2 transition-transform hover:scale-110 hover:text-sky-500"
+          >
             <Twitter size={20} />
           </a>
-          <a href="#" className="p-2 transition-transform hover:scale-110 hover:text-sky-500">
+          <a 
+            href={socials.mail} 
+            className="p-2 transition-transform hover:scale-110 hover:text-sky-500"
+          >
             <Mail size={20} />
           </a>
         </div>
@@ -27,10 +42,10 @@ const Footer: React.FC = () => {
         {/* Info Text */}
         <div className="flex flex-col gap-2">
           <p className="font-medium font-rounded">
-            © {currentYear} SWater Home. All rights reserved.
+            © {currentYear} {APP_NAME}. All rights reserved.
           </p>
           <p className="flex items-center justify-center gap-1 text-xs">
-            Made with <Heart size={12} className="text-red-400 fill-red-400" /> by SWater
+            Made with <Heart size={12} className="text-red-400 fill-red-400" /> by {APP_NAME.replace('Home', '').replace('Space', '')}
           </p>
         </div>
       </div>
