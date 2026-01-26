@@ -1,99 +1,115 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
-    <!-- Preconnect to external domains for better performance -->
-    <link rel="preconnect" href="https://api.dicebear.com" />
-    <link rel="preconnect" href="https://images.unsplash.com" />
-    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
-    
-    <!-- Primary Meta Tags -->
-    <title>Yume's Dimension | Personal Homepage</title>
-    <meta name="title" content="Yume's Dimension | Personal Homepage" />
-    <meta name="description" content="A magical personal homepage weaving dreams and code. Explore the dimension of an independent developer passionate about anime and technology." />
-    <meta name="keywords" content="Indie Developer, Anime, React, TypeScript, Personal Website, Portfolio, Full Stack Developer, Web Development" />
-    <meta name="author" content="Yume" />
-    <meta name="robots" content="index, follow" />
-    <meta name="language" content="English" />
-    <meta name="revisit-after" content="7 days" />
-
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://yume.example.com/" />
-    <meta property="og:title" content="Yume's Dimension | Personal Homepage" />
-    <meta property="og:description" content="A magical personal homepage weaving dreams and code. Explore the dimension of an independent developer passionate about anime and technology." />
-    <meta property="og:image" content="/og-image.png" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:site_name" content="Yume's Dimension" />
-    <meta property="og:locale" content="en_US" />
-
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content="https://yume.example.com/" />
-    <meta property="twitter:title" content="Yume's Dimension | Personal Homepage" />
-    <meta property="twitter:description" content="A magical personal homepage weaving dreams and code." />
-    <meta property="twitter:image" content="/og-image.png" />
-    <meta property="twitter:creator" content="@yume_dev" />
-
-    <!-- Additional Meta Tags -->
-    <meta name="theme-color" content="#ff6b9d" />
-    <meta name="msapplication-TileColor" content="#ff6b9d" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-    <meta name="apple-mobile-web-app-title" content="Yume's Dimension" />
-
-    <!-- Canonical URL -->
-    <link rel="canonical" href="https://yume.example.com/" />
-
-    <!-- Favicon -->
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-    <link rel="manifest" href="/site.webmanifest" />
-
-    <!-- Performance hints -->
-    <link rel="preload" href="/config.json" as="fetch" crossorigin="anonymous" />
-    
-    <!-- Critical CSS inlined for better performance -->
+    <title>SakuraVerse | Personal Home</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@300;400;500;700;800;900&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-      /* Critical above-the-fold styles */
-      body { 
-        margin: 0; 
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        background: linear-gradient(135deg, #fdf2f8 0%, #fef3e2 100%);
-        min-height: 100vh;
+      body {
+        font-family: 'Quicksand', 'M PLUS Rounded 1c', sans-serif;
+        background-color: #fdf2f8;
+        background-image: radial-gradient(#fbcfe8 1.5px, transparent 1.5px);
+        background-size: 24px 24px;
+        overflow-x: hidden;
       }
-      .dark body {
-        background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+
+      /* Custom Scrollbar */
+      ::-webkit-scrollbar {
+        width: 6px;
       }
-      #root { min-height: 100vh; }
-      .loading-spinner {
-        width: 40px;
-        height: 40px;
-        border: 4px solid #f3f4f6;
-        border-top: 4px solid #ff6b9d;
-        border-radius: 50%;
-        animation: spin 1s linear infinite;
-        margin: 20px auto;
+      ::-webkit-scrollbar-track {
+        background: transparent;
       }
-      @keyframes spin {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
+      ::-webkit-scrollbar-thumb {
+        background: rgba(236, 72, 153, 0.5);
+        border-radius: 10px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: rgba(236, 72, 153, 0.8);
+      }
+
+      .font-rounded {
+        font-family: 'M PLUS Rounded 1c', sans-serif;
+      }
+
+      .glass-panel {
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(255, 255, 255, 0.9);
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+      }
+
+      /* Sakura Animation */
+      .sakura-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 0;
+        overflow: hidden;
+      }
+      .sakura {
+        position: absolute;
+        background-color: #ffb7b2;
+        border-radius: 100% 0 100% 0;
+        opacity: 0.6;
+        animation: fall linear infinite;
+      }
+      @keyframes fall {
+        0% { opacity: 0; top: -10%; transform: translateX(0) rotate(0deg); }
+        10% { opacity: 0.8; }
+        100% { opacity: 0; top: 110%; transform: translateX(100px) rotate(360deg); }
       }
     </style>
-  </head>
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "@google/genai": "https://esm.sh/@google/genai@^1.38.0",
+    "lucide-react": "https://esm.sh/lucide-react@^0.563.0",
+    "framer-motion": "https://esm.sh/framer-motion@^12.29.0"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
   <body>
-    <div id="root">
-      <!-- Fallback loading indicator -->
-      <div style="display: flex; align-items: center; justify-content: center; min-height: 100vh; flex-direction: column;">
-        <div class="loading-spinner"></div>
-        <p style="color: #64748b; font-size: 14px; margin-top: 16px;">Loading dimension...</p>
-      </div>
-    </div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+    <div id="root"></div>
+    <!-- Sakura Generator Script -->
+    <script>
+      const container = document.createElement('div');
+      container.className = 'sakura-container';
+      document.body.appendChild(container);
+
+      function createSakura() {
+        const el = document.createElement('div');
+        el.className = 'sakura';
+        const size = Math.random() * 10 + 5 + 'px';
+        el.style.width = size;
+        el.style.height = size;
+        el.style.left = Math.random() * 100 + 'vw';
+        el.style.animationDuration = Math.random() * 5 + 5 + 's';
+        el.style.animationDelay = Math.random() * 5 + 's';
+        container.appendChild(el);
+        
+        // Remove after animation
+        setTimeout(() => {
+          el.remove();
+        }, 11000);
+      }
+
+      setInterval(createSakura, 300);
+    </script>
+  <script type="module" src="/index.tsx"></script>
+</body>
 </html>
