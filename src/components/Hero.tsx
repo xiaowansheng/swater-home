@@ -38,16 +38,16 @@ const Hero: React.FC = () => {
                 <div className="w-full h-full rounded-full overflow-hidden bg-sky-50 relative">
                   <img src={identity.avatarUrl} alt="Avatar" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                 </div>
-                
-                {/* SSR Badge */}
-                <motion.div 
-                  animate={{ y: [0, -4, 0] }}
-                  transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                  className="absolute top-2 right-2 bg-gradient-to-r from-yellow-400 to-orange-500 text-white text-[9px] font-black px-1.5 py-0.5 rounded shadow-lg border border-white z-30"
-                >
-                  {identity.rarity}
-                </motion.div>
               </div>
+                
+              {/* SSR Badge */}
+              <motion.div 
+                animate={{ y: [0, -4, 0] }}
+                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                className="absolute top-2 right-2 bg-gradient-to-r from-yellow-400 to-orange-500 text-white text-[9px] font-black px-1.5 py-0.5 rounded shadow-lg border border-white z-30"
+              >
+                {identity.rarity}
+              </motion.div>
             </div>
           </motion.div>
 

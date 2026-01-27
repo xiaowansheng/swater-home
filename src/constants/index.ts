@@ -18,11 +18,11 @@ export const SITE_CONFIG = {
 export const HOME_CONFIG = {
   // 1. 身份识别 (Identity)
   identity: {
-    nickname: "Hikari",
-    suffix: ".Dev",
-    title: "玩家档案",
+    nickname: "小汍笙",
+    suffix: ".Swater",
+    title: "开发者信息",
     role: "全栈魔法师",
-    level: "等级 99",
+    level: "等级 0.99",
     rarity: "SSR",
     avatarUrl: "https://picsum.photos/id/64/800/800",
   },
