@@ -33,20 +33,24 @@ export const HOME_CONFIG = {
     { platform: "twitter", url: "https://twitter.com", label: "Twitter" },
     { platform: "instagram", url: "https://instagram.com", label: "Instagram" },
     { platform: "mail", url: "mailto:hello@example.com", label: "邮箱" },
+    { platform: "qq", url: "https://qzone.qq.com", label: "QQ" },
+    { platform: "gitee", url: "https://gitee.com", label: "Gitee" },
   ],
 
   // 3. 属性数值 (Stats)
   stats: [
     { label: "编程", val: 95, color: "bg-blue-400" },
     { label: "设计", val: 80, color: "bg-teal-300" },
-    { label: "咖啡", val: 100, color: "bg-amber-500" },
+    { label: "咖啡", val: 0, color: "bg-amber-500" },
     { label: "睡眠", val: 25, color: "bg-indigo-400" },
+    { label: "游戏", val: 60, color: "bg-indigo-400" },
+    { label: "外出", val: 0, color: "bg-indigo-400" },
   ],
 
   // 4. 当前状态 (Status)
   status: {
-    location: "东京，互联网",
-    occupation: "前端魔法师",
+    location: "春城，不知名地点",
+    occupation: "Vibe Coding魔法师",
     currentQuest: "正在构建终极二次元网站生成器。",
   },
 
@@ -61,15 +65,17 @@ export const ABOUT_CONFIG = {
   description2: "不写代码的时候，你会发现我在看动漫、画数字艺术，或者探索城市里的新咖啡馆。我相信好的设计不仅关乎外观，更关乎内在逻辑。",
   metrics: [
     { label: "经验", value: "3 年以上", color: "bg-sky-50", textColor: "text-sky-600", borderColor: "border-sky-100" },
-    { label: "已完成", value: "50+ 个项目", color: "bg-indigo-50", textColor: "text-indigo-600", borderColor: "border-indigo-100" }
+    { label: "已完成", value: "5+ 个项目", color: "bg-indigo-50", textColor: "text-indigo-600", borderColor: "border-indigo-100" }
   ],
   skills: [
-    { name: "前端", level: 90, color: "bg-sky-400" },
-    { name: "后端", level: 75, color: "bg-indigo-400" },
-    { name: "React", level: 95, color: "bg-blue-400" },
-    { name: "咖啡", level: 100, color: "bg-amber-500" },
+    { name: "Java", level: 90, color: "bg-sky-400" },
+    { name: "Go", level: 60, color: "bg-indigo-400" },
+    { name: "Python", level: 60, color: "bg-indigo-400" },
+    { name: "TypeScript", level: 80, color: "bg-indigo-400" },
+    { name: "React", level: 90, color: "bg-blue-400" },
+    { name: "Vue", level: 90, color: "bg-amber-500" },
   ],
-  learning: ['Three.js', 'Rust', '日语', '钢琴']
+  learning: ['Three.js', 'Rust', 'K8S', '英语']
 };
 
 export const NAV_ITEMS: NavItem[] = [
