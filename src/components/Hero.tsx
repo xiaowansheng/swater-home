@@ -79,7 +79,7 @@ const Hero: React.FC = () => {
           className="flex flex-wrap justify-center md:justify-start gap-3 p-4 glass-panel rounded-2xl border-l-[6px] border-sky-400"
         >
           {socials.map((social) => (
-            <SocialBtn key={social.platform} href={social.url} icon={getSocialIcon(social.platform)} label={social.label} />
+            <SocialBtn key={social.platform} platform={social.platform} href={social.url} icon={getSocialIcon(social.platform)} label={social.label} />
           ))}
         </motion.div>
 
@@ -166,18 +166,30 @@ const Hero: React.FC = () => {
   );
 };
 
-const SocialBtn: React.FC<{ icon: React.ReactNode; href: string; label: string }> = ({ icon, href, label }) => (
-  <a 
-    href={href}
-    target="_blank"
-    rel="noopener noreferrer"
-    title={label}
-    className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white/40 text-slate-700 hover:text-white hover:bg-sky-400 transition-all border border-white/60 font-bold text-sm shadow-sm"
-  >
-    {icon} 
-    <span className="hidden sm:inline">{label}</span>
-  </a>
-);
+const SocialBtn: React.FC<{ icon: React.ReactNode; href: string; label: string; platform: string }> = ({ icon, href, label, platform }) => {
+  const getStyles = (p: string) => {
+    switch (p) {
+      case 'github': return "bg-gray-50 text-gray-800 border-gray-200 hover:bg-gray-800 hover:text-white hover:border-gray-800";
+      case 'twitter': return "bg-sky-50 text-sky-500 border-sky-100 hover:bg-[#1DA1F2] hover:text-white hover:border-[#1DA1F2]";
+      case 'instagram': return "bg-pink-50 text-pink-600 border-pink-100 hover:bg-[#E1306C] hover:text-white hover:border-[#E1306C]";
+      case 'mail': return "bg-red-50 text-red-600 border-red-100 hover:bg-[#EA4335] hover:text-white hover:border-[#EA4335]";
+      default: return "bg-white/90 text-slate-700 border-white/60 hover:text-white hover:bg-sky-400";
+    }
+  };
+
+  return (
+    <a 
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      title={label}
+      className={`flex items-center gap-2 px-4 py-2 rounded-xl transition-all border font-bold text-sm shadow-sm ${getStyles(platform)}`}
+    >
+      {icon} 
+      <span className="hidden sm:inline">{label}</span>
+    </a>
+  );
+};
 
 const StatBar: React.FC<{ label: string; val: number; color: string }> = ({ label, val, color }) => (
   <div className="flex items-center gap-4">
