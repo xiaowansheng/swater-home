@@ -172,7 +172,7 @@ const SocialBtn: React.FC<{ icon: React.ReactNode; href: string; label: string }
     target="_blank"
     rel="noopener noreferrer"
     title={label}
-    className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white/40 text-slate-500 hover:text-white hover:bg-sky-400 transition-all border border-white/60 font-bold text-sm shadow-sm"
+    className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white/40 text-slate-700 hover:text-white hover:bg-sky-400 transition-all border border-white/60 font-bold text-sm shadow-sm"
   >
     {icon} 
     <span className="hidden sm:inline">{label}</span>
