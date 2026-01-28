@@ -75,7 +75,7 @@ export const ABOUT_CONFIG = {
     { name: "React", level: 90, color: "bg-blue-400" },
     { name: "Vue", level: 90, color: "bg-amber-500" },
   ],
-  learning: ['Three.js', 'Rust', 'K8S', '英语']
+  learning: ['Rust', 'K8S', '英语']
 };
 
 export const NAV_ITEMS: NavItem[] = [

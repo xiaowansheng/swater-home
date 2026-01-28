@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Code, Palette, Terminal, Coffee, Zap, Heart } from 'lucide-react';
+import { Code, Palette, Terminal, Coffee, Zap, Heart, Box, FileCode, Layers } from 'lucide-react';
 import { ABOUT_CONFIG } from '@constants';
 
 const About: React.FC = () => {
@@ -10,6 +10,11 @@ const About: React.FC = () => {
       case 'Backend': return <Terminal size={18} />;
       case 'React': return <Code size={18} />;
       case 'Coffee': return <Coffee size={18} />;
+      case 'Java': return <Coffee size={18} />;
+      case 'Go': return <Terminal size={18} />;
+      case 'Python': return <Terminal size={18} />; // Lucide doesn't have Python, distinct enough with color
+      case 'TypeScript': return <FileCode size={18} />;
+      case 'Vue': return <Layers size={18} />;
       default: return <Code size={18} />;
     }
   };

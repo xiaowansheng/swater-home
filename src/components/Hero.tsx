@@ -45,8 +45,8 @@ const Hero: React.FC = () => {
             className="flex-shrink-0"
           >
             <div className="relative">
-              <div className="absolute -inset-4 bg-gradient-to-tr from-sky-400 to-indigo-400 rounded-full opacity-20 blur-2xl animate-pulse"></div>
-              <div className="absolute -inset-1 bg-gradient-to-tr from-sky-400 to-indigo-400 rounded-full opacity-30 blur-md"></div>
+              <div className="absolute -inset-4 bg-gradient-to-tr from-sky-500 via-indigo-500 to-purple-500 rounded-full opacity-30 blur-3xl animate-pulse"></div>
+              <div className="absolute -inset-1 bg-gradient-to-tr from-sky-400 to-indigo-400 rounded-full opacity-40 blur-lg"></div>
               
               <div className="relative w-40 h-40 md:w-48 md:h-48 bg-white p-1 rounded-full shadow-2xl border-4 border-white overflow-hidden group">
                 <div className="w-full h-full rounded-full overflow-hidden bg-sky-50 relative">
@@ -210,15 +210,15 @@ const SocialBtn: React.FC<{ icon: React.ReactNode; href: string; label: string; 
 const StatBar: React.FC<{ label: string; val: number; color: string }> = ({ label, val, color }) => (
   <div className="flex items-center gap-4">
     <span className="w-16 text-[10px] font-black text-slate-400 text-right uppercase tracking-wider">{label}</span>
-    <div className="flex-1 h-3 bg-slate-100/50 rounded-full overflow-hidden shadow-inner border border-white/30">
+    <div className="flex-1 h-3 bg-slate-200/60 rounded-full overflow-hidden shadow-inner border border-white/40">
       <motion.div 
         initial={{ width: 0 }}
         animate={{ width: `${val}%` }}
         transition={{ duration: 1.2, delay: 1 }}
-        className={`h-full ${color} rounded-full opacity-90`}
+        className={`h-full ${val === 0 ? 'bg-transparent' : color} rounded-full opacity-90`}
       />
     </div>
-    <span className="w-10 text-[10px] font-black text-slate-500">{val}%</span>
+    <span className={`w-10 text-[10px] font-black ${val === 0 ? 'text-slate-300' : 'text-slate-500'}`}>{val}%</span>
   </div>
 );
 
