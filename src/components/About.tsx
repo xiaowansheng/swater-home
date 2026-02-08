@@ -171,6 +171,15 @@ const About: React.FC = () => {
           transition={{ delay: 0.15 }}
           className="grid grid-cols-3 gap-3"
         >
+          {/* 职业 - 放在最前面 */}
+          <div className="glass-panel p-4 rounded-xl border-l-4 border-teal-400">
+            <div className="flex items-center gap-1.5 mb-0.5">
+              <Compass size={12} className="text-teal-500" />
+              <span className="text-[9px] text-slate-400 font-bold uppercase tracking-wider">职业</span>
+            </div>
+            <p className="font-bold text-slate-700 text-sm">{status.occupation}</p>
+          </div>
+
           {metrics.map((metric, index) => (
             <div 
               key={metric.label} 
@@ -180,28 +189,6 @@ const About: React.FC = () => {
               <p className="text-[9px] text-slate-400 font-bold uppercase tracking-wider">{metric.label}</p>
             </div>
           ))}
-          
-          <div className="glass-panel p-4 rounded-xl border-l-4 border-teal-400">
-            <div className="flex items-center gap-1.5 mb-0.5">
-              <Compass size={12} className="text-teal-500" />
-              <span className="text-[9px] text-slate-400 font-bold uppercase tracking-wider">职业</span>
-            </div>
-            <p className="font-bold text-slate-700 text-sm">{status.occupation}</p>
-          </div>
-        </motion.div>
-
-        {/* 2.5 Current Quest - Full Width */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.18 }}
-          className="glass-panel p-4 rounded-xl border-l-4 border-rose-400"
-        >
-          <div className="flex items-center gap-1.5 mb-1">
-            <Target size={12} className="text-rose-500" />
-            <span className="text-[9px] text-slate-400 font-bold uppercase tracking-wider">当前目标</span>
-          </div>
-          <p className="font-bold text-slate-700 text-sm">{status.currentQuest}</p>
         </motion.div>
 
         {/* 3. Character Stats */}
@@ -288,6 +275,20 @@ const About: React.FC = () => {
               </span>
             ))}
           </div>
+        </motion.div>
+
+        {/* 6. Current Quest - Full Width */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.35 }}
+          className="glass-panel p-4 rounded-xl border-l-4 border-rose-400"
+        >
+          <div className="flex items-center gap-1.5 mb-1">
+            <Target size={12} className="text-rose-500" />
+            <span className="text-[9px] text-slate-400 font-bold uppercase tracking-wider">当前目标</span>
+          </div>
+          <p className="font-bold text-slate-700 text-sm">{status.currentQuest}</p>
         </motion.div>
 
       </div>
