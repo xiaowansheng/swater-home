@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Code, Palette, Terminal, Coffee, Zap, Heart } from 'lucide-react';
+import { Code, Palette, Terminal, Coffee, Zap, Heart, Box, FileCode, Layers } from 'lucide-react';
 import { ABOUT_CONFIG } from '@constants';
 
 const About: React.FC = () => {
@@ -10,6 +10,11 @@ const About: React.FC = () => {
       case 'Backend': return <Terminal size={18} />;
       case 'React': return <Code size={18} />;
       case 'Coffee': return <Coffee size={18} />;
+      case 'Java': return <Coffee size={18} />;
+      case 'Go': return <Terminal size={18} />;
+      case 'Python': return <Terminal size={18} />; // Lucide doesn't have Python, distinct enough with color
+      case 'TypeScript': return <FileCode size={18} />;
+      case 'Vue': return <Layers size={18} />;
       default: return <Code size={18} />;
     }
   };
@@ -31,7 +36,7 @@ const About: React.FC = () => {
           initial={{ opacity: 0, x: -30 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.2 }}
-          className="lg:col-span-7 glass-panel p-8 rounded-3xl border-l-[6px] border-sky-400"
+          className="lg:col-span-7 lg:sticky lg:top-28 glass-panel p-8 rounded-3xl border-l-[6px] border-sky-400"
         >
           <h3 className="text-2xl font-black text-slate-800 mb-6 flex items-center gap-3">
             {ABOUT_CONFIG.subtitle}
@@ -57,7 +62,7 @@ const About: React.FC = () => {
            initial={{ opacity: 0, x: 30 }}
            animate={{ opacity: 1, x: 0 }}
            transition={{ delay: 0.4 }}
-           className="lg:col-span-5 space-y-5"
+           className="lg:col-span-5 lg:sticky lg:top-28 space-y-5"
         >
           <div className="glass-panel p-6 rounded-3xl border-l-[6px] border-indigo-400">
             <h3 className="text-xl font-black text-slate-800 mb-6 px-1 flex items-center gap-2">
