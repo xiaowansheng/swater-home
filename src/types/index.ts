@@ -7,7 +7,8 @@ export interface Project {
   id: number;
   title: string;
   description: string;
-  image: string;
+  image?: string;        // 可选封面图
+  icon?: string;         // 可选图标名称 (如 'code', 'globe', 'book' 等)
   tags: string[];
   url?: string;
 }
