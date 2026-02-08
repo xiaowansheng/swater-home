@@ -1,7 +1,6 @@
 import React from 'react';
 import { createBrowserRouter, RouterProvider, useOutlet, useLocation, ScrollRestoration } from 'react-router-dom';
 import Layout from '@components/Layout';
-import Home from '@pages/Home';
 import About from '@pages/About';
 import Websites from '@pages/Websites';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -34,10 +33,6 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Home />,
-      },
-      {
-        path: "/about",
         element: <About />,
       },
       {
@@ -46,7 +41,7 @@ const router = createBrowserRouter([
       },
       {
         path: "*",
-        element: <Home />,
+        element: <About />,
       },
     ],
   },
