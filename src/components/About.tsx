@@ -86,7 +86,7 @@ const About: React.FC = () => {
   const { descriptions, metrics, skills, learning } = ABOUT_CONFIG;
 
   return (
-    <section className="min-h-screen pt-20 pb-16 px-4 max-w-3xl mx-auto">
+    <section className="min-h-screen pt-20 pb-16 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
       
       {/* ========== HERO SECTION ========== */}
       <motion.div 
@@ -169,7 +169,7 @@ const About: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.15 }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-3"
+          className="grid grid-cols-3 gap-3"
         >
           {metrics.map((metric, index) => (
             <div 
@@ -186,16 +186,22 @@ const About: React.FC = () => {
               <Compass size={12} className="text-teal-500" />
               <span className="text-[9px] text-slate-400 font-bold uppercase tracking-wider">职业</span>
             </div>
-            <p className="font-bold text-slate-700 text-sm truncate">{status.occupation}</p>
+            <p className="font-bold text-slate-700 text-sm">{status.occupation}</p>
           </div>
+        </motion.div>
 
-          <div className="glass-panel p-4 rounded-xl border-l-4 border-rose-400">
-            <div className="flex items-center gap-1.5 mb-0.5">
-              <Target size={12} className="text-rose-500" />
-              <span className="text-[9px] text-slate-400 font-bold uppercase tracking-wider">当前</span>
-            </div>
-            <p className="font-bold text-slate-700 text-sm truncate">{status.currentQuest}</p>
+        {/* 2.5 Current Quest - Full Width */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.18 }}
+          className="glass-panel p-4 rounded-xl border-l-4 border-rose-400"
+        >
+          <div className="flex items-center gap-1.5 mb-1">
+            <Target size={12} className="text-rose-500" />
+            <span className="text-[9px] text-slate-400 font-bold uppercase tracking-wider">当前目标</span>
           </div>
+          <p className="font-bold text-slate-700 text-sm">{status.currentQuest}</p>
         </motion.div>
 
         {/* 3. Character Stats */}
@@ -281,32 +287,6 @@ const About: React.FC = () => {
                 {tag}
               </span>
             ))}
-          </div>
-        </motion.div>
-
-        {/* 6. Current Activity Highlight */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.35 }}
-          className="relative overflow-hidden glass-panel p-5 rounded-2xl border-l-4 border-rose-400"
-        >
-          <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-rose-100 to-pink-100 rounded-full -translate-y-1/2 translate-x-1/2 opacity-40"></div>
-          <div className="relative flex items-center justify-between">
-            <div>
-              <div className="flex items-center gap-2 mb-2">
-                <div className="p-1.5 bg-rose-100 rounded-lg text-rose-500"><Heart size={16} /></div>
-                <span className="text-xs text-rose-500 font-black uppercase tracking-wider">当前活动</span>
-              </div>
-              <p className="font-bold text-slate-700 leading-snug">{status.currentQuest}</p>
-            </div>
-            <motion.div 
-              animate={{ scale: [1, 1.1, 1] }}
-              transition={{ duration: 2, repeat: Infinity }}
-              className="text-rose-200 flex-shrink-0 ml-4"
-            >
-              <Heart size={28} fill="currentColor" />
-            </motion.div>
           </div>
         </motion.div>
 
