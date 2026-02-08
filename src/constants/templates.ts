@@ -57,8 +57,10 @@ export const HOME_CONFIG = {
 export const ABOUT_CONFIG = {
   title: "关于我",
   subtitle: "👋 我是谁？",
-  description1: "我是一名常驻云端的充满热情的开发者。我擅长构建美观、实用且用户友好的网站。我的目标是桥接工程与艺术之间的鸿沟。",
-  description2: "不写代码的时候，你会发现我在看动漫、画数字艺术，或者探索城市里的新咖啡馆。我相信好的设计不仅关乎外观，更关乎内在逻辑。",
+  descriptions: [
+    "我是一名常驻云端的充满热情的开发者。我擅长构建美观、实用且用户友好的网站。我的目标是桥接工程与艺术之间的鸿沟。",
+    "不写代码的时候，你会发现我在看动漫、画数字艺术，或者探索城市里的新咖啡馆。我相信好的设计不仅关乎外观，更关乎内在逻辑。"
+  ],
   metrics: [
     { label: "经验", value: "3 年以上", color: "bg-sky-50", textColor: "text-sky-600", borderColor: "border-sky-100" },
     { label: "已完成", value: "50+ 个项目", color: "bg-indigo-50", textColor: "text-indigo-600", borderColor: "border-indigo-100" }

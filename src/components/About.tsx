@@ -83,7 +83,7 @@ const SocialBtn: React.FC<{ icon: React.ReactNode; href: string; label: string; 
 
 const About: React.FC = () => {
   const { identity, socials, stats, status, bio: homeBio } = HOME_CONFIG;
-  const { description1, description2, metrics, skills, learning } = ABOUT_CONFIG;
+  const { descriptions, metrics, skills, learning } = ABOUT_CONFIG;
 
   return (
     <section className="min-h-screen pt-20 pb-16 px-4 max-w-3xl mx-auto">
@@ -158,8 +158,9 @@ const About: React.FC = () => {
 
           {/* Detailed Bio */}
           <div className="space-y-2 text-slate-600 leading-relaxed text-sm">
-            <p>{description1}</p>
-            <p>{description2}</p>
+            {descriptions.map((desc, index) => (
+              <p key={index}>{desc}</p>
+            ))}
           </div>
         </motion.div>
 
