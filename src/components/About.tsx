@@ -4,7 +4,7 @@ import {
   Github, Twitter, Instagram, Mail, 
   Zap, Heart, Star, MapPin, 
   Code, Palette, Terminal, Coffee, FileCode, Layers,
-  Compass, Clock, Award, User
+  Compass, Clock, Sparkles, Quote, Target, Rocket
 } from 'lucide-react';
 import { HOME_CONFIG, ABOUT_CONFIG } from '@constants';
 
@@ -36,16 +36,19 @@ const getSocialIcon = (platform: string) => {
 
 const getSkillIcon = (name: string) => {
   switch(name) {
-    case 'Frontend': return <Palette size={18} />;
-    case 'Backend': return <Terminal size={18} />;
-    case 'React': return <Code size={18} />;
-    case 'Coffee': return <Coffee size={18} />;
-    case 'Java': return <Coffee size={18} />;
-    case 'Go': return <Terminal size={18} />;
-    case 'Python': return <Terminal size={18} />;
-    case 'TypeScript': return <FileCode size={18} />;
-    case 'Vue': return <Layers size={18} />;
-    default: return <Code size={18} />;
+    case '前端': return <Palette size={16} />;
+    case '后端': return <Terminal size={16} />;
+    case 'React': return <Code size={16} />;
+    case '咖啡': return <Coffee size={16} />;
+    case 'Frontend': return <Palette size={16} />;
+    case 'Backend': return <Terminal size={16} />;
+    case 'Coffee': return <Coffee size={16} />;
+    case 'Java': return <Coffee size={16} />;
+    case 'Go': return <Terminal size={16} />;
+    case 'Python': return <Terminal size={16} />;
+    case 'TypeScript': return <FileCode size={16} />;
+    case 'Vue': return <Layers size={16} />;
+    default: return <Code size={16} />;
   }
 };
 
@@ -68,245 +71,243 @@ const SocialBtn: React.FC<{ icon: React.ReactNode; href: string; label: string; 
       target="_blank"
       rel="noopener noreferrer"
       title={label}
-      className={`flex items-center gap-2 px-4 py-2 rounded-xl transition-all border font-bold text-sm shadow-sm ${getStyles(platform)}`}
+      className={`flex items-center gap-2 px-3 py-2 rounded-xl transition-all border font-bold text-sm shadow-sm hover:shadow-md hover:-translate-y-0.5 ${getStyles(platform)}`}
     >
       {icon} 
       <span className="hidden sm:inline">{label}</span>
-      <span className="sm:hidden inline">{icon}</span>
     </a>
   );
 };
-
-const StatBar: React.FC<{ label: string; val: number; color: string }> = ({ label, val, color }) => (
-  <div className="flex items-center gap-4">
-    <span className="w-16 text-[10px] font-black text-slate-400 text-right uppercase tracking-wider">{label}</span>
-    <div className="flex-1 h-3 bg-slate-200/60 rounded-full overflow-hidden shadow-inner border border-white/40">
-      <motion.div 
-        initial={{ width: 0 }}
-        whileInView={{ width: `${val}%` }}
-        viewport={{ once: true }}
-        transition={{ duration: 1.2, delay: 0.2 }}
-        className={`h-full ${val === 0 ? 'bg-transparent' : color} rounded-full opacity-90`}
-      />
-    </div>
-    <span className={`w-10 text-[10px] font-black ${val === 0 ? 'text-slate-300' : 'text-slate-500'}`}>{val}%</span>
-  </div>
-);
 
 // --- Main Component ---
 
 const About: React.FC = () => {
   const { identity, socials, stats, status, bio: homeBio } = HOME_CONFIG;
-  const { title, subtitle, description1, description2, metrics, skills, learning } = ABOUT_CONFIG;
+  const { description1, description2, metrics, skills, learning } = ABOUT_CONFIG;
 
   return (
-    <section className="min-h-screen pt-24 pb-16 px-4 max-w-7xl mx-auto">
+    <section className="min-h-screen pt-20 pb-16 px-4 max-w-3xl mx-auto">
       
-      {/* 1. HERO & IDENTITY SECTION - Fused from Home */}
-      <div className="flex flex-col items-center mb-16 px-4">
-        <motion.div
-           initial={{ opacity: 0, y: 20 }}
-           animate={{ opacity: 1, y: 0 }}
-           className="relative mb-8"
-        >
-           <div className="absolute -inset-4 bg-gradient-to-tr from-sky-500 via-indigo-500 to-purple-500 rounded-full opacity-20 blur-3xl animate-pulse"></div>
-           <div className="relative w-32 h-32 md:w-40 md:h-40 bg-white p-1 rounded-full shadow-2xl border-4 border-white overflow-hidden group mx-auto">
-             <div className="w-full h-full rounded-full overflow-hidden bg-sky-50 relative">
-               <img src={identity.avatarUrl} alt="Avatar" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-             </div>
-           </div>
-           <div className="absolute top-0 right-0 md:right-2">
-              <motion.span 
-                animate={{ y: [0, -4, 0] }}
-                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                className="bg-gradient-to-r from-yellow-400 to-orange-500 text-white text-[9px] font-black px-1.5 py-0.5 rounded shadow-lg border border-white inline-block"
-              >
-                {identity.rarity}
-              </motion.span>
-           </div>
-        </motion.div>
+      {/* ========== HERO SECTION ========== */}
+      <motion.div 
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="text-center mb-10"
+      >
+        {/* Avatar */}
+        <div className="relative inline-block mb-5">
+          <div className="absolute -inset-3 bg-gradient-to-tr from-sky-400 via-indigo-400 to-purple-400 rounded-full opacity-25 blur-2xl animate-pulse"></div>
+          <div className="relative w-28 h-28 bg-white p-1 rounded-full shadow-xl border-4 border-white overflow-hidden group">
+            <div className="w-full h-full rounded-full overflow-hidden bg-gradient-to-br from-sky-50 to-indigo-50">
+              <img src={identity.avatarUrl} alt="Avatar" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+            </div>
+          </div>
+          {/* Rarity Badge */}
+          <motion.span 
+            animate={{ y: [0, -3, 0] }}
+            transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute -top-1 -right-1 bg-gradient-to-r from-yellow-400 to-orange-500 text-white text-[9px] font-black px-2 py-0.5 rounded-md shadow-lg border-2 border-white"
+          >
+            {identity.rarity}
+          </motion.span>
+        </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
+        {/* Name & Title */}
+        <h1 className="text-3xl md:text-4xl font-rounded font-black text-slate-800 mb-2">
+          {identity.nickname}<span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-indigo-500">{identity.suffix}</span>
+        </h1>
+        
+        {/* Tags */}
+        <div className="flex items-center justify-center gap-2 mb-5 flex-wrap">
+          <span className="bg-gradient-to-r from-sky-100 to-sky-50 text-sky-600 text-[10px] font-bold px-2.5 py-1 rounded-full border border-sky-100">{identity.role}</span>
+          <span className="bg-gradient-to-r from-indigo-100 to-indigo-50 text-indigo-600 text-[10px] font-bold px-2.5 py-1 rounded-full border border-indigo-100">{identity.level}</span>
+          <span className="bg-gradient-to-r from-purple-100 to-purple-50 text-purple-600 text-[10px] font-bold px-2.5 py-1 rounded-full border border-purple-100 flex items-center gap-1">
+            <MapPin size={10} /> {status.location}
+          </span>
+        </div>
+
+        {/* Socials */}
+        <div className="flex flex-wrap justify-center gap-2">
+          {socials.map((social) => (
+            <SocialBtn key={social.platform} platform={social.platform} href={social.url} icon={getSocialIcon(social.platform)} label={social.label} />
+          ))}
+        </div>
+      </motion.div>
+
+      {/* ========== VERTICAL STACKED CONTENT ========== */}
+      <div className="space-y-5">
+        
+        {/* 1. Bio Card */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="text-center"
+          className="glass-panel p-5 rounded-2xl border-l-4 border-sky-400"
         >
-           <h1 className="text-4xl md:text-5xl font-rounded font-black text-slate-800 mb-2">
-             {identity.nickname}<span className="text-sky-400">{identity.suffix}</span>
-           </h1>
-           <div className="flex items-center justify-center gap-3 mb-6">
-              <span className="bg-sky-100 text-sky-600 text-[10px] font-black px-2 py-0.5 rounded uppercase">{identity.role}</span>
-              <span className="bg-slate-100 text-slate-500 text-[10px] font-black px-2 py-0.5 rounded uppercase">{identity.level}</span>
-           </div>
-
-           {/* Socials Row */}
-           <div className="flex flex-wrap justify-center gap-3">
-             {socials.map((social) => (
-               <SocialBtn key={social.platform} platform={social.platform} href={social.url} icon={getSocialIcon(social.platform)} label={social.label} />
-             ))}
-           </div>
-        </motion.div>
-      </div>
-
-      <div className="grid lg:grid-cols-12 gap-8 items-start">
-        
-        {/* 2. LEFT COLUMN: Bio & Status - Fused Content */}
-        <div className="lg:col-span-7 space-y-8">
+          <div className="flex items-center gap-2 mb-3">
+            <div className="p-1.5 bg-sky-100 rounded-lg text-sky-500"><Quote size={16} /></div>
+            <h3 className="text-base font-black text-slate-800">关于我</h3>
+          </div>
           
-          {/* Main Biography Card */}
-          <motion.div 
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.2 }}
-            className="glass-panel p-8 rounded-3xl border-l-[6px] border-sky-400"
-          >
-            <div className="flex items-center gap-3 mb-6">
-               <div className="p-2 bg-sky-50 rounded-lg text-sky-500"><User size={24} /></div>
-               <h3 className="text-2xl font-black text-slate-800">{title}</h3>
-            </div>
-            
-            {/* Short Bio Quote from Home */}
-            <div className="mb-6 p-4 bg-slate-50 rounded-2xl border border-slate-100 italic text-slate-600 font-medium relative">
-               <span className="absolute text-5xl text-slate-200 -top-2 -left-1 font-serif">"</span>
-               <p className="relative z-10">{homeBio}</p>
-            </div>
+          {/* Quote */}
+          <div className="mb-4 p-3 bg-gradient-to-br from-slate-50 to-sky-50/30 rounded-xl border border-slate-100 relative">
+            <Sparkles size={12} className="absolute top-2 right-2 text-sky-300" />
+            <p className="text-slate-600 font-medium italic leading-relaxed text-sm">"{homeBio}"</p>
+          </div>
 
-            {/* Detailed Bio from About */}
-            <div className="space-y-4 text-slate-600 leading-relaxed font-medium">
-               <p>{description1}</p>
-               <p>{description2}</p>
-            </div>
-          </motion.div>
+          {/* Detailed Bio */}
+          <div className="space-y-2 text-slate-600 leading-relaxed text-sm">
+            <p>{description1}</p>
+            <p>{description2}</p>
+          </div>
+        </motion.div>
 
-          {/* Combined Status & Metrics Grid */}
-          <motion.div
-             initial={{ opacity: 0, y: 20 }}
-             animate={{ opacity: 1, y: 0 }}
-             transition={{ delay: 0.3 }}
-             className="grid grid-cols-1 md:grid-cols-2 gap-4"
-          >
-            {/* Metric Cards */}
-            {metrics.map(metric => (
-              <div key={metric.label} className={`bg-white/60 p-5 rounded-2xl border border-white/60 shadow-sm ${metric.borderColor?.replace('100', '200') || ''}`}>
-                <h4 className={`text-2xl font-black ${metric.textColor} mb-1`}>{metric.value}</h4>
-                <p className="text-[10px] text-slate-400 font-black uppercase tracking-wider">{metric.label}</p>
+        {/* 2. Metrics Row */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.15 }}
+          className="grid grid-cols-2 md:grid-cols-4 gap-3"
+        >
+          {metrics.map((metric, index) => (
+            <div 
+              key={metric.label} 
+              className={`glass-panel p-4 rounded-xl border-l-4 ${index === 0 ? 'border-sky-400' : 'border-indigo-400'}`}
+            >
+              <div className={`text-xl font-black ${metric.textColor} mb-0.5`}>{metric.value}</div>
+              <p className="text-[9px] text-slate-400 font-bold uppercase tracking-wider">{metric.label}</p>
+            </div>
+          ))}
+          
+          <div className="glass-panel p-4 rounded-xl border-l-4 border-teal-400">
+            <div className="flex items-center gap-1.5 mb-0.5">
+              <Compass size={12} className="text-teal-500" />
+              <span className="text-[9px] text-slate-400 font-bold uppercase tracking-wider">职业</span>
+            </div>
+            <p className="font-bold text-slate-700 text-sm truncate">{status.occupation}</p>
+          </div>
+
+          <div className="glass-panel p-4 rounded-xl border-l-4 border-rose-400">
+            <div className="flex items-center gap-1.5 mb-0.5">
+              <Target size={12} className="text-rose-500" />
+              <span className="text-[9px] text-slate-400 font-bold uppercase tracking-wider">当前</span>
+            </div>
+            <p className="font-bold text-slate-700 text-sm truncate">{status.currentQuest}</p>
+          </div>
+        </motion.div>
+
+        {/* 3. Character Stats */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+          className="glass-panel p-5 rounded-2xl border-l-4 border-teal-400"
+        >
+          <div className="flex items-center gap-2 mb-4">
+            <div className="p-1.5 bg-teal-100 rounded-lg text-teal-500"><Star size={16} /></div>
+            <h3 className="font-black text-slate-700 text-base">角色属性</h3>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+            {stats.map((stat, i) => (
+              <div key={stat.label} className="text-center">
+                <div className="relative w-full h-2 bg-slate-200/60 rounded-full overflow-hidden mb-1.5">
+                  <motion.div 
+                    initial={{ width: 0 }}
+                    whileInView={{ width: `${stat.val}%` }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 1, delay: 0.1 * i }}
+                    className={`h-full ${stat.color} rounded-full`}
+                  />
+                </div>
+                <span className="text-[10px] font-black text-slate-500 uppercase">{stat.label}</span>
+                <span className="text-[10px] font-bold text-slate-400 ml-1">{stat.val}%</span>
               </div>
             ))}
-            
-            {/* Status Cards */}
-            <div className="bg-white/60 p-5 rounded-2xl border border-white/60 shadow-sm flex flex-col justify-center">
-               <div className="flex items-center gap-3 mb-1">
-                 <MapPin size={16} className="text-indigo-400" />
-                 <span className="text-[10px] text-slate-400 font-black uppercase tracking-wider">Base</span>
-               </div>
-               <p className="font-bold text-slate-700">{status.location}</p>
+          </div>
+        </motion.div>
+
+        {/* 4. Tech Stack */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.25 }}
+          className="glass-panel p-5 rounded-2xl border-l-4 border-indigo-400"
+        >
+          <div className="flex items-center gap-2 mb-4">
+            <div className="p-1.5 bg-indigo-100 rounded-lg text-indigo-500"><Zap size={16} /></div>
+            <h3 className="font-black text-slate-700 text-base">技术栈</h3>
+          </div>
+          <div className="space-y-3">
+            {skills.map((skill, index) => (
+              <div key={skill.name} className="flex items-center gap-3">
+                <span className={`p-1.5 rounded-lg text-white ${skill.color} shadow-sm flex-shrink-0`}>
+                  {getSkillIcon(skill.name)}
+                </span>
+                <span className="text-sm font-bold text-slate-700 w-16 flex-shrink-0">{skill.name}</span>
+                <div className="flex-1 h-2 bg-slate-100 rounded-full overflow-hidden">
+                  <motion.div 
+                    initial={{ width: 0 }}
+                    whileInView={{ width: `${skill.level}%` }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 1, delay: 0.1 + (index * 0.08) }}
+                    className={`h-full ${skill.color} rounded-full`}
+                  />
+                </div>
+                <span className="text-xs font-black text-slate-400 w-10 text-right">{skill.level}%</span>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* 5. Learning Queue */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+          className="glass-panel p-5 rounded-2xl border-l-4 border-amber-400"
+        >
+          <div className="flex items-center gap-2 mb-3">
+            <div className="p-1.5 bg-amber-100 rounded-lg text-amber-500"><Rocket size={16} /></div>
+            <h4 className="font-black text-slate-700 text-sm uppercase tracking-wide">正在学习</h4>
+          </div>
+          <div className="flex flex-wrap gap-2">
+            {learning.map(tag => (
+              <span 
+                key={tag} 
+                className="px-3 py-1.5 bg-gradient-to-r from-amber-50 to-orange-50 rounded-lg text-xs font-bold text-amber-700 border border-amber-100 hover:from-amber-100 hover:to-orange-100 transition-colors cursor-default"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* 6. Current Activity Highlight */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.35 }}
+          className="relative overflow-hidden glass-panel p-5 rounded-2xl border-l-4 border-rose-400"
+        >
+          <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-rose-100 to-pink-100 rounded-full -translate-y-1/2 translate-x-1/2 opacity-40"></div>
+          <div className="relative flex items-center justify-between">
+            <div>
+              <div className="flex items-center gap-2 mb-2">
+                <div className="p-1.5 bg-rose-100 rounded-lg text-rose-500"><Heart size={16} /></div>
+                <span className="text-xs text-rose-500 font-black uppercase tracking-wider">当前活动</span>
+              </div>
+              <p className="font-bold text-slate-700 leading-snug">{status.currentQuest}</p>
             </div>
-
-            <div className="bg-white/60 p-5 rounded-2xl border border-white/60 shadow-sm flex flex-col justify-center">
-               <div className="flex items-center gap-3 mb-1">
-                 <Compass size={16} className="text-teal-400" />
-                 <span className="text-[10px] text-slate-400 font-black uppercase tracking-wider">Class</span>
-               </div>
-               <p className="font-bold text-slate-700">{status.occupation}</p>
-            </div>
-          </motion.div>
-
-          {/* Current Quest/Activity */}
-           <motion.div 
-             initial={{ opacity: 0, y: 20 }}
-             animate={{ opacity: 1, y: 0 }}
-             transition={{ delay: 0.35 }}
-             className="glass-panel p-6 rounded-3xl border-l-[6px] border-rose-400 flex items-center justify-between"
-           >
-              <div>
-                <p className="text-[10px] text-rose-400 font-black uppercase tracking-wider mb-2">Current Activity</p>
-                <p className="font-bold text-slate-700 text-lg leading-tight">{status.currentQuest}</p>
-              </div>
-              <div className="w-12 h-12 rounded-full bg-rose-50 flex items-center justify-center text-rose-400 animate-pulse">
-                <Heart size={24} fill="currentColor" className="opacity-20" />
-                <Heart size={24} className="absolute" />
-              </div>
-           </motion.div>
-
-        </div>
-
-        {/* 3. RIGHT COLUMN: Skills & Stats - Fused Content */}
-        <div className="lg:col-span-5 space-y-6">
-          
-           {/* Character Attributes (RPG Stats from Home) */}
-           <motion.div 
-             initial={{ opacity: 0, x: 20 }}
-             animate={{ opacity: 1, x: 0 }}
-             transition={{ delay: 0.4 }}
-             className="glass-panel p-6 rounded-3xl border-l-[6px] border-teal-400"
-           >
-              <h3 className="font-bold text-slate-700 mb-6 flex items-center gap-2">
-                <Star size={18} className="text-teal-400 fill-teal-400" /> Character Attributes
-              </h3>
-              <div className="space-y-4">
-                {stats.map(stat => (
-                  <StatBar key={stat.label} label={stat.label} val={stat.val} color={stat.color} />
-                ))}
-              </div>
-           </motion.div>
-
-           {/* Tech Stack (Skills from About) */}
-           <motion.div 
-             initial={{ opacity: 0, x: 20 }}
-             animate={{ opacity: 1, x: 0 }}
-             transition={{ delay: 0.5 }}
-             className="glass-panel p-6 rounded-3xl border-l-[6px] border-indigo-400"
-           >
-             <h3 className="text-xl font-black text-slate-800 mb-6 px-1 flex items-center gap-2">
-                <Zap size={20} className="text-indigo-400" /> Tech Stack
-             </h3>
-             <div className="space-y-5">
-               {skills.map((skill, index) => (
-                 <div key={skill.name}>
-                   <div className="flex justify-between items-end mb-2 px-1">
-                     <div className="flex items-center gap-2 text-slate-700 font-bold text-sm">
-                       <span className={`p-1.5 rounded-lg text-white ${skill.color} shadow-sm`}>
-                         {getSkillIcon(skill.name)}
-                       </span>
-                       {skill.name}
-                     </div>
-                     <span className="text-slate-400 text-xs font-black">{skill.level}%</span>
-                   </div>
-                   <div className="h-2.5 bg-slate-100 rounded-full overflow-hidden border border-white/40 shadow-inner">
-                     <motion.div 
-                       initial={{ width: 0 }}
-                       whileInView={{ width: `${skill.level}%` }}
-                       viewport={{ once: true }}
-                       transition={{ duration: 1.2, delay: 0.6 + (index * 0.1) }}
-                       className={`h-full ${skill.color} rounded-full`}
-                     ></motion.div>
-                   </div>
-                 </div>
-               ))}
-             </div>
-           </motion.div>
-
-           {/* Learning Queue */}
-           <motion.div 
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.6 }}
-              className="glass-panel p-6 rounded-3xl border-l-[6px] border-amber-400"
-           >
-             <h4 className="font-black text-slate-700 mb-4 flex items-center gap-2 text-sm uppercase tracking-wider">
-                <Clock size={16} className="text-amber-400" /> Learning Queue
-             </h4>
-             <div className="flex flex-wrap gap-2">
-               {learning.map(tag => (
-                 <span key={tag} className="px-3 py-1 bg-white/60 rounded-lg text-xs font-bold text-slate-500 border border-white/80 shadow-sm hover:bg-amber-100 hover:text-amber-600 transition-colors cursor-default">
-                   {tag}
-                 </span>
-               ))}
-             </div>
-           </motion.div>
-
-        </div>
+            <motion.div 
+              animate={{ scale: [1, 1.1, 1] }}
+              transition={{ duration: 2, repeat: Infinity }}
+              className="text-rose-200 flex-shrink-0 ml-4"
+            >
+              <Heart size={28} fill="currentColor" />
+            </motion.div>
+          </div>
+        </motion.div>
 
       </div>
     </section>
