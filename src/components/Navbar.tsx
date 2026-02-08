@@ -3,12 +3,22 @@ import { NavLink } from 'react-router-dom';
 import { Home, User, Globe, BookOpen } from 'lucide-react';
 import { motion } from 'framer-motion';
 
+import { NAV_ITEMS } from '@constants';
+
 const Navbar: React.FC = () => {
-  const navItems = [
-    { id: '/', icon: <Home size={20} />, label: '首页' },
-    { id: '/about', icon: <User size={20} />, label: '关于' },
-    { id: '/websites', icon: <Globe size={20} />, label: '作品' },
-  ];
+  const getIcon = (id: string) => {
+    switch (id) {
+      case '/': return <Home size={20} />;
+      case '/about': return <User size={20} />;
+      case '/websites': return <Globe size={20} />;
+      default: return <BookOpen size={20} />;
+    }
+  };
+
+  const navItems = NAV_ITEMS.map(item => ({
+    ...item,
+    icon: getIcon(item.id)
+  }));
 
   return (
     <div className="fixed bottom-6 left-0 w-full z-50 flex justify-center pointer-events-none">
