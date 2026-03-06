@@ -1,27 +1,44 @@
-@import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@300;400;500;700;800;900&family=Quicksand:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Zen+Maru+Gothic:wght@400;500;700;900&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --primary-color: #38bdf8; /* sky-400 */
-  --secondary-color: #818cf8; /* indigo-400 */
-  --accent-color: #5eead4; /* teal-300 */
+  --primary-color: #22d3ee;
+  --secondary-color: #38bdf8;
+  --accent-color: #fb7185;
+  --surface-white: rgba(255, 255, 255, 0.72);
+  --surface-border: rgba(255, 255, 255, 0.82);
+}
+
+* {
+  box-sizing: border-box;
 }
 
 body {
-  font-family: 'Quicksand', 'M PLUS Rounded 1c', sans-serif;
-  background-color: #f0f9ff;
-  background-image: 
-    radial-gradient(at 0% 0%, rgba(56, 189, 248, 0.1) 0px, transparent 50%),
-    radial-gradient(at 100% 0%, rgba(94, 234, 212, 0.1) 0px, transparent 50%),
-    radial-gradient(at 100% 100%, rgba(129, 140, 248, 0.1) 0px, transparent 50%),
-    radial-gradient(at 0% 100%, rgba(192, 132, 252, 0.05) 0px, transparent 50%);
+  margin: 0;
+  font-family: 'Baloo 2', 'Zen Maru Gothic', sans-serif;
+  color: #1e293b;
+  background-color: #fff7fb;
+  background-image:
+    radial-gradient(circle at 15% 10%, rgba(56, 189, 248, 0.24), transparent 36%),
+    radial-gradient(circle at 85% 8%, rgba(251, 113, 133, 0.26), transparent 34%),
+    radial-gradient(circle at 80% 88%, rgba(45, 212, 191, 0.2), transparent 40%),
+    linear-gradient(145deg, #fff7fb 0%, #fef9ff 45%, #f3fcff 100%);
   background-attachment: fixed;
-  background-size: cover;
   overflow-x: hidden;
-  color: #334155; /* slate-700 */
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.3;
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.66) 1px, transparent 1px);
+  background-size: 20px 20px;
 }
 
 /* Custom Scrollbar */
@@ -32,71 +49,131 @@ body {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(56, 189, 248, 0.3);
-  border-radius: 10px;
+  background: rgba(56, 189, 248, 0.35);
+  border-radius: 999px;
   border: 2px solid transparent;
   background-clip: content-box;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(56, 189, 248, 0.6);
+  background: rgba(251, 113, 133, 0.48);
   border: 2px solid transparent;
   background-clip: content-box;
 }
 
 .font-rounded {
-  font-family: 'M PLUS Rounded 1c', sans-serif;
+  font-family: 'Zen Maru Gothic', sans-serif;
 }
 
 .glass-panel {
-  background: rgba(255, 255, 255, 0.55);
-  backdrop-filter: blur(16px) saturate(180%);
-  -webkit-backdrop-filter: blur(16px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  box-shadow: 
-    0 8px 32px 0 rgba(31, 38, 135, 0.04),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.3);
-  transition: all 0.3s ease;
-}
-
-.dark .glass-panel {
-  background: rgba(15, 23, 42, 0.6);
-  border-color: rgba(255, 255, 255, 0.1);
-  box-shadow: 
-    0 8px 32px 0 rgba(0, 0, 0, 0.3),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.05);
-  color: #e2e8f0;
+  background: var(--surface-white);
+  backdrop-filter: blur(18px) saturate(180%);
+  -webkit-backdrop-filter: blur(18px) saturate(180%);
+  border: 1px solid var(--surface-border);
+  box-shadow:
+    0 12px 40px rgba(14, 116, 144, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
 }
 
 .glass-panel:hover {
-  background: rgba(255, 255, 255, 0.65);
-  border-color: rgba(255, 255, 255, 0.6);
-  box-shadow: 
-    0 8px 32px 0 rgba(31, 38, 135, 0.07),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+  transform: translateY(-2px);
+  border-color: rgba(251, 113, 133, 0.55);
+  box-shadow:
+    0 16px 44px rgba(236, 72, 153, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.92);
 }
 
-/* Sakura/Cloud Animation */
-.sakura-container {
+.anime-grid {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0;
   pointer-events: none;
   z-index: 0;
-  overflow: hidden;
+  background-image:
+    linear-gradient(to right, rgba(56, 189, 248, 0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(251, 113, 133, 0.08) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: radial-gradient(circle at center, #000 32%, transparent 85%);
 }
-.sakura {
+
+.anime-aura {
+  position: fixed;
+  pointer-events: none;
+  filter: blur(40px);
+  z-index: 0;
+  opacity: 0.55;
+}
+
+.anime-aura-cyan {
+  width: 260px;
+  height: 260px;
+  border-radius: 999px;
+  top: -40px;
+  right: 6vw;
+  background: rgba(34, 211, 238, 0.5);
+  animation: drift 12s ease-in-out infinite;
+}
+
+.anime-aura-rose {
+  width: 320px;
+  height: 320px;
+  border-radius: 999px;
+  bottom: 8vh;
+  left: -80px;
+  background: rgba(251, 113, 133, 0.4);
+  animation: drift 14s ease-in-out infinite reverse;
+}
+
+.anime-sticker {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  background: linear-gradient(120deg, rgba(255, 255, 255, 0.8), rgba(240, 249, 255, 0.9));
+  box-shadow: 0 8px 24px rgba(56, 189, 248, 0.16);
+}
+
+.kira {
+  width: 12px;
+  height: 12px;
+  background: linear-gradient(135deg, #facc15, #f97316);
+  clip-path: polygon(50% 0%, 62% 36%, 100% 50%, 62% 64%, 50% 100%, 38% 64%, 0% 50%, 38% 36%);
+  animation: twinkle 1.6s ease-in-out infinite;
+}
+
+.float-rune {
   position: absolute;
-  /* Switched to a lighter, possibly white/pale blue petal for fresh look */
-  background-color: rgba(255, 255, 255, 0.8);
-  border-radius: 100% 0 100% 0;
-  opacity: 0.6;
-  animation: fall linear infinite;
-  box-shadow: 0 0 2px rgba(255, 255, 255, 0.5);
+  font-family: 'Zen Maru Gothic', sans-serif;
+  font-weight: 700;
+  color: rgba(244, 114, 182, 0.45);
+  text-shadow: 0 4px 12px rgba(56, 189, 248, 0.2);
+  animation: floatY 5.8s ease-in-out infinite;
 }
+
 @keyframes fall {
   0% { opacity: 0; top: -10%; transform: translateX(0) rotate(0deg); }
   10% { opacity: 0.6; }
   100% { opacity: 0; top: 110%; transform: translateX(50px) rotate(360deg); }
+}
+
+@keyframes drift {
+  0%,
+  100% { transform: translate(0, 0); }
+  50% { transform: translate(-18px, 22px); }
+}
+
+@keyframes twinkle {
+  0%,
+  100% { transform: scale(0.9) rotate(0deg); opacity: 0.7; }
+  50% { transform: scale(1.14) rotate(12deg); opacity: 1; }
+}
+
+@keyframes floatY {
+  0%,
+  100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
 }

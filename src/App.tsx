@@ -15,10 +15,10 @@ const AnimatedLayout: React.FC = () => {
       <AnimatePresence mode="wait" initial={false}>
         <motion.div
           key={location.pathname}
-          initial={{ opacity: 0, scale: 0.98, filter: 'blur(5px)' }}
-          animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
-          exit={{ opacity: 0, scale: 1.02, filter: 'blur(5px)' }}
-          transition={{ duration: 0.3 }}
+          initial={{ opacity: 0, y: 18, scale: 0.98, filter: 'blur(5px)' }}
+          animate={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
+          exit={{ opacity: 0, y: -12, scale: 1.01, filter: 'blur(5px)' }}
+          transition={{ duration: 0.34, ease: 'easeOut' }}
         >
           {outlet}
         </motion.div>
@@ -32,15 +32,15 @@ const router = createBrowserRouter([
     element: <AnimatedLayout />,
     children: [
       {
-        path: "/",
+        path: '/',
         element: <About />,
       },
       {
-        path: "/websites",
+        path: '/websites',
         element: <Websites />,
       },
       {
-        path: "*",
+        path: '*',
         element: <About />,
       },
     ],
