@@ -21,11 +21,11 @@ const Navbar: React.FC = () => {
   }));
 
   return (
-    <div className="fixed bottom-6 left-0 w-full z-50 flex justify-center pointer-events-none">
+    <div className="fixed bottom-4 sm:bottom-6 left-0 w-full z-50 flex justify-center pointer-events-none">
       <motion.nav 
         initial={{ y: 50, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        className="glass-panel px-4 py-3 rounded-full flex items-center gap-2 shadow-2xl pointer-events-auto"
+        className="glass-panel px-3 sm:px-4 py-2.5 sm:py-3 rounded-full flex items-center gap-1.5 sm:gap-2 shadow-xl pointer-events-auto border border-white/70"
       >
         {navItems.map((item) => (
           <NavLink
@@ -35,7 +35,7 @@ const Navbar: React.FC = () => {
               `relative flex items-center gap-2 px-4 py-2 rounded-full transition-all duration-300 ${
                 isActive 
                   ? 'text-white' 
-                  : 'text-slate-500 hover:bg-white/40 hover:text-sky-500'
+                  : 'text-slate-500 hover:bg-white/45 hover:text-sky-600'
               }`
             }
           >
@@ -44,7 +44,7 @@ const Navbar: React.FC = () => {
                 {isActive && (
                   <motion.div
                     layoutId="nav-pill"
-                    className="absolute inset-0 bg-gradient-to-r from-sky-400 to-indigo-400 rounded-full shadow-lg shadow-sky-200"
+                    className="absolute inset-0 bg-gradient-to-r from-sky-400 to-indigo-400 rounded-full shadow-md shadow-sky-200/60"
                     transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                   />
                 )}

@@ -6,7 +6,7 @@ import {
   Code, Palette, Terminal, Coffee, FileCode, Layers,
   Compass, Quote, Target, Rocket
 } from 'lucide-react';
-import { HOME_CONFIG, ABOUT_CONFIG } from '@constants';
+import { ABOUT_CONFIG } from '@constants';
 
 // --- Icons & Helpers ---
 
@@ -61,13 +61,13 @@ const getSkillLevelLabel = (level: number) => {
 const SocialBtn: React.FC<{ icon: React.ReactNode; href: string; label: string; platform: string }> = ({ icon, href, label, platform }) => {
   const getStyles = (p: string) => {
     switch (p) {
-      case 'github': return "bg-gray-50 text-gray-800 border-gray-200 hover:bg-gray-800 hover:text-white hover:border-gray-800";
-      case 'twitter': return "bg-sky-50 text-sky-500 border-sky-100 hover:bg-[#1DA1F2] hover:text-white hover:border-[#1DA1F2]";
-      case 'instagram': return "bg-pink-50 text-pink-600 border-pink-100 hover:bg-[#E1306C] hover:text-white hover:border-[#E1306C]";
-      case 'mail': return "bg-red-50 text-red-600 border-red-100 hover:bg-[#EA4335] hover:text-white hover:border-[#EA4335]";
-      case 'qq': return "bg-sky-50 text-sky-500 border-sky-100 hover:bg-[#12B7F5] hover:text-white hover:border-[#12B7F5]";
-      case 'gitee': return "bg-orange-50 text-orange-600 border-orange-100 hover:bg-[#C71D23] hover:text-white hover:border-[#C71D23]";
-      default: return "bg-white/90 text-slate-700 border-white/60 hover:text-white hover:bg-sky-400";
+      case 'github': return "bg-white/85 text-slate-700 border-slate-200/70 hover:text-slate-900 hover:border-slate-300";
+      case 'twitter': return "bg-white/85 text-slate-700 border-slate-200/70 hover:text-sky-600 hover:border-sky-200";
+      case 'instagram': return "bg-white/85 text-slate-700 border-slate-200/70 hover:text-pink-600 hover:border-pink-200";
+      case 'mail': return "bg-white/85 text-slate-700 border-slate-200/70 hover:text-rose-600 hover:border-rose-200";
+      case 'qq': return "bg-white/85 text-slate-700 border-slate-200/70 hover:text-cyan-600 hover:border-cyan-200";
+      case 'gitee': return "bg-white/85 text-slate-700 border-slate-200/70 hover:text-orange-600 hover:border-orange-200";
+      default: return "bg-white/85 text-slate-700 border-slate-200/70 hover:text-slate-900 hover:border-slate-300";
     }
   };
 
@@ -77,7 +77,7 @@ const SocialBtn: React.FC<{ icon: React.ReactNode; href: string; label: string; 
       target="_blank"
       rel="noopener noreferrer"
       title={label}
-      className={`flex items-center gap-2 px-3 py-2 rounded-xl transition-all border font-bold text-sm shadow-sm hover:shadow-md hover:-translate-y-0.5 ${getStyles(platform)}`}
+      className={`flex items-center gap-2 px-3 py-2 rounded-xl transition-all duration-200 border font-semibold text-sm shadow-sm hover:shadow-sm hover:-translate-y-px ${getStyles(platform)}`}
     >
       {icon} 
       <span className="hidden sm:inline">{label}</span>
@@ -88,9 +88,8 @@ const SocialBtn: React.FC<{ icon: React.ReactNode; href: string; label: string; 
 // --- Main Component ---
 
 const About: React.FC = () => {
-  const { identity, socials, status, bio: homeBio } = HOME_CONFIG;
-  const { descriptions, metrics, skills, learning } = ABOUT_CONFIG;
-  const cleanDescriptions = descriptions.filter((desc) => {
+  const { hero, profile, statusSnapshot, capabilities, learning } = ABOUT_CONFIG;
+  const cleanDescriptions = profile.descriptions.filter((desc) => {
     const text = desc.trim();
     return text.length > 0 && !/^\d+$/.test(text);
   });
@@ -103,59 +102,60 @@ const About: React.FC = () => {
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="text-center mb-8"
+        className="text-center mb-10"
       >
         <div className="relative inline-block mb-4">
-          <div className="absolute -inset-3 bg-gradient-to-tr from-sky-400 via-indigo-400 to-purple-400 rounded-full opacity-25 blur-2xl animate-pulse"></div>
+          <div className="absolute -inset-3 bg-gradient-to-tr from-sky-300 via-indigo-300 to-violet-300 rounded-full opacity-20 blur-2xl animate-pulse"></div>
           <div className="relative w-24 h-24 sm:w-28 sm:h-28 bg-white p-1 rounded-full shadow-xl border-4 border-white overflow-hidden group">
             <div className="w-full h-full rounded-full overflow-hidden bg-gradient-to-br from-sky-50 to-indigo-50">
-              <img src={identity.avatarUrl} alt="Avatar" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+              <img src={hero.identity.avatarUrl} alt="Avatar" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
             </div>
           </div>
           <motion.span 
             animate={{ y: [0, -3, 0] }}
             transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute -top-1 -right-1 bg-gradient-to-r from-yellow-400 to-orange-500 text-white text-xs font-black px-2 py-0.5 rounded-md shadow-lg border-2 border-white"
+            className="absolute -bottom-1 -right-2 bg-emerald-50 text-emerald-700 text-[11px] font-semibold px-2.5 py-1 rounded-full shadow-sm border border-emerald-200 inline-flex items-center gap-1"
           >
-            {identity.rarity}
+            <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500" />
+            {hero.identity.rarity}
           </motion.span>
         </div>
 
         <h1 className="text-3xl md:text-4xl font-rounded font-black text-slate-800 mb-2">
-          {identity.nickname}<span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-indigo-500">{identity.suffix}</span>
+          {hero.identity.nickname}<span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-indigo-500">{hero.identity.suffix}</span>
         </h1>
-        <p className="text-sm sm:text-base text-slate-600 font-medium max-w-2xl mx-auto leading-relaxed mb-4">{identity.title}</p>
+        <p className="text-sm sm:text-base text-slate-600 font-medium max-w-2xl mx-auto leading-relaxed mb-4">{hero.identity.title}</p>
         
-        <div className="flex items-center justify-center gap-2 mb-5 flex-wrap">
-          <span className="bg-gradient-to-r from-sky-100 to-sky-50 text-sky-600 text-xs font-bold px-3 py-1 rounded-full border border-sky-100">{identity.role}</span>
-          <span className="bg-gradient-to-r from-indigo-100 to-indigo-50 text-indigo-600 text-xs font-bold px-3 py-1 rounded-full border border-indigo-100">{identity.level}</span>
-          <span className="bg-gradient-to-r from-purple-100 to-purple-50 text-purple-600 text-xs font-bold px-3 py-1 rounded-full border border-purple-100 flex items-center gap-1.5">
-            <MapPin size={12} /> {status.location}
+        <div className="flex items-center justify-center gap-2 mb-6 flex-wrap">
+          <span className="bg-sky-50 text-sky-700 text-xs font-semibold px-3 py-1 rounded-full border border-sky-100">{hero.identity.role}</span>
+          <span className="bg-indigo-50 text-indigo-700 text-xs font-semibold px-3 py-1 rounded-full border border-indigo-100">{hero.identity.level}</span>
+          <span className="bg-violet-50 text-violet-700 text-xs font-semibold px-3 py-1 rounded-full border border-violet-100 flex items-center gap-1.5">
+            <MapPin size={12} /> {hero.location}
           </span>
         </div>
 
         <div className="flex flex-wrap justify-center gap-2">
-          {socials.map((social) => (
+          {hero.socials.map((social) => (
             <SocialBtn key={social.platform} platform={social.platform} href={social.url} icon={getSocialIcon(social.platform)} label={social.label} />
           ))}
         </div>
       </motion.div>
 
-      <div className="space-y-4 sm:space-y-5">
+      <div className="space-y-5 sm:space-y-6">
         {/* 1. Profile summary */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="glass-panel p-5 rounded-2xl border-l-4 border-sky-400"
+          className="glass-panel p-5 rounded-2xl border border-white/70"
         >
-          <div className="flex items-center gap-2 mb-3">
+          <div className="flex items-center gap-2 mb-4">
             <div className="p-1.5 bg-sky-100 rounded-lg text-sky-500"><Quote size={16} /></div>
             <h3 className="text-base font-black text-slate-800">关于我</h3>
           </div>
 
           <div className="space-y-2 text-slate-600 leading-relaxed text-sm sm:text-base">
-            <p className="text-slate-700 font-medium">{homeBio}</p>
+            <p className="text-slate-700 font-medium">{profile.summary}</p>
             {cleanDescriptions.map((desc, index) => (
               <p key={index}>{desc}</p>
             ))}
@@ -176,9 +176,9 @@ const About: React.FC = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
             <div className="rounded-xl p-3 bg-white/70 border border-white/80">
               <p className="text-xs font-semibold text-slate-500 mb-1">职业</p>
-              <p className="font-bold text-slate-700 text-sm">{status.occupation}</p>
+              <p className="font-bold text-slate-700 text-sm">{statusSnapshot.occupation}</p>
             </div>
-            {metrics.map((metric) => (
+            {statusSnapshot.metrics.map((metric) => (
               <div key={metric.label} className="rounded-xl p-3 bg-white/70 border border-white/80">
                 <p className="text-xs font-semibold text-slate-500 mb-1">{metric.label}</p>
                 <p className={`text-base font-black ${metric.textColor}`}>{metric.value}</p>
@@ -190,7 +190,7 @@ const About: React.FC = () => {
               <Target size={12} className="text-rose-500" />
               当前目标
             </p>
-            <p className="font-bold text-slate-700 text-sm sm:text-base">{status.currentQuest}</p>
+            <p className="font-bold text-slate-700 text-sm sm:text-base">{statusSnapshot.currentQuest}</p>
           </div>
         </motion.div>
 
@@ -200,14 +200,14 @@ const About: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="glass-panel p-5 rounded-2xl border-l-4 border-indigo-400"
+            className="glass-panel p-5 rounded-2xl border border-white/70"
           >
             <div className="flex items-center gap-2 mb-4">
               <div className="p-1.5 bg-indigo-100 rounded-lg text-indigo-500"><Zap size={16} /></div>
               <h3 className="font-black text-slate-700 text-base">核心能力</h3>
             </div>
             <div className="space-y-3">
-              {skills.map((skill, index) => (
+              {capabilities.skills.map((skill, index) => (
                 <div key={skill.name} className="grid grid-cols-[auto,minmax(0,1fr)] items-center gap-2 sm:gap-3">
                   <span className={`p-1.5 rounded-lg text-white ${skill.color} shadow-sm flex-shrink-0`}>
                     {getSkillIcon(skill.name)}
@@ -238,17 +238,17 @@ const About: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
-          className="glass-panel p-5 rounded-2xl border-l-4 border-amber-400"
+          className="glass-panel p-5 rounded-2xl border border-white/70"
         >
-          <div className="flex items-center gap-2 mb-3">
+          <div className="flex items-center gap-2 mb-4">
             <div className="p-1.5 bg-amber-100 rounded-lg text-amber-500"><Rocket size={16} /></div>
             <h3 className="font-black text-slate-700 text-base">正在学习</h3>
           </div>
           <div className="flex flex-wrap gap-2">
-            {learning.map(tag => (
+            {learning.tags.map(tag => (
               <span 
                 key={tag} 
-                className="px-3 py-1.5 bg-gradient-to-r from-amber-50 to-orange-50 rounded-lg text-sm font-bold text-amber-700 border border-amber-100 hover:from-amber-100 hover:to-orange-100 transition-colors cursor-default"
+                className="px-3 py-1.5 bg-amber-50 rounded-lg text-sm font-semibold text-amber-700 border border-amber-100 hover:bg-amber-100 transition-colors cursor-default"
               >
                 {tag}
               </span>

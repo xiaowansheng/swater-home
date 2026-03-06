@@ -44,6 +44,35 @@ const gradients = [
 ];
 
 const Websites: React.FC = () => {
+  const renderTags = (tags: string[], light = false) => {
+    const visibleTags = tags.slice(0, 3);
+    const remainCount = tags.length - visibleTags.length;
+
+    return (
+      <div className="flex flex-wrap gap-1.5 mb-3">
+        {visibleTags.map((tag) => (
+          <span
+            key={tag}
+            className={light
+              ? "px-2 py-0.5 bg-white/20 text-xs text-white font-semibold rounded-md backdrop-blur-sm"
+              : "px-2 py-0.5 bg-sky-50 text-xs text-sky-700 font-semibold rounded-md border border-sky-100"}
+          >
+            {tag}
+          </span>
+        ))}
+        {remainCount > 0 && (
+          <span
+            className={light
+              ? "px-2 py-0.5 bg-white/15 text-xs text-white/90 font-semibold rounded-md"
+              : "px-2 py-0.5 bg-slate-50 text-xs text-slate-600 font-semibold rounded-md border border-slate-200"}
+          >
+            +{remainCount}
+          </span>
+        )}
+      </div>
+    );
+  };
+
   return (
     <section className="min-h-screen pt-24 pb-20 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
       <motion.div
@@ -69,7 +98,7 @@ const Websites: React.FC = () => {
           >
             {project.image ? (
               /* 有封面图的卡片 */
-              <div className="relative h-64 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300">
+              <div className="relative h-64 rounded-2xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 border border-white/30">
                 <img 
                   src={project.image} 
                   alt={project.title} 
@@ -81,35 +110,29 @@ const Websites: React.FC = () => {
                 {/* 内容 */}
                 <div className="absolute bottom-0 left-0 right-0 p-5">
                   <h3 className="text-lg font-black text-white mb-1">{project.title}</h3>
-                  <p className="text-white/70 text-xs line-clamp-2 mb-3">{project.description}</p>
+                  <p className="text-white/80 text-sm line-clamp-2 mb-3">{project.description}</p>
                   
-                  <div className="flex flex-wrap gap-1.5 mb-3">
-                    {project.tags.slice(0, 3).map(tag => (
-                      <span key={tag} className="px-2 py-0.5 bg-white/20 text-[10px] text-white font-bold rounded-md backdrop-blur-sm">
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
+                  {renderTags(project.tags, true)}
 
                   {project.url && (
                     <a 
                       href={project.url} 
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 text-white/80 hover:text-white text-xs font-bold transition-colors"
+                      className="inline-flex items-center gap-1.5 text-white/85 hover:text-white text-sm font-semibold transition-colors"
                     >
-                      <ExternalLink size={12} /> 访问
+                      <ExternalLink size={14} /> 查看项目
                     </a>
                   )}
                 </div>
               </div>
             ) : (
               /* 无封面图的卡片 - 使用图标或首字母 */
-              <div className="glass-panel p-5 rounded-2xl border-l-4 border-sky-400 hover:shadow-lg transition-all duration-300 h-full flex flex-col">
+              <div className="glass-panel p-5 rounded-2xl border border-white/70 hover:shadow-md transition-all duration-300 h-full flex flex-col">
                 {/* 图标/首字母区域 */}
-                <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${gradients[index % gradients.length]} flex items-center justify-center text-white shadow-lg mb-4`}>
+                <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${gradients[index % gradients.length]} flex items-center justify-center text-white shadow-md mb-4`}>
                   {project.icon ? getProjectIcon(project.icon) : (
-                    <span className="text-2xl font-black">{project.title.charAt(0).toUpperCase()}</span>
+                    <span className="text-xl font-black">{project.title.charAt(0).toUpperCase()}</span>
                   )}
                 </div>
                 
@@ -118,13 +141,7 @@ const Websites: React.FC = () => {
                 <p className="text-slate-500 text-sm leading-relaxed mb-4 flex-1">{project.description}</p>
                 
                 {/* 标签 */}
-                <div className="flex flex-wrap gap-1.5 mb-4">
-                  {project.tags.map(tag => (
-                    <span key={tag} className="px-2 py-0.5 bg-sky-50 text-[10px] text-sky-600 font-bold rounded-md border border-sky-100">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
+                {renderTags(project.tags)}
 
                 {/* 链接 */}
                 {project.url && (
@@ -132,9 +149,9 @@ const Websites: React.FC = () => {
                     href={project.url} 
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-sky-500 hover:text-sky-600 text-sm font-bold transition-colors"
+                    className="inline-flex items-center gap-1.5 text-sky-600 hover:text-sky-700 text-sm font-semibold transition-colors"
                   >
-                    <ExternalLink size={14} /> 查看详情
+                    <ExternalLink size={14} /> 查看项目
                   </a>
                 )}
               </div>

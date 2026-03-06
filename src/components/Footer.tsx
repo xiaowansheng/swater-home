@@ -8,7 +8,7 @@ const Footer: React.FC = () => {
 
   return (
     <footer className="relative z-10 w-full py-8 mt-12 text-sm text-center text-slate-500">
-      <div className="glass-panel mx-auto w-[90%] md:w-3/4 lg:w-1/2 rounded-2xl p-6 flex flex-col items-center gap-4">
+      <div className="glass-panel mx-auto w-[90%] md:w-3/4 lg:w-1/2 rounded-2xl p-6 flex flex-col items-center gap-4 border border-white/70">
         
         {/* Social Links */}
         <div className="flex items-center gap-6">
@@ -16,7 +16,7 @@ const Footer: React.FC = () => {
             href={socials.github} 
             target="_blank" 
             rel="noopener noreferrer"
-            className="p-2 transition-transform hover:scale-110 hover:text-sky-500"
+            className="p-2 transition-all duration-200 hover:-translate-y-px hover:text-sky-600"
           >
             <Github size={20} />
           </a>
@@ -24,13 +24,13 @@ const Footer: React.FC = () => {
             href={socials.twitter} 
             target="_blank" 
             rel="noopener noreferrer"
-            className="p-2 transition-transform hover:scale-110 hover:text-sky-500"
+            className="p-2 transition-all duration-200 hover:-translate-y-px hover:text-sky-600"
           >
             <Twitter size={20} />
           </a>
           <a 
             href={socials.mail} 
-            className="p-2 transition-transform hover:scale-110 hover:text-sky-500"
+            className="p-2 transition-all duration-200 hover:-translate-y-px hover:text-sky-600"
           >
             <Mail size={20} />
           </a>

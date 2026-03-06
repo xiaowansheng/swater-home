@@ -6,7 +6,6 @@ import * as Local from './config.local';
 export const APP_NAME = (Local as any).APP_NAME ?? Defaults.APP_NAME;
 export const OWNER_NAME = (Local as any).OWNER_NAME ?? Defaults.OWNER_NAME;
 export const SITE_CONFIG = (Local as any).SITE_CONFIG ?? Defaults.SITE_CONFIG;
-export const HOME_CONFIG = (Local as any).HOME_CONFIG ?? Defaults.HOME_CONFIG;
 export const ABOUT_CONFIG = (Local as any).ABOUT_CONFIG ?? Defaults.ABOUT_CONFIG;
 export const NAV_ITEMS = (Local as any).NAV_ITEMS ?? Defaults.NAV_ITEMS;
 export const AIKO_SYSTEM_INSTRUCTION = (Local as any).AIKO_SYSTEM_INSTRUCTION ?? Defaults.AIKO_SYSTEM_INSTRUCTION;
