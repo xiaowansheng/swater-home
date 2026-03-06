@@ -2,9 +2,9 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { 
   Github, Twitter, Instagram, Mail, 
-  Zap, Heart, Star, MapPin, 
+  Zap, MapPin, 
   Code, Palette, Terminal, Coffee, FileCode, Layers,
-  Compass, Clock, Sparkles, Quote, Target, Rocket
+  Compass, Quote, Target, Rocket
 } from 'lucide-react';
 import { HOME_CONFIG, ABOUT_CONFIG } from '@constants';
 
@@ -52,6 +52,12 @@ const getSkillIcon = (name: string) => {
   }
 };
 
+const getSkillLevelLabel = (level: number) => {
+  if (level >= 90) return '精通';
+  if (level >= 75) return '熟练';
+  return '掌握';
+};
+
 const SocialBtn: React.FC<{ icon: React.ReactNode; href: string; label: string; platform: string }> = ({ icon, href, label, platform }) => {
   const getStyles = (p: string) => {
     switch (p) {
@@ -82,52 +88,52 @@ const SocialBtn: React.FC<{ icon: React.ReactNode; href: string; label: string; 
 // --- Main Component ---
 
 const About: React.FC = () => {
-  const { identity, socials, stats, status, bio: homeBio } = HOME_CONFIG;
+  const { identity, socials, status, bio: homeBio } = HOME_CONFIG;
   const { descriptions, metrics, skills, learning } = ABOUT_CONFIG;
+  const cleanDescriptions = descriptions.filter((desc) => {
+    const text = desc.trim();
+    return text.length > 0 && !/^\d+$/.test(text);
+  });
 
   return (
     <section className="min-h-screen pt-20 pb-16 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
       
-      {/* ========== HERO SECTION ========== */}
+      {/* Hero */}
       <motion.div 
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="text-center mb-10"
+        className="text-center mb-8"
       >
-        {/* Avatar */}
-        <div className="relative inline-block mb-5">
+        <div className="relative inline-block mb-4">
           <div className="absolute -inset-3 bg-gradient-to-tr from-sky-400 via-indigo-400 to-purple-400 rounded-full opacity-25 blur-2xl animate-pulse"></div>
-          <div className="relative w-28 h-28 bg-white p-1 rounded-full shadow-xl border-4 border-white overflow-hidden group">
+          <div className="relative w-24 h-24 sm:w-28 sm:h-28 bg-white p-1 rounded-full shadow-xl border-4 border-white overflow-hidden group">
             <div className="w-full h-full rounded-full overflow-hidden bg-gradient-to-br from-sky-50 to-indigo-50">
               <img src={identity.avatarUrl} alt="Avatar" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
             </div>
           </div>
-          {/* Rarity Badge */}
           <motion.span 
             animate={{ y: [0, -3, 0] }}
             transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute -top-1 -right-1 bg-gradient-to-r from-yellow-400 to-orange-500 text-white text-[9px] font-black px-2 py-0.5 rounded-md shadow-lg border-2 border-white"
+            className="absolute -top-1 -right-1 bg-gradient-to-r from-yellow-400 to-orange-500 text-white text-xs font-black px-2 py-0.5 rounded-md shadow-lg border-2 border-white"
           >
             {identity.rarity}
           </motion.span>
         </div>
 
-        {/* Name & Title */}
         <h1 className="text-3xl md:text-4xl font-rounded font-black text-slate-800 mb-2">
           {identity.nickname}<span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-indigo-500">{identity.suffix}</span>
         </h1>
+        <p className="text-sm sm:text-base text-slate-600 font-medium max-w-2xl mx-auto leading-relaxed mb-4">{identity.title}</p>
         
-        {/* Tags */}
         <div className="flex items-center justify-center gap-2 mb-5 flex-wrap">
-          <span className="bg-gradient-to-r from-sky-100 to-sky-50 text-sky-600 text-[10px] font-bold px-2.5 py-1 rounded-full border border-sky-100">{identity.role}</span>
-          <span className="bg-gradient-to-r from-indigo-100 to-indigo-50 text-indigo-600 text-[10px] font-bold px-2.5 py-1 rounded-full border border-indigo-100">{identity.level}</span>
-          <span className="bg-gradient-to-r from-purple-100 to-purple-50 text-purple-600 text-[10px] font-bold px-2.5 py-1 rounded-full border border-purple-100 flex items-center gap-1">
-            <MapPin size={10} /> {status.location}
+          <span className="bg-gradient-to-r from-sky-100 to-sky-50 text-sky-600 text-xs font-bold px-3 py-1 rounded-full border border-sky-100">{identity.role}</span>
+          <span className="bg-gradient-to-r from-indigo-100 to-indigo-50 text-indigo-600 text-xs font-bold px-3 py-1 rounded-full border border-indigo-100">{identity.level}</span>
+          <span className="bg-gradient-to-r from-purple-100 to-purple-50 text-purple-600 text-xs font-bold px-3 py-1 rounded-full border border-purple-100 flex items-center gap-1.5">
+            <MapPin size={12} /> {status.location}
           </span>
         </div>
 
-        {/* Socials */}
         <div className="flex flex-wrap justify-center gap-2">
           {socials.map((social) => (
             <SocialBtn key={social.platform} platform={social.platform} href={social.url} icon={getSocialIcon(social.platform)} label={social.label} />
@@ -135,10 +141,8 @@ const About: React.FC = () => {
         </div>
       </motion.div>
 
-      {/* ========== VERTICAL STACKED CONTENT ========== */}
-      <div className="space-y-5">
-        
-        {/* 1. Bio Card */}
+      <div className="space-y-4 sm:space-y-5">
+        {/* 1. Profile summary */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -149,112 +153,87 @@ const About: React.FC = () => {
             <div className="p-1.5 bg-sky-100 rounded-lg text-sky-500"><Quote size={16} /></div>
             <h3 className="text-base font-black text-slate-800">关于我</h3>
           </div>
-          
-          {/* Quote */}
-          <div className="mb-4 p-3 bg-gradient-to-br from-slate-50 to-sky-50/30 rounded-xl border border-slate-100 relative">
-            <Sparkles size={12} className="absolute top-2 right-2 text-sky-300" />
-            <p className="text-slate-600 font-medium italic leading-relaxed text-sm">"{homeBio}"</p>
-          </div>
 
-          {/* Detailed Bio */}
-          <div className="space-y-2 text-slate-600 leading-relaxed text-sm">
-            {descriptions.map((desc, index) => (
+          <div className="space-y-2 text-slate-600 leading-relaxed text-sm sm:text-base">
+            <p className="text-slate-700 font-medium">{homeBio}</p>
+            {cleanDescriptions.map((desc, index) => (
               <p key={index}>{desc}</p>
             ))}
           </div>
         </motion.div>
 
-        {/* 2. Metrics Row */}
+        {/* 2. Status snapshot */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.15 }}
-          className="grid grid-cols-3 gap-3"
-        >
-          {/* 职业 - 放在最前面 */}
-          <div className="glass-panel p-4 rounded-xl border-l-4 border-teal-400">
-            <div className="flex items-center gap-1.5 mb-0.5">
-              <Compass size={12} className="text-teal-500" />
-              <span className="text-[9px] text-slate-400 font-bold uppercase tracking-wider">职业</span>
-            </div>
-            <p className="font-bold text-slate-700 text-sm">{status.occupation}</p>
-          </div>
-
-          {metrics.map((metric, index) => (
-            <div 
-              key={metric.label} 
-              className={`glass-panel p-4 rounded-xl border-l-4 ${index === 0 ? 'border-sky-400' : 'border-indigo-400'}`}
-            >
-              <div className={`text-xl font-black ${metric.textColor} mb-0.5`}>{metric.value}</div>
-              <p className="text-[9px] text-slate-400 font-bold uppercase tracking-wider">{metric.label}</p>
-            </div>
-          ))}
-        </motion.div>
-
-        {/* 3. Character Stats */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
           className="glass-panel p-5 rounded-2xl border-l-4 border-teal-400"
         >
           <div className="flex items-center gap-2 mb-4">
-            <div className="p-1.5 bg-teal-100 rounded-lg text-teal-500"><Star size={16} /></div>
-            <h3 className="font-black text-slate-700 text-base">角色属性</h3>
+            <div className="p-1.5 bg-teal-100 rounded-lg text-teal-500"><Compass size={16} /></div>
+            <h3 className="text-base font-black text-slate-800">当前状态</h3>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-            {stats.map((stat, i) => (
-              <div key={stat.label} className="text-center">
-                <div className="relative w-full h-2 bg-slate-200/60 rounded-full overflow-hidden mb-1.5">
-                  <motion.div 
-                    initial={{ width: 0 }}
-                    whileInView={{ width: `${stat.val}%` }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 1, delay: 0.1 * i }}
-                    className={`h-full ${stat.color} rounded-full`}
-                  />
-                </div>
-                <span className="text-[10px] font-black text-slate-500 uppercase">{stat.label}</span>
-                <span className="text-[10px] font-bold text-slate-400 ml-1">{stat.val}%</span>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            <div className="rounded-xl p-3 bg-white/70 border border-white/80">
+              <p className="text-xs font-semibold text-slate-500 mb-1">职业</p>
+              <p className="font-bold text-slate-700 text-sm">{status.occupation}</p>
+            </div>
+            {metrics.map((metric) => (
+              <div key={metric.label} className="rounded-xl p-3 bg-white/70 border border-white/80">
+                <p className="text-xs font-semibold text-slate-500 mb-1">{metric.label}</p>
+                <p className={`text-base font-black ${metric.textColor}`}>{metric.value}</p>
               </div>
             ))}
           </div>
+          <div className="mt-3 rounded-xl p-3 bg-white/70 border border-white/80">
+            <p className="text-xs font-semibold text-slate-500 mb-1 flex items-center gap-1.5">
+              <Target size={12} className="text-rose-500" />
+              当前目标
+            </p>
+            <p className="font-bold text-slate-700 text-sm sm:text-base">{status.currentQuest}</p>
+          </div>
         </motion.div>
 
-        {/* 4. Tech Stack */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.25 }}
-          className="glass-panel p-5 rounded-2xl border-l-4 border-indigo-400"
-        >
-          <div className="flex items-center gap-2 mb-4">
-            <div className="p-1.5 bg-indigo-100 rounded-lg text-indigo-500"><Zap size={16} /></div>
-            <h3 className="font-black text-slate-700 text-base">技术栈</h3>
-          </div>
-          <div className="space-y-3">
-            {skills.map((skill, index) => (
-              <div key={skill.name} className="flex items-center gap-3">
-                <span className={`p-1.5 rounded-lg text-white ${skill.color} shadow-sm flex-shrink-0`}>
-                  {getSkillIcon(skill.name)}
-                </span>
-                <span className="text-sm font-bold text-slate-700 w-16 flex-shrink-0">{skill.name}</span>
-                <div className="flex-1 h-2 bg-slate-100 rounded-full overflow-hidden">
-                  <motion.div 
-                    initial={{ width: 0 }}
-                    whileInView={{ width: `${skill.level}%` }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 1, delay: 0.1 + (index * 0.08) }}
-                    className={`h-full ${skill.color} rounded-full`}
-                  />
+        {/* 3. Capability & progress */}
+        <div className="grid grid-cols-1 gap-4">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="glass-panel p-5 rounded-2xl border-l-4 border-indigo-400"
+          >
+            <div className="flex items-center gap-2 mb-4">
+              <div className="p-1.5 bg-indigo-100 rounded-lg text-indigo-500"><Zap size={16} /></div>
+              <h3 className="font-black text-slate-700 text-base">核心能力</h3>
+            </div>
+            <div className="space-y-3">
+              {skills.map((skill, index) => (
+                <div key={skill.name} className="grid grid-cols-[auto,minmax(0,1fr)] items-center gap-2 sm:gap-3">
+                  <span className={`p-1.5 rounded-lg text-white ${skill.color} shadow-sm flex-shrink-0`}>
+                    {getSkillIcon(skill.name)}
+                  </span>
+                  <div className="min-w-0">
+                    <div className="flex items-center justify-between text-xs sm:text-sm mb-1">
+                      <span className="font-bold text-slate-700 truncate">{skill.name}</span>
+                      <span className="text-slate-500 font-semibold">{getSkillLevelLabel(skill.level)}</span>
+                    </div>
+                    <div className="h-2 bg-slate-100 rounded-full overflow-hidden">
+                      <motion.div 
+                        initial={{ width: 0 }}
+                        whileInView={{ width: `${skill.level}%` }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 1, delay: 0.1 + (index * 0.08) }}
+                        className={`h-full ${skill.color} rounded-full`}
+                      />
+                    </div>
+                  </div>
                 </div>
-                <span className="text-xs font-black text-slate-400 w-10 text-right">{skill.level}%</span>
-              </div>
-            ))}
-          </div>
-        </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
 
-        {/* 5. Learning Queue */}
+        {/* 4. Learning */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -263,34 +242,19 @@ const About: React.FC = () => {
         >
           <div className="flex items-center gap-2 mb-3">
             <div className="p-1.5 bg-amber-100 rounded-lg text-amber-500"><Rocket size={16} /></div>
-            <h4 className="font-black text-slate-700 text-sm uppercase tracking-wide">正在学习</h4>
+            <h3 className="font-black text-slate-700 text-base">正在学习</h3>
           </div>
           <div className="flex flex-wrap gap-2">
             {learning.map(tag => (
               <span 
                 key={tag} 
-                className="px-3 py-1.5 bg-gradient-to-r from-amber-50 to-orange-50 rounded-lg text-xs font-bold text-amber-700 border border-amber-100 hover:from-amber-100 hover:to-orange-100 transition-colors cursor-default"
+                className="px-3 py-1.5 bg-gradient-to-r from-amber-50 to-orange-50 rounded-lg text-sm font-bold text-amber-700 border border-amber-100 hover:from-amber-100 hover:to-orange-100 transition-colors cursor-default"
               >
                 {tag}
               </span>
             ))}
           </div>
         </motion.div>
-
-        {/* 6. Current Quest - Full Width */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.35 }}
-          className="glass-panel p-4 rounded-xl border-l-4 border-rose-400"
-        >
-          <div className="flex items-center gap-1.5 mb-1">
-            <Target size={12} className="text-rose-500" />
-            <span className="text-[9px] text-slate-400 font-bold uppercase tracking-wider">当前目标</span>
-          </div>
-          <p className="font-bold text-slate-700 text-sm">{status.currentQuest}</p>
-        </motion.div>
-
       </div>
     </section>
   );
