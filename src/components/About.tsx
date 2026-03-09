@@ -17,6 +17,7 @@ import {
 import { ABOUT_CONFIG, SITE_CONFIG } from '@constants';
 import { SOCIAL_LABELS, isSocialPlatform, type SocialPlatform } from '../constants/socialPlatforms';
 import { getSocialIcon } from './socialIcons';
+import { isValidString, isValidArray, cleanStringArray } from '../utils/configValidation';
 
 const getSkillIcon = (name: string) => {
   switch (name) {
@@ -92,10 +93,7 @@ const About: React.FC = () => {
     [],
   );
   const displaySocials = mergedSocials.length > 0 ? mergedSocials : hero.socials;
-  const cleanDescriptions = profile.descriptions.filter((desc) => {
-    const text = desc.trim();
-    return text.length > 0 && !/^\d+$/.test(text);
-  });
+  const cleanDescriptions = cleanStringArray(profile.descriptions);
 
   return (
     <section className="min-h-screen pt-20 pb-8 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
@@ -121,14 +119,16 @@ const About: React.FC = () => {
               />
             </div>
           </div>
-          <motion.span
-            animate={{ y: [0, -3, 0] }}
-            transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
-            className="absolute -bottom-1 -right-2 bg-emerald-50 text-emerald-700 text-[11px] font-semibold px-2.5 py-1 rounded-full shadow-sm border border-emerald-200 inline-flex items-center gap-1"
-          >
-            <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500" />
-            {hero.identity.rarity}
-          </motion.span>
+          {isValidString(hero.identity.rarity) && (
+            <motion.span
+              animate={{ y: [0, -3, 0] }}
+              transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
+              className="absolute -bottom-1 -right-2 bg-emerald-50 text-emerald-700 text-[11px] font-semibold px-2.5 py-1 rounded-full shadow-sm border border-emerald-200 inline-flex items-center gap-1"
+            >
+              <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500" />
+              {hero.identity.rarity}
+            </motion.span>
+          )}
         </div>
 
         <h1 className="text-3xl md:text-4xl font-rounded font-black text-slate-800 mb-2">
@@ -138,11 +138,19 @@ const About: React.FC = () => {
         <p className="text-sm sm:text-base text-slate-600 font-medium max-w-2xl mx-auto leading-relaxed mb-4">{hero.identity.title}</p>
 
         <div className="flex items-center justify-center gap-2 mb-6 flex-wrap">
-          <span className="bg-cyan-50 text-cyan-700 text-xs font-semibold px-3 py-1 rounded-full border border-cyan-100">{hero.identity.role}</span>
-          <span className="bg-sky-50 text-sky-700 text-xs font-semibold px-3 py-1 rounded-full border border-sky-100">{hero.identity.level}</span>
-          <span className="bg-pink-50 text-pink-700 text-xs font-semibold px-3 py-1 rounded-full border border-pink-100 flex items-center gap-1.5">
-            <MapPin size={12} /> {hero.location}
-          </span>
+          {isValidArray(hero.identity.tags) && hero.identity.tags.map((tag, index) => {
+            const colors = [
+              "bg-cyan-50 text-cyan-700 border-cyan-100",
+              "bg-sky-50 text-sky-700 border-sky-100",
+              "bg-pink-50 text-pink-700 border-pink-100",
+            ];
+            const colorClass = colors[index % colors.length];
+            return (
+              <span key={index} className={`text-xs font-semibold px-3 py-1 rounded-full border ${colorClass}`}>
+                {tag}
+              </span>
+            );
+          })}
         </div>
 
         <div className="flex flex-wrap justify-center gap-2">
@@ -159,123 +167,146 @@ const About: React.FC = () => {
       </motion.div>
 
       <div className="space-y-5 sm:space-y-6">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
-          className="glass-panel p-5 rounded-2xl border border-white/80"
-        >
-          <div className="flex items-center gap-2 mb-4">
-            <div className="p-1.5 bg-cyan-100 rounded-lg text-cyan-500">
-              <Quote size={16} />
-            </div>
-            <h3 className="text-base font-black text-slate-800">关于我</h3>
-          </div>
-
-          <div className="space-y-2 text-slate-600 leading-relaxed text-sm sm:text-base">
-            <p className="text-slate-700 font-medium">{profile.summary}</p>
-            {cleanDescriptions.map((desc, index) => (
-              <p key={index}>{desc}</p>
-            ))}
-          </div>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.15 }}
-          className="glass-panel p-5 rounded-2xl border-l-4 border-cyan-400"
-        >
-          <div className="flex items-center gap-2 mb-4">
-            <div className="p-1.5 bg-cyan-100 rounded-lg text-cyan-500">
-              <Compass size={16} />
-            </div>
-            <h3 className="text-base font-black text-slate-800">当前状态</h3>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-            <div className="rounded-xl p-3 bg-white/75 border border-white/85">
-              <p className="text-xs font-semibold text-slate-500 mb-1">职业</p>
-              <p className="font-bold text-slate-700 text-sm">{statusSnapshot.occupation}</p>
-            </div>
-            {statusSnapshot.metrics.map((metric) => (
-              <div key={metric.label} className="rounded-xl p-3 bg-white/75 border border-white/85">
-                <p className="text-xs font-semibold text-slate-500 mb-1">{metric.label}</p>
-                <p className={`text-base font-black ${metric.textColor}`}>{metric.value}</p>
-              </div>
-            ))}
-          </div>
-          <div className="mt-3 rounded-xl p-3 bg-white/75 border border-white/85">
-            <p className="text-xs font-semibold text-slate-500 mb-1 flex items-center gap-1.5">
-              <Target size={12} className="text-rose-500" />
-              当前目标
-            </p>
-            <p className="font-bold text-slate-700 text-sm sm:text-base">{statusSnapshot.currentQuest}</p>
-          </div>
-        </motion.div>
-
-        <div className="grid grid-cols-1 gap-4">
+        {(isValidString(profile.summary) || isValidArray(cleanDescriptions)) && (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
+            transition={{ delay: 0.1 }}
             className="glass-panel p-5 rounded-2xl border border-white/80"
           >
             <div className="flex items-center gap-2 mb-4">
-              <div className="p-1.5 bg-sky-100 rounded-lg text-sky-500">
-                <Zap size={16} />
+              <div className="p-1.5 bg-cyan-100 rounded-lg text-cyan-500">
+                <Quote size={16} />
               </div>
-              <h3 className="font-black text-slate-700 text-base">核心能力</h3>
+              <h3 className="text-base font-black text-slate-800">关于我</h3>
             </div>
-            <div className="space-y-3">
-              {capabilities.skills.map((skill, index) => (
-                <div key={skill.name} className="grid grid-cols-[auto,minmax(0,1fr)] items-center gap-2 sm:gap-3">
-                  <span className={`p-1.5 rounded-lg text-white ${skill.color} shadow-sm flex-shrink-0`}>
-                    {getSkillIcon(skill.name)}
-                  </span>
-                  <div className="min-w-0">
-                    <div className="flex items-center justify-between text-xs sm:text-sm mb-1">
-                      <span className="font-bold text-slate-700 truncate">{skill.name}</span>
-                      <span className="text-slate-500 font-semibold">{getSkillLevelLabel(skill.level)}</span>
-                    </div>
-                    <div className="h-2 bg-slate-100 rounded-full overflow-hidden">
-                      <motion.div
-                        initial={{ width: 0 }}
-                        whileInView={{ width: `${skill.level}%` }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 1, delay: 0.1 + index * 0.08 }}
-                        className={`h-full ${skill.color} rounded-full`}
-                      />
-                    </div>
-                  </div>
-                </div>
+
+            <div className="space-y-2 text-slate-600 leading-relaxed text-sm sm:text-base">
+              {isValidString(profile.summary) && (
+                <p className="text-slate-700 font-medium">{profile.summary}</p>
+              )}
+              {cleanDescriptions.map((desc, index) => (
+                <p key={index}>{desc}</p>
               ))}
             </div>
           </motion.div>
-        </div>
+        )}
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
-          className="glass-panel p-5 rounded-2xl border border-white/80"
-        >
-          <div className="flex items-center gap-2 mb-4">
-            <div className="p-1.5 bg-amber-100 rounded-lg text-amber-500">
-              <Rocket size={16} />
+        {(isValidString(statusSnapshot.occupation) || isValidArray(statusSnapshot.metrics) || isValidString(statusSnapshot.currentQuest)) && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.15 }}
+            className="glass-panel p-5 rounded-2xl border-l-4 border-cyan-400"
+          >
+            <div className="flex items-center gap-2 mb-4">
+              <div className="p-1.5 bg-cyan-100 rounded-lg text-cyan-500">
+                <Compass size={16} />
+              </div>
+              <h3 className="text-base font-black text-slate-800">当前状态</h3>
             </div>
-            <h3 className="font-black text-slate-700 text-base">正在学习</h3>
+            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+              {isValidString(statusSnapshot.occupation) && (
+                <div className="rounded-xl p-3 bg-white/75 border border-white/85">
+                  <p className="text-xs font-semibold text-slate-500 mb-1">职业</p>
+                  <p className="font-bold text-slate-700 text-sm">{statusSnapshot.occupation}</p>
+                </div>
+              )}
+              {isValidString(statusSnapshot.location) && (
+                <div className="rounded-xl p-3 bg-white/75 border border-white/85">
+                  <p className="text-xs font-semibold text-slate-500 mb-1 flex items-center gap-1.5">
+                    <MapPin size={12} className="text-rose-500" />
+                    位置
+                  </p>
+                  <p className="font-bold text-slate-700 text-sm">{statusSnapshot.location}</p>
+                </div>
+              )}
+              {isValidArray(statusSnapshot.metrics) && statusSnapshot.metrics.map((metric) => (
+                <div key={metric.label} className="rounded-xl p-3 bg-white/75 border border-white/85">
+                  <p className="text-xs font-semibold text-slate-500 mb-1">{metric.label}</p>
+                  <p className={`text-base font-black ${metric.textColor}`}>{metric.value}</p>
+                </div>
+              ))}
+            </div>
+            {isValidString(statusSnapshot.currentQuest) && (
+              <div className="mt-3 rounded-xl p-3 bg-white/75 border border-white/85">
+                <p className="text-xs font-semibold text-slate-500 mb-1 flex items-center gap-1.5">
+                  <Target size={12} className="text-rose-500" />
+                  当前目标
+                </p>
+                <p className="font-bold text-slate-700 text-sm sm:text-base">{statusSnapshot.currentQuest}</p>
+              </div>
+            )}
+          </motion.div>
+        )}
+
+        {isValidArray(capabilities.skills) && (
+          <div className="grid grid-cols-1 gap-4">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="glass-panel p-5 rounded-2xl border border-white/80"
+            >
+              <div className="flex items-center gap-2 mb-4">
+                <div className="p-1.5 bg-sky-100 rounded-lg text-sky-500">
+                  <Zap size={16} />
+                </div>
+                <h3 className="font-black text-slate-700 text-base">核心能力</h3>
+              </div>
+              <div className="space-y-3">
+                {capabilities.skills.map((skill, index) => (
+                  <div key={skill.name} className="grid grid-cols-[auto,minmax(0,1fr)] items-center gap-2 sm:gap-3">
+                    <span className={`p-1.5 rounded-lg text-white ${skill.color} shadow-sm flex-shrink-0`}>
+                      {getSkillIcon(skill.name)}
+                    </span>
+                    <div className="min-w-0">
+                      <div className="flex items-center justify-between text-xs sm:text-sm mb-1">
+                        <span className="font-bold text-slate-700 truncate">{skill.name}</span>
+                        <span className="text-slate-500 font-semibold">{getSkillLevelLabel(skill.level)}</span>
+                      </div>
+                      <div className="h-2 bg-slate-100 rounded-full overflow-hidden">
+                        <motion.div
+                          initial={{ width: 0 }}
+                          whileInView={{ width: `${skill.level}%` }}
+                          viewport={{ once: true }}
+                          transition={{ duration: 1, delay: 0.1 + index * 0.08 }}
+                          className={`h-full ${skill.color} rounded-full`}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
           </div>
-          <div className="flex flex-wrap gap-2">
-            {learning.tags.map((tag) => (
-              <span
-                key={tag}
-                className="px-3 py-1.5 bg-amber-50 rounded-lg text-sm font-semibold text-amber-700 border border-amber-100 hover:bg-amber-100 transition-colors cursor-default"
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
-        </motion.div>
+        )}
+
+        {isValidArray(learning.tags) && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+            className="glass-panel p-5 rounded-2xl border border-white/80"
+          >
+            <div className="flex items-center gap-2 mb-4">
+              <div className="p-1.5 bg-amber-100 rounded-lg text-amber-500">
+                <Rocket size={16} />
+              </div>
+              <h3 className="font-black text-slate-700 text-base">正在学习</h3>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              {learning.tags.map((tag) => (
+                <span
+                  key={tag}
+                  className="px-3 py-1.5 bg-amber-50 rounded-lg text-sm font-semibold text-amber-700 border border-amber-100 hover:bg-amber-100 transition-colors cursor-default"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </motion.div>
+        )}
       </div>
     </section>
   );
