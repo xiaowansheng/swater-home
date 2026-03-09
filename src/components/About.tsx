@@ -14,8 +14,8 @@ import {
   Target,
   Rocket,
 } from 'lucide-react';
-import { ABOUT_CONFIG } from '@constants';
-import { type SocialPlatform } from '../constants/socialPlatforms';
+import { ABOUT_CONFIG, SITE_CONFIG } from '@constants';
+import { SOCIAL_LABELS, isSocialPlatform, type SocialPlatform } from '../constants/socialPlatforms';
 import { getSocialIcon } from './socialIcons';
 
 const getSkillIcon = (name: string) => {
@@ -57,12 +57,13 @@ const SocialBtn: React.FC<{ icon: React.ReactNode; href: string; label: string; 
   platform,
 }) => {
   const platformClass = `social-chip--${platform as SocialPlatform}`;
+  const isMail = href.startsWith('mailto:');
 
   return (
     <a
       href={href}
-      target="_blank"
-      rel="noopener noreferrer"
+      target={isMail ? undefined : '_blank'}
+      rel={isMail ? undefined : 'noopener noreferrer'}
       title={label}
       aria-label={label}
       className={`social-chip ${platformClass}`}
@@ -75,6 +76,22 @@ const SocialBtn: React.FC<{ icon: React.ReactNode; href: string; label: string; 
 
 const About: React.FC = () => {
   const { hero, profile, statusSnapshot, capabilities, learning } = ABOUT_CONFIG;
+  const configuredSocials = (SITE_CONFIG?.socials ?? {}) as Record<string, string>;
+  const aboutLabelMap = new Map(hero.socials.map((social) => [social.platform, social.label]));
+  const mergedSocials = Object.entries(configuredSocials).reduce<Array<{ platform: string; url: string; label: string }>>(
+    (acc, [platform, url]) => {
+      if (!isSocialPlatform(platform)) return acc;
+      if (!url || !url.trim()) return acc;
+      acc.push({
+        platform,
+        url,
+        label: aboutLabelMap.get(platform) ?? SOCIAL_LABELS[platform],
+      });
+      return acc;
+    },
+    [],
+  );
+  const displaySocials = mergedSocials.length > 0 ? mergedSocials : hero.socials;
   const cleanDescriptions = profile.descriptions.filter((desc) => {
     const text = desc.trim();
     return text.length > 0 && !/^\d+$/.test(text);
@@ -129,7 +146,7 @@ const About: React.FC = () => {
         </div>
 
         <div className="flex flex-wrap justify-center gap-2">
-          {hero.socials.map((social) => (
+          {displaySocials.map((social) => (
             <SocialBtn
               key={social.platform}
               platform={social.platform}

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Heart } from 'lucide-react';
 import { SITE_CONFIG, APP_NAME } from '@constants';
-import { SOCIAL_LABELS, SOCIAL_PLATFORMS, type SocialPlatform } from '../constants/socialPlatforms';
+import { SOCIAL_LABELS, isSocialPlatform, type SocialPlatform } from '../constants/socialPlatforms';
 import { getSocialIcon } from './socialIcons';
 
 type SocialLink = { platform: SocialPlatform; url: string; label: string };
@@ -14,9 +14,9 @@ const getFooterSocialClass = (platform: SocialPlatform) => `social-icon social-i
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
-  const socials = (SITE_CONFIG?.socials ?? {}) as Partial<Record<SocialPlatform, string>>;
-  const iconLinks = SOCIAL_PLATFORMS.reduce<SocialLink[]>((acc, platform) => {
-    const url = socials[platform];
+  const socials = (SITE_CONFIG?.socials ?? {}) as Record<string, string>;
+  const iconLinks = Object.entries(socials).reduce<SocialLink[]>((acc, [platform, url]) => {
+    if (!isSocialPlatform(platform)) return acc;
     if (!url || !url.trim()) return acc;
     acc.push({ platform, url, label: SOCIAL_LABELS[platform] });
     return acc;

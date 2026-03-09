@@ -45,3 +45,7 @@ export const SOCIAL_LABELS: Record<SocialPlatform, string> = {
   xiaohongshu: 'Xiaohongshu',
   zhihu: 'Zhihu',
 };
+
+export const isSocialPlatform = (value: string): value is SocialPlatform => {
+  return (SOCIAL_PLATFORMS as readonly string[]).includes(value);
+};
