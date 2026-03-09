@@ -1,10 +1,26 @@
 import React from 'react';
-import { Github, Twitter, Mail, Heart } from 'lucide-react';
+import { Heart } from 'lucide-react';
 import { SITE_CONFIG, APP_NAME } from '@constants';
+import { SOCIAL_LABELS, SOCIAL_PLATFORMS, type SocialPlatform } from '../constants/socialPlatforms';
+import { getSocialIcon } from './socialIcons';
+
+type SocialLink = { platform: SocialPlatform; url: string; label: string };
+
+const getFooterSocialIcon = (platform: SocialPlatform) => {
+  return getSocialIcon(platform, 20);
+};
+
+const getFooterSocialClass = (platform: SocialPlatform) => `social-icon social-icon--${platform}`;
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
-  const { socials } = SITE_CONFIG;
+  const socials = (SITE_CONFIG?.socials ?? {}) as Partial<Record<SocialPlatform, string>>;
+  const iconLinks = SOCIAL_PLATFORMS.reduce<SocialLink[]>((acc, platform) => {
+    const url = socials[platform];
+    if (!url || !url.trim()) return acc;
+    acc.push({ platform, url, label: SOCIAL_LABELS[platform] });
+    return acc;
+  }, []);
 
   return (
     <footer className="relative z-10 w-full pt-3 pb-[calc(env(safe-area-inset-bottom)+6rem)] sm:pb-[calc(env(safe-area-inset-bottom)+7rem)] mt-4 sm:mt-6 text-sm text-center text-slate-500">
@@ -14,27 +30,22 @@ const Footer: React.FC = () => {
           OTAKU MODE
         </div>
 
-        <div className="flex items-center gap-6">
-          <a
-            href={socials.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="p-2 transition-all duration-200 hover:-translate-y-px hover:text-pink-500"
-          >
-            <Github size={20} />
-          </a>
-          <a
-            href={socials.twitter}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="p-2 transition-all duration-200 hover:-translate-y-px hover:text-sky-500"
-          >
-            <Twitter size={20} />
-          </a>
-          <a href={socials.mail} className="p-2 transition-all duration-200 hover:-translate-y-px hover:text-rose-500">
-            <Mail size={20} />
-          </a>
-        </div>
+        {iconLinks.length > 0 && (
+          <div className="flex items-center gap-4">
+            {iconLinks.map((item) => (
+              <a
+                key={item.platform}
+                href={item.url}
+                target={item.platform === 'mail' ? undefined : '_blank'}
+                rel={item.platform === 'mail' ? undefined : 'noopener noreferrer'}
+                aria-label={item.label}
+                className={getFooterSocialClass(item.platform)}
+              >
+                {getFooterSocialIcon(item.platform)}
+              </a>
+            ))}
+          </div>
+        )}
 
         <div className="w-1/2 h-px bg-gradient-to-r from-transparent via-pink-300/70 to-transparent" />
 

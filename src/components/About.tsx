@@ -1,10 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import {
-  Github,
-  Twitter,
-  Instagram,
-  Mail,
   Zap,
   MapPin,
   Code,
@@ -19,37 +15,8 @@ import {
   Rocket,
 } from 'lucide-react';
 import { ABOUT_CONFIG } from '@constants';
-
-const QQIcon = ({ size = 18 }: { size?: number }) => (
-  <svg viewBox="0 0 1024 1024" width={size} height={size} fill="currentColor">
-    <path d="M824.8 613.2c-16-81.4-45.6-123.8-143.4-142.8l-12.2-2.2c16.2-46.8 14-99.8-19.4-141.4-42.2-53-118-72.2-184.8-46.6-66.8-25.6-142.6-6.4-184.8 46.6-33.4 41.6-35.6 94.6-19.4 141.4l-12.2 2.2c-97.8 19-127.4 61.4-143.4 142.8-17.6 89.6-12.8 112.6 30 119.8 42.8 7.2 60-16.2 60-16.2s3.6 22 46.8 28.2c43.2 6.2 78-4.4 78-4.4s-14.4 74.8 68.8 81c82 6 100-34.4 100-34.4s18 40.4 100 34.4c83.2-6.2 68.8-81 68.8-81s34.8 10.6 78 4.4c43.2-6.2 46.8-28.2 46.8-28.2s17.2 23.4 60 16.2c42.8-7.2 47.6-30.2 30-119.8z" />
-  </svg>
-);
-
-const GiteeIcon = ({ size = 18 }: { size?: number }) => (
-  <svg viewBox="0 0 1024 1024" width={size} height={size} fill="currentColor">
-    <path d="M512 1024C230.4 1024 0 793.6 0 512S230.4 0 512 0s512 230.4 512 512-230.4 512-512 512z m259.2-569.6H507.2L496 499.2l-5.6 10.4 108.8 108.8h112c31.2 0 56-24.8 56-56V454.4zM476.8 692.8V536L320 379.2V560c0 40 32.8 72.8 72.8 72.8H476.8z" />
-  </svg>
-);
-
-const getSocialIcon = (platform: string) => {
-  switch (platform) {
-    case 'github':
-      return <Github size={18} />;
-    case 'twitter':
-      return <Twitter size={18} />;
-    case 'instagram':
-      return <Instagram size={18} />;
-    case 'mail':
-      return <Mail size={18} />;
-    case 'qq':
-      return <QQIcon size={18} />;
-    case 'gitee':
-      return <GiteeIcon size={18} />;
-    default:
-      return <Github size={18} />;
-  }
-};
+import { type SocialPlatform } from '../constants/socialPlatforms';
+import { getSocialIcon } from './socialIcons';
 
 const getSkillIcon = (name: string) => {
   switch (name) {
@@ -89,24 +56,7 @@ const SocialBtn: React.FC<{ icon: React.ReactNode; href: string; label: string; 
   label,
   platform,
 }) => {
-  const getStyles = (p: string) => {
-    switch (p) {
-      case 'github':
-        return 'bg-white/90 text-slate-700 border-slate-200/70 hover:text-slate-900 hover:border-slate-300';
-      case 'twitter':
-        return 'bg-white/90 text-slate-700 border-slate-200/70 hover:text-sky-600 hover:border-sky-200';
-      case 'instagram':
-        return 'bg-white/90 text-slate-700 border-slate-200/70 hover:text-pink-600 hover:border-pink-200';
-      case 'mail':
-        return 'bg-white/90 text-slate-700 border-slate-200/70 hover:text-rose-600 hover:border-rose-200';
-      case 'qq':
-        return 'bg-white/90 text-slate-700 border-slate-200/70 hover:text-cyan-600 hover:border-cyan-200';
-      case 'gitee':
-        return 'bg-white/90 text-slate-700 border-slate-200/70 hover:text-orange-600 hover:border-orange-200';
-      default:
-        return 'bg-white/90 text-slate-700 border-slate-200/70 hover:text-slate-900 hover:border-slate-300';
-    }
-  };
+  const platformClass = `social-chip--${platform as SocialPlatform}`;
 
   return (
     <a
@@ -114,12 +64,11 @@ const SocialBtn: React.FC<{ icon: React.ReactNode; href: string; label: string; 
       target="_blank"
       rel="noopener noreferrer"
       title={label}
-      className={`flex items-center gap-2 px-3 py-2 rounded-xl transition-all duration-200 border font-semibold text-sm shadow-sm hover:-translate-y-px ${getStyles(
-        platform,
-      )}`}
+      aria-label={label}
+      className={`social-chip ${platformClass}`}
     >
-      {icon}
-      <span className="hidden sm:inline">{label}</span>
+      <span className="social-chip__icon">{icon}</span>
+      <span>{label}</span>
     </a>
   );
 };

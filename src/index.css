@@ -172,6 +172,518 @@ body::before {
   animation: floatY 5.8s ease-in-out infinite;
 }
 
+.social-icon {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 999px;
+  color: #0f172a;
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  background: linear-gradient(140deg, rgba(255, 255, 255, 0.86), rgba(248, 250, 252, 0.72));
+  box-shadow:
+    0 10px 24px rgba(15, 23, 42, 0.09),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.social-icon:hover {
+  transform: translateY(-3px) scale(1.04);
+}
+
+.social-icon::before {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: inherit;
+  opacity: 0;
+  filter: blur(10px);
+  transition: opacity 0.2s ease;
+  z-index: -1;
+}
+
+.social-icon:hover::before {
+  opacity: 0.95;
+}
+
+.social-icon--github:hover {
+  color: #0f172a;
+  border-color: rgba(148, 163, 184, 0.75);
+  box-shadow:
+    0 14px 28px rgba(51, 65, 85, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+.social-icon--github::before {
+  background: radial-gradient(circle, rgba(148, 163, 184, 0.5), transparent 70%);
+}
+
+.social-icon--twitter:hover {
+  color: #0284c7;
+  border-color: rgba(56, 189, 248, 0.7);
+  box-shadow:
+    0 14px 28px rgba(14, 165, 233, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+.social-icon--twitter::before {
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.5), transparent 70%);
+}
+
+.social-icon--gitee:hover {
+  color: #ea580c;
+  border-color: rgba(251, 146, 60, 0.75);
+  box-shadow:
+    0 14px 28px rgba(249, 115, 22, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+.social-icon--gitee::before {
+  background: radial-gradient(circle, rgba(251, 146, 60, 0.5), transparent 70%);
+}
+
+.social-icon--qq:hover {
+  color: #0891b2;
+  border-color: rgba(34, 211, 238, 0.75);
+  box-shadow:
+    0 14px 28px rgba(6, 182, 212, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+.social-icon--qq::before {
+  background: radial-gradient(circle, rgba(34, 211, 238, 0.5), transparent 70%);
+}
+
+.social-icon--mail:hover {
+  color: #e11d48;
+  border-color: rgba(251, 113, 133, 0.75);
+  box-shadow:
+    0 14px 28px rgba(244, 63, 94, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+.social-icon--mail::before {
+  background: radial-gradient(circle, rgba(251, 113, 133, 0.5), transparent 70%);
+}
+
+.social-icon--linkedin:hover {
+  color: #0a66c2;
+  border-color: rgba(59, 130, 246, 0.75);
+  box-shadow:
+    0 14px 28px rgba(37, 99, 235, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+.social-icon--linkedin::before {
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.5), transparent 70%);
+}
+
+.social-icon--youtube:hover {
+  color: #ef4444;
+  border-color: rgba(248, 113, 113, 0.75);
+  box-shadow:
+    0 14px 28px rgba(239, 68, 68, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+.social-icon--youtube::before {
+  background: radial-gradient(circle, rgba(248, 113, 113, 0.5), transparent 70%);
+}
+
+.social-icon--facebook:hover {
+  color: #1877f2;
+  border-color: rgba(96, 165, 250, 0.75);
+  box-shadow:
+    0 14px 28px rgba(59, 130, 246, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+.social-icon--facebook::before {
+  background: radial-gradient(circle, rgba(96, 165, 250, 0.5), transparent 70%);
+}
+
+.social-icon--twitch:hover {
+  color: #9146ff;
+  border-color: rgba(167, 139, 250, 0.75);
+  box-shadow:
+    0 14px 28px rgba(139, 92, 246, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+.social-icon--twitch::before {
+  background: radial-gradient(circle, rgba(167, 139, 250, 0.5), transparent 70%);
+}
+
+.social-icon--tiktok:hover {
+  color: #111827;
+  border-color: rgba(75, 85, 99, 0.75);
+  box-shadow:
+    0 14px 28px rgba(17, 24, 39, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+.social-icon--tiktok::before {
+  background: radial-gradient(circle, rgba(75, 85, 99, 0.5), transparent 70%);
+}
+
+.social-icon--telegram:hover {
+  color: #0ea5e9;
+  border-color: rgba(56, 189, 248, 0.75);
+  box-shadow:
+    0 14px 28px rgba(14, 165, 233, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+.social-icon--telegram::before {
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.5), transparent 70%);
+}
+
+.social-icon--discord:hover {
+  color: #6366f1;
+  border-color: rgba(129, 140, 248, 0.75);
+  box-shadow:
+    0 14px 28px rgba(99, 102, 241, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+.social-icon--discord::before {
+  background: radial-gradient(circle, rgba(129, 140, 248, 0.5), transparent 70%);
+}
+
+.social-icon--reddit:hover {
+  color: #ea580c;
+  border-color: rgba(251, 146, 60, 0.75);
+  box-shadow:
+    0 14px 28px rgba(249, 115, 22, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+.social-icon--reddit::before {
+  background: radial-gradient(circle, rgba(251, 146, 60, 0.5), transparent 70%);
+}
+
+.social-icon--whatsapp:hover {
+  color: #16a34a;
+  border-color: rgba(74, 222, 128, 0.75);
+  box-shadow:
+    0 14px 28px rgba(22, 163, 74, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+.social-icon--whatsapp::before {
+  background: radial-gradient(circle, rgba(74, 222, 128, 0.5), transparent 70%);
+}
+
+.social-icon--wechat:hover {
+  color: #16a34a;
+  border-color: rgba(74, 222, 128, 0.75);
+  box-shadow:
+    0 14px 28px rgba(22, 163, 74, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+.social-icon--wechat::before {
+  background: radial-gradient(circle, rgba(74, 222, 128, 0.5), transparent 70%);
+}
+
+.social-icon--weibo:hover {
+  color: #e11d48;
+  border-color: rgba(251, 113, 133, 0.75);
+  box-shadow:
+    0 14px 28px rgba(225, 29, 72, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+.social-icon--weibo::before {
+  background: radial-gradient(circle, rgba(251, 113, 133, 0.5), transparent 70%);
+}
+
+.social-icon--bilibili:hover {
+  color: #0891b2;
+  border-color: rgba(34, 211, 238, 0.75);
+  box-shadow:
+    0 14px 28px rgba(8, 145, 178, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+.social-icon--bilibili::before {
+  background: radial-gradient(circle, rgba(34, 211, 238, 0.5), transparent 70%);
+}
+
+.social-icon--xiaohongshu:hover {
+  color: #f43f5e;
+  border-color: rgba(251, 113, 133, 0.75);
+  box-shadow:
+    0 14px 28px rgba(244, 63, 94, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+.social-icon--xiaohongshu::before {
+  background: radial-gradient(circle, rgba(251, 113, 133, 0.5), transparent 70%);
+}
+
+.social-icon--zhihu:hover {
+  color: #2563eb;
+  border-color: rgba(96, 165, 250, 0.75);
+  box-shadow:
+    0 14px 28px rgba(37, 99, 235, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+.social-icon--zhihu::before {
+  background: radial-gradient(circle, rgba(96, 165, 250, 0.5), transparent 70%);
+}
+
+.social-chip {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 12px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #334155;
+  border: 1px solid rgba(226, 232, 240, 0.85);
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.92), rgba(241, 245, 249, 0.74));
+  box-shadow:
+    0 8px 20px rgba(15, 23, 42, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.social-chip:hover {
+  transform: translateY(-2px);
+}
+
+.social-chip::before {
+  content: '';
+  position: absolute;
+  inset: -5px;
+  border-radius: inherit;
+  opacity: 0;
+  filter: blur(10px);
+  transition: opacity 0.2s ease;
+  z-index: -1;
+}
+
+.social-chip:hover::before {
+  opacity: 0.9;
+}
+
+.social-chip__icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(226, 232, 240, 0.85);
+  background: rgba(255, 255, 255, 0.75);
+}
+
+.social-chip--github:hover {
+  color: #0f172a;
+  border-color: rgba(148, 163, 184, 0.75);
+  box-shadow: 0 12px 24px rgba(51, 65, 85, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+.social-chip--github:hover::before {
+  background: radial-gradient(circle, rgba(148, 163, 184, 0.45), transparent 70%);
+}
+
+.social-chip--twitter:hover {
+  color: #0284c7;
+  border-color: rgba(56, 189, 248, 0.7);
+  box-shadow: 0 12px 24px rgba(14, 165, 233, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+.social-chip--twitter:hover::before {
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.45), transparent 70%);
+}
+
+.social-chip--instagram:hover {
+  color: #db2777;
+  border-color: rgba(244, 114, 182, 0.72);
+  box-shadow: 0 12px 24px rgba(236, 72, 153, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+.social-chip--instagram:hover::before {
+  background: radial-gradient(circle, rgba(244, 114, 182, 0.45), transparent 70%);
+}
+
+.social-chip--mail:hover {
+  color: #e11d48;
+  border-color: rgba(251, 113, 133, 0.72);
+  box-shadow: 0 12px 24px rgba(244, 63, 94, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+.social-chip--mail:hover::before {
+  background: radial-gradient(circle, rgba(251, 113, 133, 0.45), transparent 70%);
+}
+
+.social-chip--qq:hover {
+  color: #0891b2;
+  border-color: rgba(34, 211, 238, 0.7);
+  box-shadow: 0 12px 24px rgba(6, 182, 212, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+.social-chip--qq:hover::before {
+  background: radial-gradient(circle, rgba(34, 211, 238, 0.45), transparent 70%);
+}
+
+.social-chip--gitee:hover {
+  color: #ea580c;
+  border-color: rgba(251, 146, 60, 0.72);
+  box-shadow: 0 12px 24px rgba(249, 115, 22, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+.social-chip--gitee:hover::before {
+  background: radial-gradient(circle, rgba(251, 146, 60, 0.45), transparent 70%);
+}
+
+.social-chip--linkedin:hover {
+  color: #0a66c2;
+  border-color: rgba(59, 130, 246, 0.72);
+  box-shadow: 0 12px 24px rgba(37, 99, 235, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+.social-chip--linkedin:hover::before {
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.45), transparent 70%);
+}
+
+.social-chip--youtube:hover {
+  color: #ef4444;
+  border-color: rgba(248, 113, 113, 0.72);
+  box-shadow: 0 12px 24px rgba(239, 68, 68, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+.social-chip--youtube:hover::before {
+  background: radial-gradient(circle, rgba(248, 113, 113, 0.45), transparent 70%);
+}
+
+.social-chip--facebook:hover {
+  color: #1877f2;
+  border-color: rgba(96, 165, 250, 0.72);
+  box-shadow: 0 12px 24px rgba(59, 130, 246, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+.social-chip--facebook:hover::before {
+  background: radial-gradient(circle, rgba(96, 165, 250, 0.45), transparent 70%);
+}
+
+.social-chip--twitch:hover {
+  color: #9146ff;
+  border-color: rgba(167, 139, 250, 0.72);
+  box-shadow: 0 12px 24px rgba(139, 92, 246, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+.social-chip--twitch:hover::before {
+  background: radial-gradient(circle, rgba(167, 139, 250, 0.45), transparent 70%);
+}
+
+.social-chip--tiktok:hover {
+  color: #111827;
+  border-color: rgba(75, 85, 99, 0.72);
+  box-shadow: 0 12px 24px rgba(17, 24, 39, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+.social-chip--tiktok:hover::before {
+  background: radial-gradient(circle, rgba(75, 85, 99, 0.45), transparent 70%);
+}
+
+.social-chip--telegram:hover {
+  color: #0ea5e9;
+  border-color: rgba(56, 189, 248, 0.72);
+  box-shadow: 0 12px 24px rgba(14, 165, 233, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+.social-chip--telegram:hover::before {
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.45), transparent 70%);
+}
+
+.social-chip--discord:hover {
+  color: #6366f1;
+  border-color: rgba(129, 140, 248, 0.72);
+  box-shadow: 0 12px 24px rgba(99, 102, 241, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+.social-chip--discord:hover::before {
+  background: radial-gradient(circle, rgba(129, 140, 248, 0.45), transparent 70%);
+}
+
+.social-chip--reddit:hover {
+  color: #ea580c;
+  border-color: rgba(251, 146, 60, 0.72);
+  box-shadow: 0 12px 24px rgba(249, 115, 22, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+.social-chip--reddit:hover::before {
+  background: radial-gradient(circle, rgba(251, 146, 60, 0.45), transparent 70%);
+}
+
+.social-chip--whatsapp:hover {
+  color: #16a34a;
+  border-color: rgba(74, 222, 128, 0.72);
+  box-shadow: 0 12px 24px rgba(22, 163, 74, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+.social-chip--whatsapp:hover::before {
+  background: radial-gradient(circle, rgba(74, 222, 128, 0.45), transparent 70%);
+}
+
+.social-chip--wechat:hover {
+  color: #16a34a;
+  border-color: rgba(74, 222, 128, 0.72);
+  box-shadow: 0 12px 24px rgba(22, 163, 74, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+.social-chip--wechat:hover::before {
+  background: radial-gradient(circle, rgba(74, 222, 128, 0.45), transparent 70%);
+}
+
+.social-chip--weibo:hover {
+  color: #e11d48;
+  border-color: rgba(251, 113, 133, 0.72);
+  box-shadow: 0 12px 24px rgba(225, 29, 72, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+.social-chip--weibo:hover::before {
+  background: radial-gradient(circle, rgba(251, 113, 133, 0.45), transparent 70%);
+}
+
+.social-chip--bilibili:hover {
+  color: #0891b2;
+  border-color: rgba(34, 211, 238, 0.72);
+  box-shadow: 0 12px 24px rgba(8, 145, 178, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+.social-chip--bilibili:hover::before {
+  background: radial-gradient(circle, rgba(34, 211, 238, 0.45), transparent 70%);
+}
+
+.social-chip--xiaohongshu:hover {
+  color: #f43f5e;
+  border-color: rgba(251, 113, 133, 0.72);
+  box-shadow: 0 12px 24px rgba(244, 63, 94, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+.social-chip--xiaohongshu:hover::before {
+  background: radial-gradient(circle, rgba(251, 113, 133, 0.45), transparent 70%);
+}
+
+.social-chip--zhihu:hover {
+  color: #2563eb;
+  border-color: rgba(96, 165, 250, 0.72);
+  box-shadow: 0 12px 24px rgba(37, 99, 235, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+.social-chip--zhihu:hover::before {
+  background: radial-gradient(circle, rgba(96, 165, 250, 0.45), transparent 70%);
+}
+
 @keyframes fall {
   0% { opacity: 0; top: -10%; transform: translateX(0) rotate(0deg); }
   10% { opacity: 0.6; }
