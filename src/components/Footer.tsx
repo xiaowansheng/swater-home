@@ -7,7 +7,7 @@ const Footer: React.FC = () => {
   const { socials } = SITE_CONFIG;
 
   return (
-    <footer className="relative z-10 w-full py-8 mt-12 text-sm text-center text-slate-500">
+    <footer className="relative z-10 w-full pt-3 pb-6 mt-4 sm:mt-6 text-sm text-center text-slate-500">
       <div className="glass-panel mx-auto w-[90%] md:w-3/4 lg:w-1/2 rounded-2xl p-6 flex flex-col items-center gap-4 border border-white/80">
         <div className="anime-sticker">
           <span className="kira" />

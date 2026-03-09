@@ -14,7 +14,7 @@ const runes = [
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
-    <div className="min-h-screen relative text-slate-700 selection:bg-pink-200 selection:text-pink-900 pb-24 overflow-hidden">
+    <div className="min-h-screen relative text-slate-700 selection:bg-pink-200 selection:text-pink-900 pb-14 sm:pb-16 overflow-hidden">
       <div className="anime-grid" />
       <div className="anime-aura anime-aura-cyan" />
       <div className="anime-aura anime-aura-rose" />

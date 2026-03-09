@@ -109,7 +109,7 @@ const Websites: React.FC = () => {
   };
 
   return (
-    <section className="min-h-screen pt-24 pb-20 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+    <section className="min-h-[calc(100vh-7rem)] pt-24 pb-4 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-12">
         <div className="anime-sticker mx-auto w-fit mb-3">
           <span className="kira" />
