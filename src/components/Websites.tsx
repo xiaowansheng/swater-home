@@ -24,54 +24,36 @@ import {
 
 const getProjectIcon = (iconName?: string) => {
   switch (iconName) {
-    case 'code':
-      return <Code size={32} />;
-    case 'globe':
-      return <Globe size={32} />;
-    case 'book':
-      return <Book size={32} />;
-    case 'game':
-      return <Gamepad2 size={32} />;
-    case 'music':
-      return <Music size={32} />;
-    case 'palette':
-      return <Palette size={32} />;
-    case 'terminal':
-      return <Terminal size={32} />;
-    case 'database':
-      return <Database size={32} />;
-    case 'mobile':
-      return <Smartphone size={32} />;
-    case 'box':
-      return <Box size={32} />;
-    case 'layers':
-      return <Layers size={32} />;
-    case 'sparkles':
-      return <Sparkles size={32} />;
-    case 'star':
-      return <Star size={32} />;
-    case 'zap':
-      return <Zap size={32} />;
-    case 'heart':
-      return <Heart size={32} />;
-    case 'coffee':
-      return <Coffee size={32} />;
-    case 'rocket':
-      return <Rocket size={32} />;
-    default:
-      return <Code size={32} />;
+    case 'code': return <Code size={28} />;
+    case 'globe': return <Globe size={28} />;
+    case 'book': return <Book size={28} />;
+    case 'game': return <Gamepad2 size={28} />;
+    case 'music': return <Music size={28} />;
+    case 'palette': return <Palette size={28} />;
+    case 'terminal': return <Terminal size={28} />;
+    case 'database': return <Database size={28} />;
+    case 'mobile': return <Smartphone size={28} />;
+    case 'box': return <Box size={28} />;
+    case 'layers': return <Layers size={28} />;
+    case 'sparkles': return <Sparkles size={28} />;
+    case 'star': return <Star size={28} />;
+    case 'zap': return <Zap size={28} />;
+    case 'heart': return <Heart size={28} />;
+    case 'coffee': return <Coffee size={28} />;
+    case 'rocket': return <Rocket size={28} />;
+    default: return <Code size={28} />;
   }
 };
 
-const gradients = [
-  'from-cyan-400 to-sky-500',
-  'from-rose-400 to-orange-400',
-  'from-teal-400 to-cyan-500',
-  'from-pink-400 to-rose-500',
-  'from-emerald-400 to-teal-500',
-  'from-blue-400 to-indigo-500',
-  'from-amber-400 to-orange-500',
-  'from-sky-400 to-pink-400',
+const iconGradients = [
+  'linear-gradient(135deg, #f472b6, #c084fc)',
+  'linear-gradient(135deg, #818cf8, #38bdf8)',
+  'linear-gradient(135deg, #34d399, #22d3ee)',
+  'linear-gradient(135deg, #fb923c, #f472b6)',
+  'linear-gradient(135deg, #a78bfa, #818cf8)',
+  'linear-gradient(135deg, #22d3ee, #34d399)',
+  'linear-gradient(135deg, #fde68a, #fb923c)',
+  'linear-gradient(135deg, #f472b6, #818cf8)',
 ];
 
 const Websites: React.FC = () => {
@@ -84,10 +66,11 @@ const Websites: React.FC = () => {
         {visibleTags.map((tag) => (
           <span
             key={tag}
-            className={
+            className="px-2 py-0.5 text-[11px] font-bold rounded-md"
+            style={
               light
-                ? 'px-2 py-0.5 bg-white/20 text-xs text-white font-semibold rounded-md backdrop-blur-sm border border-white/30'
-                : 'px-2 py-0.5 bg-cyan-50 text-xs text-cyan-700 font-semibold rounded-md border border-cyan-100'
+                ? { background: 'rgba(255,255,255,0.15)', color: 'rgba(255,255,255,0.9)', border: '1px solid rgba(255,255,255,0.25)', backdropFilter: 'blur(4px)' }
+                : { background: 'rgba(129,140,248,0.12)', color: '#c4b5fd', border: '1px solid rgba(129,140,248,0.25)' }
             }
           >
             {tag}
@@ -95,10 +78,11 @@ const Websites: React.FC = () => {
         ))}
         {remainCount > 0 && (
           <span
-            className={
+            className="px-2 py-0.5 text-[11px] font-bold rounded-md"
+            style={
               light
-                ? 'px-2 py-0.5 bg-white/15 text-xs text-white/90 font-semibold rounded-md'
-                : 'px-2 py-0.5 bg-rose-50 text-xs text-rose-600 font-semibold rounded-md border border-rose-100'
+                ? { background: 'rgba(255,255,255,0.1)', color: 'rgba(255,255,255,0.8)' }
+                : { background: 'rgba(244,114,182,0.12)', color: '#f9a8d4', border: '1px solid rgba(244,114,182,0.25)' }
             }
           >
             +{remainCount}
@@ -115,9 +99,16 @@ const Websites: React.FC = () => {
           <span className="kira" />
           PROJECT ARCHIVE
         </div>
-        <h2 className="text-3xl font-black text-slate-800 mb-3 font-rounded">作品集</h2>
-        <div className="w-20 h-1 bg-gradient-to-r from-cyan-400 via-sky-400 to-pink-400 mx-auto rounded-full mb-4"></div>
-        <p className="text-slate-500 max-w-xl mx-auto text-sm font-medium">我用代码和热情构建的数字作品与应用</p>
+        <h2
+          className="text-3xl font-black font-rounded mb-3"
+          style={{ color: '#f0abfc', textShadow: '0 0 24px rgba(244,114,182,0.35)' }}
+        >
+          作品集
+        </h2>
+        <div className="section-divider w-20 mx-auto mb-4" />
+        <p className="max-w-xl mx-auto text-sm font-medium" style={{ color: '#a78bfa' }}>
+          我用代码和热情构建的数字作品与应用
+        </p>
       </motion.div>
 
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -129,23 +120,37 @@ const Websites: React.FC = () => {
             transition={{ delay: index * 0.08 }}
           >
             {project.image ? (
-              <div className="relative h-64 rounded-2xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 border border-white/40">
+              /* ─── Image card ─── */
+              <div
+                className="relative h-64 rounded-2xl overflow-hidden transition-all duration-300 group"
+                style={{
+                  border: '1px solid rgba(244,114,182,0.2)',
+                  boxShadow: '0 8px 32px rgba(124,58,237,0.14)',
+                }}
+              >
                 <img
                   src={project.image}
                   alt={project.title}
-                  className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/45 to-transparent"></div>
+                <div
+                  className="absolute inset-0"
+                  style={{ background: 'linear-gradient(to top, rgba(15,10,30,0.95) 0%, rgba(15,10,30,0.5) 40%, transparent 100%)' }}
+                />
 
-                <div className="absolute top-3 right-3 anime-sticker text-white/90 bg-white/20 border-white/40">NEW DROP</div>
+                <div className="absolute top-3 right-3 anime-badge">
+                  <span className="kira" style={{ width: '6px', height: '6px' }} />
+                  NEW
+                </div>
 
                 <div className="absolute bottom-0 left-0 right-0 p-5">
                   <h3 className="text-lg font-black text-white mb-1">{project.title}</h3>
-                  <div className="relative group mb-3">
-                    <p className="text-white/80 text-sm line-clamp-2">
-                      {project.description}
-                    </p>
-                    <div className="pointer-events-none absolute left-0 top-full mt-2 w-64 rounded-lg bg-slate-900/95 px-3 py-2 text-xs text-white shadow-lg opacity-0 translate-y-1 transition-all duration-200 group-hover:opacity-100 group-hover:translate-y-0">
+                  <div className="relative group/desc mb-3">
+                    <p className="text-white/75 text-sm line-clamp-2">{project.description}</p>
+                    <div
+                      className="pointer-events-none absolute left-0 top-full mt-2 w-64 rounded-lg px-3 py-2 text-xs shadow-lg opacity-0 translate-y-1 transition-all duration-200 group-hover/desc:opacity-100 group-hover/desc:translate-y-0 z-20"
+                      style={{ background: 'rgba(15,10,30,0.95)', color: '#e2d9f3', border: '1px solid rgba(244,114,182,0.25)' }}
+                    >
                       {project.description}
                     </div>
                   </div>
@@ -157,32 +162,46 @@ const Websites: React.FC = () => {
                       href={project.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 text-white/85 hover:text-pink-200 text-sm font-semibold transition-colors"
+                      className="inline-flex items-center gap-1.5 text-sm font-bold transition-colors"
+                      style={{ color: '#f9a8d4' }}
+                      onMouseEnter={(e) => (e.currentTarget.style.color = '#22d3ee')}
+                      onMouseLeave={(e) => (e.currentTarget.style.color = '#f9a8d4')}
                     >
-                      <ExternalLink size={14} /> 查看项目
+                      <ExternalLink size={13} /> 查看项目
                     </a>
                   )}
                 </div>
               </div>
             ) : (
-              <div className="glass-panel p-5 rounded-2xl border border-white/80 hover:shadow-md transition-all duration-300 h-full flex flex-col">
+              /* ─── Glass card ─── */
+              <div className="glass-panel p-5 rounded-2xl h-full flex flex-col">
                 <div className="flex items-center justify-between mb-4">
                   <div
-                    className={`w-12 h-12 rounded-xl bg-gradient-to-br ${gradients[index % gradients.length]} flex items-center justify-center text-white shadow-md`}
+                    className="w-12 h-12 rounded-xl flex items-center justify-center text-white"
+                    style={{
+                      background: iconGradients[index % iconGradients.length],
+                      boxShadow: '0 4px 16px rgba(244,114,182,0.25)',
+                    }}
                   >
                     {project.icon ? getProjectIcon(project.icon) : (
                       <span className="text-xl font-black">{project.title.charAt(0).toUpperCase()}</span>
                     )}
                   </div>
-                  <span className="anime-sticker">二次元企划</span>
+                  <span className="anime-badge">
+                    <span className="kira" style={{ width: '6px', height: '6px' }} />
+                    二次元企划
+                  </span>
                 </div>
 
-                <h3 className="text-lg font-black text-slate-800 mb-2">{project.title}</h3>
-                <div className="relative group mb-4 flex-1">
-                  <p className="text-slate-500 text-sm leading-relaxed line-clamp-2">
+                <h3 className="text-lg font-black mb-2" style={{ color: '#f0e6ff' }}>{project.title}</h3>
+                <div className="relative group/desc mb-4 flex-1">
+                  <p className="text-sm leading-relaxed line-clamp-2" style={{ color: '#a78bfa' }}>
                     {project.description}
                   </p>
-                  <div className="pointer-events-none absolute left-0 top-full mt-2 w-64 rounded-lg bg-white px-3 py-2 text-xs text-slate-700 shadow-lg border border-slate-200 opacity-0 translate-y-1 transition-all duration-200 group-hover:opacity-100 group-hover:translate-y-0">
+                  <div
+                    className="pointer-events-none absolute left-0 top-full mt-2 w-64 rounded-lg px-3 py-2 text-xs shadow-lg opacity-0 translate-y-1 transition-all duration-200 group-hover/desc:opacity-100 group-hover/desc:translate-y-0 z-20"
+                    style={{ background: 'rgba(15,10,30,0.95)', color: '#e2d9f3', border: '1px solid rgba(244,114,182,0.25)' }}
+                  >
                     {project.description}
                   </div>
                 </div>
@@ -194,9 +213,12 @@ const Websites: React.FC = () => {
                     href={project.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-cyan-600 hover:text-pink-500 text-sm font-semibold transition-colors"
+                    className="inline-flex items-center gap-1.5 text-sm font-bold transition-colors"
+                    style={{ color: '#f9a8d4' }}
+                    onMouseEnter={(e) => (e.currentTarget.style.color = '#22d3ee')}
+                    onMouseLeave={(e) => (e.currentTarget.style.color = '#f9a8d4')}
                   >
-                    <ExternalLink size={14} /> 查看项目
+                    <ExternalLink size={13} /> 查看项目
                   </a>
                 )}
               </div>
@@ -207,10 +229,13 @@ const Websites: React.FC = () => {
 
       {PROJECTS.length === 0 && (
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center py-20">
-          <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-slate-100 flex items-center justify-center text-slate-300">
+          <div
+            className="w-20 h-20 mx-auto mb-6 rounded-full flex items-center justify-center"
+            style={{ background: 'rgba(167,139,250,0.1)', border: '1px solid rgba(167,139,250,0.2)', color: '#a78bfa' }}
+          >
             <Box size={40} />
           </div>
-          <p className="text-slate-400 font-medium">暂无作品</p>
+          <p className="font-medium" style={{ color: '#a78bfa' }}>暂无作品</p>
         </motion.div>
       )}
     </section>

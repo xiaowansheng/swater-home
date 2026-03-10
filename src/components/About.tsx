@@ -23,35 +23,45 @@ const getSkillIcon = (name: string) => {
   switch (name) {
     case '前端':
     case 'Frontend':
-      return <Palette size={16} />;
+      return <Palette size={15} />;
     case '后端':
     case 'Backend':
-      return <Terminal size={16} />;
+      return <Terminal size={15} />;
     case 'React':
-      return <Code size={16} />;
+      return <Code size={15} />;
     case '咖啡':
     case 'Coffee':
     case 'Java':
-      return <Coffee size={16} />;
+      return <Coffee size={15} />;
     case 'Go':
     case 'Python':
-      return <Terminal size={16} />;
+      return <Terminal size={15} />;
     case 'TypeScript':
-      return <FileCode size={16} />;
+      return <FileCode size={15} />;
     case 'Vue':
-      return <Layers size={16} />;
+      return <Layers size={15} />;
     default:
-      return <Code size={16} />;
+      return <Code size={15} />;
   }
 };
 
 const getSkillLevelLabel = (level: number) => {
-  if (level >= 90) return '精通';
-  if (level >= 75) return '熟练';
-  if (level >= 60) return '掌握';
-  if (level >= 40) return '入门';
-  return '认识';
+  if (level >= 90) return 'MASTER';
+  if (level >= 75) return 'PRO';
+  if (level >= 60) return 'ADV';
+  if (level >= 40) return 'MID';
+  return 'INIT';
 };
+
+/* Skill bar gradient by index */
+const skillGradients = [
+  'linear-gradient(90deg, #f472b6, #c084fc)',
+  'linear-gradient(90deg, #818cf8, #38bdf8)',
+  'linear-gradient(90deg, #34d399, #22d3ee)',
+  'linear-gradient(90deg, #fb923c, #f472b6)',
+  'linear-gradient(90deg, #a78bfa, #818cf8)',
+  'linear-gradient(90deg, #22d3ee, #34d399)',
+];
 
 const SocialBtn: React.FC<{ icon: React.ReactNode; href: string; label: string; platform: string }> = ({
   icon,
@@ -77,6 +87,29 @@ const SocialBtn: React.FC<{ icon: React.ReactNode; href: string; label: string; 
   );
 };
 
+/* Section card header */
+const CardHeader: React.FC<{ icon: React.ReactNode; title: string; color?: string }> = ({
+  icon,
+  title,
+  color = 'rgba(244,114,182,0.18)',
+}) => (
+  <div className="flex items-center gap-2.5 mb-4">
+    <div
+      className="p-1.5 rounded-lg flex-shrink-0"
+      style={{ background: color, boxShadow: '0 0 12px rgba(244,114,182,0.2)' }}
+    >
+      {icon}
+    </div>
+    <h3
+      className="text-sm font-rounded font-black tracking-wide"
+      style={{ color: '#f0abfc', textShadow: '0 0 12px rgba(244,114,182,0.3)' }}
+    >
+      {title}
+    </h3>
+    <div className="flex-1 h-px" style={{ background: 'linear-gradient(90deg, rgba(244,114,182,0.4), transparent)' }} />
+  </div>
+);
+
 const About: React.FC = () => {
   const { hero, profile, statusSnapshot, capabilities, learning } = ABOUT_CONFIG;
   const configuredSocials = (SITE_CONFIG?.socials ?? {}) as Record<string, string>;
@@ -101,21 +134,40 @@ const About: React.FC = () => {
 
   return (
     <section className="min-h-screen pt-20 pb-8 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
+      {/* ── Hero ── */}
       <motion.div
-        initial={{ opacity: 0, y: 30 }}
+        initial={{ opacity: 0, y: 32 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
+        transition={{ duration: 0.65 }}
         className="text-center mb-10"
       >
-        <div className="anime-sticker mx-auto w-fit mb-3">
+        <div className="anime-sticker mx-auto w-fit mb-4">
           <span className="kira" />
           CHARACTER FILE
         </div>
 
-        <div className="relative w-fit mx-auto mb-4">
-          <div className="absolute -inset-3 bg-gradient-to-tr from-cyan-300 via-sky-300 to-pink-300 rounded-full opacity-25 blur-2xl animate-pulse"></div>
-          <div className="relative w-24 h-24 sm:w-28 sm:h-28 bg-white p-1 rounded-full shadow-xl border-4 border-white overflow-hidden group">
-            <div className="w-full h-full rounded-full overflow-hidden bg-gradient-to-br from-cyan-50 to-pink-50">
+        {/* Avatar */}
+        <div className="relative w-fit mx-auto mb-5">
+          {/* Outer glow ring */}
+          <div
+            className="absolute -inset-4 rounded-full opacity-60"
+            style={{
+              background: 'conic-gradient(from 0deg, #f472b6, #818cf8, #22d3ee, #34d399, #f472b6)',
+              filter: 'blur(10px)',
+              animation: 'holo-shift 4s linear infinite',
+              backgroundSize: '200% 200%',
+            }}
+          />
+          {/* Ring border */}
+          <div
+            className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-full p-[3px]"
+            style={{
+              background: 'linear-gradient(135deg, #f472b6, #818cf8, #22d3ee)',
+              backgroundSize: '200% 200%',
+              animation: 'holo-shift 4s linear infinite',
+            }}
+          >
+            <div className="w-full h-full rounded-full overflow-hidden bg-slate-900 group">
               <img
                 src={hero.identity.avatarUrl}
                 alt="Avatar"
@@ -125,38 +177,66 @@ const About: React.FC = () => {
           </div>
           {isValidString(hero.identity.rarity) && (
             <motion.span
-              animate={{ y: [0, -3, 0] }}
+              animate={{ y: [0, -4, 0] }}
               transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
-              className="absolute -bottom-1 -right-2 bg-emerald-50 text-emerald-700 text-[11px] font-semibold px-2.5 py-1 rounded-full shadow-sm border border-emerald-200 inline-flex items-center gap-1"
+              className="absolute -bottom-2 -right-2 text-[11px] font-black px-2.5 py-1 rounded-full inline-flex items-center gap-1"
+              style={{
+                background: 'rgba(15,10,35,0.9)',
+                border: '1px solid rgba(52,211,153,0.5)',
+                color: '#34d399',
+                boxShadow: '0 0 10px rgba(52,211,153,0.3)',
+                fontFamily: 'Orbitron, sans-serif',
+                fontSize: '9px',
+              }}
             >
-              <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500" />
+              <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-400" style={{ boxShadow: '0 0 6px #34d399' }} />
               {hero.identity.rarity}
             </motion.span>
           )}
         </div>
 
-        <h1 className="text-3xl md:text-4xl font-rounded font-black text-slate-800 mb-2">
-          {hero.identity.nickname}
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-sky-400 to-pink-500">{hero.identity.suffix}</span>
+        {/* Name */}
+        <h1 className="text-3xl md:text-4xl font-rounded font-black mb-2">
+          <span style={{ color: '#f0e6ff' }}>{hero.identity.nickname}</span>
+          <span
+            style={{
+              background: 'linear-gradient(135deg, #f472b6, #818cf8, #22d3ee)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundSize: '200% 200%',
+              animation: 'holo-shift 4s linear infinite',
+            }}
+          >
+            {hero.identity.suffix}
+          </span>
         </h1>
-        <p className="text-sm sm:text-base text-slate-600 font-medium max-w-2xl mx-auto leading-relaxed mb-4">{hero.identity.title}</p>
+        <p className="text-sm sm:text-base font-medium max-w-2xl mx-auto leading-relaxed mb-5" style={{ color: '#a78bfa' }}>
+          {hero.identity.title}
+        </p>
 
+        {/* Tags */}
         <div className="flex items-center justify-center gap-2 mb-6 flex-wrap">
-          {isValidArray(hero.identity.tags) && hero.identity.tags.map((tag, index) => {
-            const colors = [
-              "bg-cyan-50 text-cyan-700 border-cyan-100",
-              "bg-sky-50 text-sky-700 border-sky-100",
-              "bg-pink-50 text-pink-700 border-pink-100",
-            ];
-            const colorClass = colors[index % colors.length];
-            return (
-              <span key={index} className={`text-xs font-semibold px-3 py-1 rounded-full border ${colorClass}`}>
-                {tag}
-              </span>
-            );
-          })}
+          {isValidArray(hero.identity.tags) &&
+            hero.identity.tags.map((tag, index) => {
+              const tagStyles = [
+                { bg: 'rgba(244,114,182,0.12)', border: 'rgba(244,114,182,0.35)', color: '#f9a8d4' },
+                { bg: 'rgba(129,140,248,0.12)', border: 'rgba(129,140,248,0.35)', color: '#c4b5fd' },
+                { bg: 'rgba(34,211,238,0.12)', border: 'rgba(34,211,238,0.35)', color: '#67e8f9' },
+              ];
+              const s = tagStyles[index % tagStyles.length];
+              return (
+                <span
+                  key={index}
+                  className="text-xs font-bold px-3 py-1 rounded-full"
+                  style={{ background: s.bg, border: `1px solid ${s.border}`, color: s.color }}
+                >
+                  {tag}
+                </span>
+              );
+            })}
         </div>
 
+        {/* Social chips */}
         <div className="flex flex-wrap justify-center gap-2">
           {displaySocials.map((social) => (
             <SocialBtn
@@ -170,24 +250,24 @@ const About: React.FC = () => {
         </div>
       </motion.div>
 
-      <div className="space-y-5 sm:space-y-6">
+      {/* ── Cards ── */}
+      <div className="space-y-5">
+        {/* About */}
         {(isValidString(profile.summary) || isValidArray(cleanDescriptions)) && (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="glass-panel p-5 rounded-2xl border border-white/80"
+            className="glass-panel p-5 rounded-2xl"
           >
-            <div className="flex items-center gap-2 mb-4">
-              <div className="p-1.5 bg-cyan-100 rounded-lg text-cyan-500">
-                <Quote size={16} />
-              </div>
-              <h3 className="text-base font-black text-slate-800">关于我</h3>
-            </div>
-
-            <div className="space-y-2 text-slate-600 leading-relaxed text-sm sm:text-base">
+            <CardHeader
+              icon={<Quote size={15} style={{ color: '#f472b6' }} />}
+              title="关于我"
+              color="rgba(244,114,182,0.15)"
+            />
+            <div className="space-y-2 leading-relaxed text-sm sm:text-base" style={{ color: '#c4b5fd' }}>
               {isValidString(profile.summary) && (
-                <p className="text-slate-700 font-medium">{profile.summary}</p>
+                <p className="font-semibold" style={{ color: '#e2d9f3' }}>{profile.summary}</p>
               )}
               {cleanDescriptions.map((desc, index) => (
                 <p key={index}>{desc}</p>
@@ -196,152 +276,211 @@ const About: React.FC = () => {
           </motion.div>
         )}
 
+        {/* Status */}
         {(isValidString(statusSnapshot.occupation) ||
           isValidString(statusSnapshot.location) ||
           isValidString(statusSnapshot.currentQuest) ||
           isValidArray(statusSnapshot.metrics)) && (
-          <div className="space-y-4">
-            {(isValidString(statusSnapshot.occupation) ||
-              isValidString(statusSnapshot.industry) ||
-              isValidString(statusSnapshot.location) ||
-              isValidString(statusSnapshot.currentQuest)) && (
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.15 }}
-                className="glass-panel p-5 rounded-2xl border-l-4 border-cyan-400"
-              >
-                <div className="flex items-center gap-2 mb-4">
-                  <div className="p-1.5 bg-cyan-100 rounded-lg text-cyan-500">
-                    <Compass size={16} />
-                  </div>
-                  <h3 className="text-base font-black text-slate-800">当前状态</h3>
-                </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-                  {isValidString(statusSnapshot.occupation) && (
-                    <div className="rounded-xl p-3 bg-white/75 border border-white/85">
-                      <p className="text-xs font-semibold text-slate-500 mb-1">职业</p>
-                      <p className="font-bold text-slate-700 text-sm">{statusSnapshot.occupation}</p>
+            <div className="space-y-4">
+              {(isValidString(statusSnapshot.occupation) ||
+                isValidString(statusSnapshot.industry) ||
+                isValidString(statusSnapshot.location) ||
+                isValidString(statusSnapshot.currentQuest)) && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.15 }}
+                    className="glass-panel p-5 rounded-2xl"
+                    style={{ borderLeft: '3px solid #f472b6' }}
+                  >
+                    <CardHeader
+                      icon={<Compass size={15} style={{ color: '#818cf8' }} />}
+                      title="当前状态"
+                      color="rgba(129,140,248,0.15)"
+                    />
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                      {isValidString(statusSnapshot.occupation) && (
+                        <div
+                          className="rounded-xl p-3"
+                          style={{ background: 'rgba(244,114,182,0.07)', border: '1px solid rgba(244,114,182,0.15)' }}
+                        >
+                          <p className="text-xs font-bold mb-1" style={{ color: '#a78bfa' }}>职业</p>
+                          <p className="font-black text-sm" style={{ color: '#f0e6ff' }}>{statusSnapshot.occupation}</p>
+                        </div>
+                      )}
+                      {isValidString(statusSnapshot.industry) && (
+                        <div
+                          className="rounded-xl p-3"
+                          style={{ background: 'rgba(129,140,248,0.07)', border: '1px solid rgba(129,140,248,0.15)' }}
+                        >
+                          <p className="text-xs font-bold mb-1" style={{ color: '#a78bfa' }}>行业</p>
+                          <p className="font-black text-sm" style={{ color: '#f0e6ff' }}>{statusSnapshot.industry}</p>
+                        </div>
+                      )}
+                      {isValidString(statusSnapshot.location) && (
+                        <div
+                          className="rounded-xl p-3"
+                          style={{ background: 'rgba(34,211,238,0.07)', border: '1px solid rgba(34,211,238,0.15)' }}
+                        >
+                          <p className="text-xs font-bold mb-1 flex items-center gap-1.5" style={{ color: '#a78bfa' }}>
+                            <MapPin size={11} style={{ color: '#f472b6' }} />
+                            位置
+                          </p>
+                          <p className="font-black text-sm" style={{ color: '#f0e6ff' }}>{statusSnapshot.location}</p>
+                        </div>
+                      )}
                     </div>
-                  )}
-                  {isValidString(statusSnapshot.industry) && (
-                    <div className="rounded-xl p-3 bg-white/75 border border-white/85">
-                      <p className="text-xs font-semibold text-slate-500 mb-1">行业</p>
-                      <p className="font-bold text-slate-700 text-sm">{statusSnapshot.industry}</p>
-                    </div>
-                  )}
-                  {isValidString(statusSnapshot.location) && (
-                    <div className="rounded-xl p-3 bg-white/75 border border-white/85">
-                      <p className="text-xs font-semibold text-slate-500 mb-1 flex items-center gap-1.5">
-                        <MapPin size={12} className="text-rose-500" />
-                        位置
-                      </p>
-                      <p className="font-bold text-slate-700 text-sm">{statusSnapshot.location}</p>
-                    </div>
-                  )}
-                </div>
-                {isValidString(statusSnapshot.currentQuest) && (
-                  <div className="mt-3 rounded-xl p-3 bg-white/75 border border-white/85">
-                    <p className="text-xs font-semibold text-slate-500 mb-1 flex items-center gap-1.5">
-                      <Target size={12} className="text-rose-500" />
-                      当前目标
-                    </p>
-                    <p className="font-bold text-slate-700 text-sm sm:text-base">{statusSnapshot.currentQuest}</p>
-                  </div>
+                    {isValidString(statusSnapshot.currentQuest) && (
+                      <div
+                        className="mt-3 rounded-xl p-3"
+                        style={{ background: 'rgba(244,114,182,0.07)', border: '1px solid rgba(244,114,182,0.18)' }}
+                      >
+                        <p className="text-xs font-bold mb-1 flex items-center gap-1.5" style={{ color: '#a78bfa' }}>
+                          <Target size={11} style={{ color: '#f472b6' }} />
+                          当前目标
+                        </p>
+                        <p className="font-black text-sm sm:text-base" style={{ color: '#f0e6ff' }}>
+                          {statusSnapshot.currentQuest}
+                        </p>
+                      </div>
+                    )}
+                  </motion.div>
                 )}
-              </motion.div>
-            )}
 
-            {isValidArray(statusSnapshot.metrics) && (
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 }}
-                className="glass-panel p-5 rounded-2xl border border-white/80"
-              >
-                <div className="flex items-center gap-2 mb-4">
-                  <div className="p-1.5 bg-sky-100 rounded-lg text-sky-500">
-                    <Zap size={16} />
+              {/* Metrics */}
+              {isValidArray(statusSnapshot.metrics) && (
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.2 }}
+                  className="glass-panel p-5 rounded-2xl"
+                >
+                  <CardHeader
+                    icon={<Zap size={15} style={{ color: '#22d3ee' }} />}
+                    title="关键指标"
+                    color="rgba(34,211,238,0.15)"
+                  />
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                    {statusSnapshot.metrics.map((metric, i) => {
+                      const colors = ['#f472b6', '#818cf8', '#22d3ee', '#34d399', '#fb923c', '#a78bfa'];
+                      const c = colors[i % colors.length];
+                      return (
+                        <div
+                          key={metric.label}
+                          className="rounded-xl p-3"
+                          style={{
+                            background: `${c}0d`,
+                            border: `1px solid ${c}26`,
+                          }}
+                        >
+                          <p className="text-xs font-bold mb-1" style={{ color: '#a78bfa' }}>{metric.label}</p>
+                          <p className="text-base font-black" style={{ color: c, textShadow: `0 0 10px ${c}66` }}>
+                            {metric.value}
+                          </p>
+                        </div>
+                      );
+                    })}
                   </div>
-                  <h3 className="text-base font-black text-slate-800">关键指标</h3>
-                </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-                  {statusSnapshot.metrics.map((metric) => (
-                    <div key={metric.label} className="rounded-xl p-3 bg-white/75 border border-white/85">
-                      <p className="text-xs font-semibold text-slate-500 mb-1">{metric.label}</p>
-                      <p className={`text-base font-black ${metric.textColor}`}>{metric.value}</p>
-                    </div>
-                  ))}
-                </div>
-              </motion.div>
-            )}
-          </div>
-        )}
+                </motion.div>
+              )}
+            </div>
+          )}
 
+        {/* Skills */}
         {isValidArray(capabilities.skills) && (
-          <div className="grid grid-cols-1 gap-4">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="glass-panel p-5 rounded-2xl border border-white/80"
-            >
-              <div className="flex items-center gap-2 mb-4">
-                <div className="p-1.5 bg-sky-100 rounded-lg text-sky-500">
-                  <Zap size={16} />
-                </div>
-                <h3 className="font-black text-slate-700 text-base">核心能力</h3>
-              </div>
-              <div className="space-y-3">
-                {capabilities.skills.map((skill, index) => (
-                  <div key={skill.name} className="grid grid-cols-[auto,minmax(0,1fr)] items-center gap-2 sm:gap-3">
-                    <span className={`p-1.5 rounded-lg text-white ${skill.color} shadow-sm flex-shrink-0`}>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.25 }}
+            className="glass-panel p-5 rounded-2xl"
+          >
+            <CardHeader
+              icon={<Zap size={15} style={{ color: '#f472b6' }} />}
+              title="核心能力"
+              color="rgba(244,114,182,0.15)"
+            />
+            <div className="space-y-4">
+              {capabilities.skills.map((skill, index) => {
+                const gradient = skillGradients[index % skillGradients.length];
+                return (
+                  <div key={skill.name} className="grid grid-cols-[auto,minmax(0,1fr)] items-center gap-3">
+                    <span
+                      className="p-1.5 rounded-lg flex-shrink-0 flex items-center justify-center"
+                      style={{
+                        background: gradient,
+                        boxShadow: `0 0 10px rgba(244,114,182,0.25)`,
+                        color: 'white',
+                      }}
+                    >
                       {getSkillIcon(skill.name)}
                     </span>
                     <div className="min-w-0">
-                      <div className="flex items-center justify-between text-xs sm:text-sm mb-1">
-                        <span className="font-bold text-slate-700 truncate">{skill.name}</span>
-                        <span className="text-slate-500 font-semibold">{getSkillLevelLabel(skill.level)}</span>
+                      <div className="flex items-center justify-between text-xs mb-1.5">
+                        <span className="font-bold truncate" style={{ color: '#f0e6ff' }}>{skill.name}</span>
+                        <span
+                          className="font-black text-[10px] px-2 py-0.5 rounded-full ml-2 flex-shrink-0"
+                          style={{
+                            background: 'rgba(244,114,182,0.12)',
+                            border: '1px solid rgba(244,114,182,0.3)',
+                            color: '#f9a8d4',
+                            fontFamily: 'Orbitron, sans-serif',
+                          }}
+                        >
+                          {getSkillLevelLabel(skill.level)}
+                        </span>
                       </div>
-                      <div className="h-2 bg-slate-100 rounded-full overflow-hidden">
+                      <div className="skill-bar-track">
                         <motion.div
                           initial={{ width: 0 }}
                           whileInView={{ width: `${skill.level}%` }}
                           viewport={{ once: true }}
-                          transition={{ duration: 1, delay: 0.1 + index * 0.08 }}
-                          className={`h-full ${skill.color} rounded-full`}
+                          transition={{ duration: 1.2, delay: 0.1 + index * 0.1, ease: 'easeOut' }}
+                          className="skill-bar-fill"
+                          style={{ background: gradient }}
                         />
                       </div>
                     </div>
                   </div>
-                ))}
-              </div>
-            </motion.div>
-          </div>
+                );
+              })}
+            </div>
+          </motion.div>
         )}
 
+        {/* Learning */}
         {isValidArray(learning.tags) && (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
-            className="glass-panel p-5 rounded-2xl border border-white/80"
+            className="glass-panel p-5 rounded-2xl"
           >
-            <div className="flex items-center gap-2 mb-4">
-              <div className="p-1.5 bg-amber-100 rounded-lg text-amber-500">
-                <Rocket size={16} />
-              </div>
-              <h3 className="font-black text-slate-700 text-base">正在学习</h3>
-            </div>
+            <CardHeader
+              icon={<Rocket size={15} style={{ color: '#fb923c' }} />}
+              title="正在学习"
+              color="rgba(251,146,60,0.15)"
+            />
             <div className="flex flex-wrap gap-2">
-              {learning.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="px-3 py-1.5 bg-amber-50 rounded-lg text-sm font-semibold text-amber-700 border border-amber-100 hover:bg-amber-100 transition-colors cursor-default"
-                >
-                  {tag}
-                </span>
-              ))}
+              {learning.tags.map((tag, i) => {
+                const tagColors = [
+                  { bg: 'rgba(244,114,182,0.12)', border: 'rgba(244,114,182,0.3)', color: '#f9a8d4' },
+                  { bg: 'rgba(129,140,248,0.12)', border: 'rgba(129,140,248,0.3)', color: '#c4b5fd' },
+                  { bg: 'rgba(34,211,238,0.12)', border: 'rgba(34,211,238,0.3)', color: '#67e8f9' },
+                  { bg: 'rgba(52,211,153,0.12)', border: 'rgba(52,211,153,0.3)', color: '#86efac' },
+                  { bg: 'rgba(251,146,60,0.12)', border: 'rgba(251,146,60,0.3)', color: '#fdba74' },
+                ];
+                const s = tagColors[i % tagColors.length];
+                return (
+                  <motion.span
+                    key={tag}
+                    whileHover={{ scale: 1.05, y: -2 }}
+                    className="px-3 py-1.5 rounded-lg text-sm font-bold cursor-default transition-colors"
+                    style={{ background: s.bg, border: `1px solid ${s.border}`, color: s.color }}
+                  >
+                    {tag}
+                  </motion.span>
+                );
+              })}
             </div>
           </motion.div>
         )}

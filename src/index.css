@@ -1,46 +1,105 @@
-@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Zen+Maru+Gothic:wght@400;500;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700;800;900&family=Quicksand:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700;900&family=Orbitron:wght@400;700;900&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   CSS VARIABLES — ANIME COLOR SYSTEM
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 :root {
-  --primary-color: #22d3ee;
-  --secondary-color: #38bdf8;
-  --accent-color: #fb7185;
-  --surface-white: rgba(255, 255, 255, 0.72);
-  --surface-border: rgba(255, 255, 255, 0.82);
+  --primary: #f472b6;       /* hot pink */
+  --primary-glow: rgba(244, 114, 182, 0.55);
+  --secondary: #818cf8;     /* lavender */
+  --secondary-glow: rgba(129, 140, 248, 0.5);
+  --accent: #34d399;        /* mint */
+  --accent-glow: rgba(52, 211, 153, 0.45);
+  --cyan: #22d3ee;
+  --cyan-glow: rgba(34, 211, 238, 0.45);
+  --surface: rgba(255, 248, 255, 0.78);
+  --surface-border: rgba(244, 114, 182, 0.28);
+  --surface-glow: rgba(244, 114, 182, 0.12);
+  --text-primary: #1e1b4b;
+  --text-secondary: #5b21b6;
+  --text-muted: #7c3aed;
+
+  /* Anime-specific tokens */
+  --moe-shadow: 0 0 20px rgba(244, 114, 182, 0.35), 0 0 40px rgba(167, 139, 250, 0.2);
+  --holo-border: linear-gradient(135deg, #f472b6, #818cf8, #22d3ee, #34d399, #f472b6);
+  --card-shadow: 0 8px 32px rgba(124, 58, 237, 0.14), 0 2px 8px rgba(244, 114, 182, 0.1);
 }
 
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   BASE
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 * {
   box-sizing: border-box;
 }
 
 body {
   margin: 0;
-  font-family: 'Baloo 2', 'Zen Maru Gothic', sans-serif;
-  color: #1e293b;
-  background-color: #fff7fb;
+  font-family: 'M PLUS Rounded 1c', 'Noto Sans JP', 'Quicksand', sans-serif;
+  color: var(--text-primary);
+  background-color: #0f0a1e;
   background-image:
-    radial-gradient(circle at 15% 10%, rgba(56, 189, 248, 0.24), transparent 36%),
-    radial-gradient(circle at 85% 8%, rgba(251, 113, 133, 0.26), transparent 34%),
-    radial-gradient(circle at 80% 88%, rgba(45, 212, 191, 0.2), transparent 40%),
-    linear-gradient(145deg, #fff7fb 0%, #fef9ff 45%, #f3fcff 100%);
+    radial-gradient(ellipse at 15% 0%, rgba(167, 139, 250, 0.35) 0%, transparent 50%),
+    radial-gradient(ellipse at 85% 5%, rgba(244, 114, 182, 0.3) 0%, transparent 45%),
+    radial-gradient(ellipse at 50% 100%, rgba(34, 211, 238, 0.22) 0%, transparent 55%),
+    radial-gradient(ellipse at 90% 60%, rgba(52, 211, 153, 0.15) 0%, transparent 40%),
+    linear-gradient(160deg, #0f0a1e 0%, #1a0a2e 40%, #0d1a2d 100%);
   background-attachment: fixed;
   overflow-x: hidden;
 }
 
+/* Star-field dot pattern */
 body::before {
   content: '';
   position: fixed;
   inset: 0;
   pointer-events: none;
-  z-index: -1;
-  opacity: 0.3;
-  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.66) 1px, transparent 1px);
-  background-size: 20px 20px;
+  z-index: 0;
+  background-image:
+    radial-gradient(circle, rgba(255, 255, 255, 0.85) 1px, transparent 1px),
+    radial-gradient(circle, rgba(244, 114, 182, 0.55) 1px, transparent 1px),
+    radial-gradient(circle, rgba(167, 139, 250, 0.5) 1px, transparent 1px);
+  background-size: 80px 80px, 130px 130px, 200px 200px;
+  background-position: 0 0, 40px 60px, 100px 20px;
+  animation: star-drift 60s linear infinite;
 }
 
+/* Scan-line overlay */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 3px,
+    rgba(0, 0, 0, 0.04) 3px,
+    rgba(0, 0, 0, 0.04) 6px
+  );
+  animation: scan-drift 8s linear infinite;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   CUSTOM SCROLLBAR
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: rgba(15, 10, 30, 0.5); }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #f472b6, #818cf8);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #e879f9, #38bdf8);
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   SAKURA PETALS
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 .sakura-container {
   position: fixed;
   inset: 0;
@@ -54,124 +113,217 @@ body::before {
   top: -10%;
   border-radius: 999px 999px 999px 0;
   transform: rotate(45deg);
-  background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.95), rgba(251, 113, 133, 0.75) 60%, rgba(244, 63, 94, 0.65));
-  box-shadow: 0 2px 8px rgba(251, 113, 133, 0.28);
+  background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.9), rgba(244, 114, 182, 0.8) 60%, rgba(216, 27, 96, 0.6));
+  box-shadow: 0 0 6px rgba(244, 114, 182, 0.5), 0 0 12px rgba(244, 114, 182, 0.25);
   animation: fall linear forwards;
 }
 
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-}
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-::-webkit-scrollbar-thumb {
-  background: rgba(56, 189, 248, 0.35);
-  border-radius: 999px;
-  border: 2px solid transparent;
-  background-clip: content-box;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(251, 113, 133, 0.48);
-  border: 2px solid transparent;
-  background-clip: content-box;
-}
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   TYPOGRAPHY
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.font-rounded { font-family: 'M PLUS Rounded 1c', sans-serif; }
+.font-jp     { font-family: 'Noto Sans JP', sans-serif; }
+.font-orb    { font-family: 'Orbitron', sans-serif; }
 
-.font-rounded {
-  font-family: 'Zen Maru Gothic', sans-serif;
-}
-
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   GLASS PANEL — ANIME DARK CARD
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 .glass-panel {
-  background: var(--surface-white);
-  backdrop-filter: blur(18px) saturate(180%);
-  -webkit-backdrop-filter: blur(18px) saturate(180%);
-  border: 1px solid var(--surface-border);
-  box-shadow:
-    0 12px 40px rgba(14, 116, 144, 0.08),
-    inset 0 1px 0 rgba(255, 255, 255, 0.8);
-  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  background: rgba(22, 10, 45, 0.72);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid rgba(244, 114, 182, 0.22);
+  box-shadow: var(--card-shadow), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  position: relative;
+  overflow: hidden;
 }
+
+.glass-panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(244, 114, 182, 0.04) 0%, transparent 50%, rgba(129, 140, 248, 0.04) 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.glass-panel > * { position: relative; z-index: 1; }
 
 .glass-panel:hover {
-  transform: translateY(-2px);
-  border-color: rgba(251, 113, 133, 0.55);
+  transform: translateY(-3px);
+  border-color: rgba(244, 114, 182, 0.5);
   box-shadow:
-    0 16px 44px rgba(236, 72, 153, 0.12),
-    inset 0 1px 0 rgba(255, 255, 255, 0.92);
+    0 12px 40px rgba(244, 114, 182, 0.2),
+    0 0 0 1px rgba(244, 114, 182, 0.15),
+    var(--moe-shadow),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
+/* Holographic border variant */
+.glass-panel--holo {
+  border: 1.5px solid transparent;
+  background-clip: padding-box;
+  background-color: rgba(22, 10, 45, 0.78);
+  box-shadow: var(--moe-shadow), var(--card-shadow);
+}
+.glass-panel--holo::after {
+  content: '';
+  position: absolute;
+  inset: -1.5px;
+  border-radius: inherit;
+  background: var(--holo-border);
+  background-size: 300% 300%;
+  animation: holo-shift 4s linear infinite;
+  z-index: -1;
+  opacity: 0.7;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   ANIME GRID BACKGROUND
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 .anime-grid {
   position: fixed;
   inset: 0;
   pointer-events: none;
   z-index: 0;
   background-image:
-    linear-gradient(to right, rgba(56, 189, 248, 0.08) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(251, 113, 133, 0.08) 1px, transparent 1px);
-  background-size: 44px 44px;
-  mask-image: radial-gradient(circle at center, #000 32%, transparent 85%);
+    linear-gradient(to right, rgba(167, 139, 250, 0.07) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(244, 114, 182, 0.07) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse at center, #000 20%, transparent 80%);
 }
 
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   ANIME AURA BLOBS
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 .anime-aura {
   position: fixed;
   pointer-events: none;
-  filter: blur(40px);
+  filter: blur(70px);
   z-index: 0;
-  opacity: 0.55;
+  border-radius: 999px;
 }
 
 .anime-aura-cyan {
-  width: 260px;
-  height: 260px;
-  border-radius: 999px;
-  top: -40px;
-  right: 6vw;
-  background: rgba(34, 211, 238, 0.5);
-  animation: drift 12s ease-in-out infinite;
+  width: 350px;
+  height: 350px;
+  top: -60px;
+  right: 4vw;
+  background: radial-gradient(circle, rgba(129, 140, 248, 0.45), rgba(34, 211, 238, 0.2));
+  animation: drift 14s ease-in-out infinite;
 }
 
 .anime-aura-rose {
-  width: 320px;
-  height: 320px;
-  border-radius: 999px;
-  bottom: 8vh;
-  left: -80px;
-  background: rgba(251, 113, 133, 0.4);
-  animation: drift 14s ease-in-out infinite reverse;
+  width: 420px;
+  height: 420px;
+  bottom: 5vh;
+  left: -100px;
+  background: radial-gradient(circle, rgba(244, 114, 182, 0.38), rgba(167, 139, 250, 0.18));
+  animation: drift 18s ease-in-out infinite reverse;
 }
 
+.anime-aura-mint {
+  width: 280px;
+  height: 280px;
+  top: 40vh;
+  left: 50%;
+  transform: translateX(-50%);
+  background: radial-gradient(circle, rgba(52, 211, 153, 0.18), transparent 70%);
+  animation: drift 22s ease-in-out infinite 3s;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   ANIME STICKER / BADGE
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 .anime-sticker {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 4px 10px;
+  padding: 4px 12px;
   border-radius: 999px;
-  font-size: 12px;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-family: 'Orbitron', sans-serif;
+  color: #f0abfc;
+  border: 1px solid rgba(244, 114, 182, 0.45);
+  background: rgba(22, 10, 45, 0.8);
+  box-shadow: 0 0 12px rgba(244, 114, 182, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.anime-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 10px;
   font-weight: 700;
-  letter-spacing: 0.04em;
-  border: 1px solid rgba(255, 255, 255, 0.85);
-  background: linear-gradient(120deg, rgba(255, 255, 255, 0.8), rgba(240, 249, 255, 0.9));
-  box-shadow: 0 8px 24px rgba(56, 189, 248, 0.16);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-family: 'Orbitron', sans-serif;
+  background: linear-gradient(135deg, rgba(244, 114, 182, 0.18), rgba(129, 140, 248, 0.18));
+  border: 1px solid rgba(244, 114, 182, 0.38);
+  color: #f9a8d4;
+  box-shadow: 0 0 8px rgba(244, 114, 182, 0.15);
 }
 
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   KIRA STAR
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 .kira {
-  width: 12px;
-  height: 12px;
-  background: linear-gradient(135deg, #facc15, #f97316);
+  width: 10px;
+  height: 10px;
+  background: linear-gradient(135deg, #f9a8d4, #c084fc);
   clip-path: polygon(50% 0%, 62% 36%, 100% 50%, 62% 64%, 50% 100%, 38% 64%, 0% 50%, 38% 36%);
-  animation: twinkle 1.6s ease-in-out infinite;
+  animation: twinkle 1.8s ease-in-out infinite;
+  flex-shrink: 0;
 }
 
+.kira--gold {
+  background: linear-gradient(135deg, #fde68a, #f59e0b);
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   FLOAT RUNE
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 .float-rune {
   position: absolute;
-  font-family: 'Zen Maru Gothic', sans-serif;
-  font-weight: 700;
-  color: rgba(244, 114, 182, 0.45);
-  text-shadow: 0 4px 12px rgba(56, 189, 248, 0.2);
-  animation: floatY 5.8s ease-in-out infinite;
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  font-weight: 900;
+  color: rgba(167, 139, 250, 0.22);
+  text-shadow: 0 0 16px rgba(244, 114, 182, 0.3);
+  animation: floatY 6s ease-in-out infinite;
+  user-select: none;
+  pointer-events: none;
 }
 
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   SECTION HEADER DIVIDER
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.section-title {
+  position: relative;
+  display: inline-block;
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  font-weight: 900;
+  color: #f0abfc;
+  text-shadow: 0 0 20px rgba(244, 114, 182, 0.4);
+}
+
+.section-divider {
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #f472b6 20%, #818cf8 50%, #22d3ee 80%, transparent);
+  border-radius: 999px;
+  box-shadow: 0 0 6px rgba(244, 114, 182, 0.4);
+  animation: holo-shift 3s linear infinite;
+  background-size: 200% 100%;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   SOCIAL ICON BUTTONS
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 .social-icon {
   position: relative;
   display: inline-flex;
@@ -180,17 +332,15 @@ body::before {
   width: 42px;
   height: 42px;
   border-radius: 999px;
-  color: #0f172a;
-  border: 1px solid rgba(255, 255, 255, 0.9);
-  background: linear-gradient(140deg, rgba(255, 255, 255, 0.86), rgba(248, 250, 252, 0.72));
-  box-shadow:
-    0 10px 24px rgba(15, 23, 42, 0.09),
-    inset 0 1px 0 rgba(255, 255, 255, 0.95);
-  transition: transform 0.2s ease, box-shadow 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  color: #e2e8f0;
+  border: 1px solid rgba(244, 114, 182, 0.25);
+  background: rgba(22, 10, 45, 0.75);
+  box-shadow: 0 4px 16px rgba(244, 114, 182, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  transition: transform 0.22s ease, box-shadow 0.22s ease, color 0.22s ease, border-color 0.22s ease;
 }
 
 .social-icon:hover {
-  transform: translateY(-3px) scale(1.04);
+  transform: translateY(-3px) scale(1.08);
 }
 
 .social-icon::before {
@@ -199,264 +349,72 @@ body::before {
   inset: -6px;
   border-radius: inherit;
   opacity: 0;
-  filter: blur(10px);
-  transition: opacity 0.2s ease;
+  filter: blur(12px);
+  transition: opacity 0.22s ease;
   z-index: -1;
 }
+.social-icon:hover::before { opacity: 1; }
 
-.social-icon:hover::before {
-  opacity: 0.95;
-}
+/* Shared hover glow pattern */
+.social-icon--github:hover   { color: #e2e8f0; border-color: rgba(148,163,184,.6); box-shadow: 0 12px 28px rgba(148,163,184,.22), inset 0 1px 0 rgba(255,255,255,.1); }
+.social-icon--github::before { background: radial-gradient(circle, rgba(148,163,184,.5), transparent 70%); }
+.social-icon--twitter:hover  { color: #38bdf8; border-color: rgba(56,189,248,.6);  box-shadow: 0 12px 28px rgba(56,189,248,.22), inset 0 1px 0 rgba(255,255,255,.1); }
+.social-icon--twitter::before{ background: radial-gradient(circle, rgba(56,189,248,.5), transparent 70%); }
+.social-icon--gitee:hover    { color: #fb923c; border-color: rgba(251,146,60,.6);  box-shadow: 0 12px 28px rgba(249,115,22,.22),  inset 0 1px 0 rgba(255,255,255,.1); }
+.social-icon--gitee::before  { background: radial-gradient(circle, rgba(251,146,60,.5), transparent 70%); }
+.social-icon--qq:hover       { color: #22d3ee; border-color: rgba(34,211,238,.6);  box-shadow: 0 12px 28px rgba(6,182,212,.22),   inset 0 1px 0 rgba(255,255,255,.1); }
+.social-icon--qq::before     { background: radial-gradient(circle, rgba(34,211,238,.5), transparent 70%); }
+.social-icon--mail:hover     { color: #f472b6; border-color: rgba(244,114,182,.6); box-shadow: 0 12px 28px rgba(244,63,94,.22),  inset 0 1px 0 rgba(255,255,255,.1); }
+.social-icon--mail::before   { background: radial-gradient(circle, rgba(244,114,182,.5), transparent 70%); }
+.social-icon--linkedin:hover { color: #60a5fa; border-color: rgba(59,130,246,.6);  box-shadow: 0 12px 28px rgba(37,99,235,.22),  inset 0 1px 0 rgba(255,255,255,.1); }
+.social-icon--linkedin::before{ background: radial-gradient(circle, rgba(59,130,246,.5), transparent 70%); }
+.social-icon--youtube:hover  { color: #ef4444; border-color: rgba(248,113,113,.6); box-shadow: 0 12px 28px rgba(239,68,68,.22),  inset 0 1px 0 rgba(255,255,255,.1); }
+.social-icon--youtube::before{ background: radial-gradient(circle, rgba(248,113,113,.5), transparent 70%); }
+.social-icon--facebook:hover { color: #60a5fa; border-color: rgba(96,165,250,.6);  box-shadow: 0 12px 28px rgba(59,130,246,.22), inset 0 1px 0 rgba(255,255,255,.1); }
+.social-icon--facebook::before{ background: radial-gradient(circle, rgba(96,165,250,.5), transparent 70%); }
+.social-icon--twitch:hover   { color: #a78bfa; border-color: rgba(167,139,250,.6); box-shadow: 0 12px 28px rgba(139,92,246,.22), inset 0 1px 0 rgba(255,255,255,.1); }
+.social-icon--twitch::before { background: radial-gradient(circle, rgba(167,139,250,.5), transparent 70%); }
+.social-icon--tiktok:hover   { color: #cbd5e1; border-color: rgba(75,85,99,.6);    box-shadow: 0 12px 28px rgba(17,24,39,.32),   inset 0 1px 0 rgba(255,255,255,.1); }
+.social-icon--tiktok::before { background: radial-gradient(circle, rgba(75,85,99,.5), transparent 70%); }
+.social-icon--telegram:hover { color: #38bdf8; border-color: rgba(56,189,248,.6);  box-shadow: 0 12px 28px rgba(14,165,233,.22), inset 0 1px 0 rgba(255,255,255,.1); }
+.social-icon--telegram::before{ background: radial-gradient(circle, rgba(56,189,248,.5), transparent 70%); }
+.social-icon--discord:hover  { color: #818cf8; border-color: rgba(129,140,248,.6); box-shadow: 0 12px 28px rgba(99,102,241,.22), inset 0 1px 0 rgba(255,255,255,.1); }
+.social-icon--discord::before{ background: radial-gradient(circle, rgba(129,140,248,.5), transparent 70%); }
+.social-icon--reddit:hover   { color: #fb923c; border-color: rgba(251,146,60,.6);  box-shadow: 0 12px 28px rgba(249,115,22,.22), inset 0 1px 0 rgba(255,255,255,.1); }
+.social-icon--reddit::before { background: radial-gradient(circle, rgba(251,146,60,.5), transparent 70%); }
+.social-icon--whatsapp:hover { color: #4ade80; border-color: rgba(74,222,128,.6);  box-shadow: 0 12px 28px rgba(22,163,74,.22),  inset 0 1px 0 rgba(255,255,255,.1); }
+.social-icon--whatsapp::before{ background: radial-gradient(circle, rgba(74,222,128,.5), transparent 70%); }
+.social-icon--wechat:hover   { color: #4ade80; border-color: rgba(74,222,128,.6);  box-shadow: 0 12px 28px rgba(22,163,74,.22),  inset 0 1px 0 rgba(255,255,255,.1); }
+.social-icon--wechat::before { background: radial-gradient(circle, rgba(74,222,128,.5), transparent 70%); }
+.social-icon--weibo:hover    { color: #f472b6; border-color: rgba(244,114,182,.6); box-shadow: 0 12px 28px rgba(225,29,72,.22),  inset 0 1px 0 rgba(255,255,255,.1); }
+.social-icon--weibo::before  { background: radial-gradient(circle, rgba(244,114,182,.5), transparent 70%); }
+.social-icon--bilibili:hover { color: #22d3ee; border-color: rgba(34,211,238,.6);  box-shadow: 0 12px 28px rgba(8,145,178,.22),  inset 0 1px 0 rgba(255,255,255,.1); }
+.social-icon--bilibili::before{ background: radial-gradient(circle, rgba(34,211,238,.5), transparent 70%); }
+.social-icon--xiaohongshu:hover{ color: #f472b6; border-color: rgba(244,114,182,.6); box-shadow: 0 12px 28px rgba(244,63,94,.22), inset 0 1px 0 rgba(255,255,255,.1); }
+.social-icon--xiaohongshu::before{ background: radial-gradient(circle, rgba(244,114,182,.5), transparent 70%); }
+.social-icon--zhihu:hover    { color: #60a5fa; border-color: rgba(96,165,250,.6);  box-shadow: 0 12px 28px rgba(37,99,235,.22),  inset 0 1px 0 rgba(255,255,255,.1); }
+.social-icon--zhihu::before  { background: radial-gradient(circle, rgba(96,165,250,.5), transparent 70%); }
 
-.social-icon--github:hover {
-  color: #0f172a;
-  border-color: rgba(148, 163, 184, 0.75);
-  box-shadow:
-    0 14px 28px rgba(51, 65, 85, 0.24),
-    inset 0 1px 0 rgba(255, 255, 255, 0.95);
-}
-
-.social-icon--github::before {
-  background: radial-gradient(circle, rgba(148, 163, 184, 0.5), transparent 70%);
-}
-
-.social-icon--twitter:hover {
-  color: #0284c7;
-  border-color: rgba(56, 189, 248, 0.7);
-  box-shadow:
-    0 14px 28px rgba(14, 165, 233, 0.24),
-    inset 0 1px 0 rgba(255, 255, 255, 0.95);
-}
-
-.social-icon--twitter::before {
-  background: radial-gradient(circle, rgba(56, 189, 248, 0.5), transparent 70%);
-}
-
-.social-icon--gitee:hover {
-  color: #ea580c;
-  border-color: rgba(251, 146, 60, 0.75);
-  box-shadow:
-    0 14px 28px rgba(249, 115, 22, 0.24),
-    inset 0 1px 0 rgba(255, 255, 255, 0.95);
-}
-
-.social-icon--gitee::before {
-  background: radial-gradient(circle, rgba(251, 146, 60, 0.5), transparent 70%);
-}
-
-.social-icon--qq:hover {
-  color: #0891b2;
-  border-color: rgba(34, 211, 238, 0.75);
-  box-shadow:
-    0 14px 28px rgba(6, 182, 212, 0.24),
-    inset 0 1px 0 rgba(255, 255, 255, 0.95);
-}
-
-.social-icon--qq::before {
-  background: radial-gradient(circle, rgba(34, 211, 238, 0.5), transparent 70%);
-}
-
-.social-icon--mail:hover {
-  color: #e11d48;
-  border-color: rgba(251, 113, 133, 0.75);
-  box-shadow:
-    0 14px 28px rgba(244, 63, 94, 0.24),
-    inset 0 1px 0 rgba(255, 255, 255, 0.95);
-}
-
-.social-icon--mail::before {
-  background: radial-gradient(circle, rgba(251, 113, 133, 0.5), transparent 70%);
-}
-
-.social-icon--linkedin:hover {
-  color: #0a66c2;
-  border-color: rgba(59, 130, 246, 0.75);
-  box-shadow:
-    0 14px 28px rgba(37, 99, 235, 0.24),
-    inset 0 1px 0 rgba(255, 255, 255, 0.95);
-}
-
-.social-icon--linkedin::before {
-  background: radial-gradient(circle, rgba(59, 130, 246, 0.5), transparent 70%);
-}
-
-.social-icon--youtube:hover {
-  color: #ef4444;
-  border-color: rgba(248, 113, 113, 0.75);
-  box-shadow:
-    0 14px 28px rgba(239, 68, 68, 0.24),
-    inset 0 1px 0 rgba(255, 255, 255, 0.95);
-}
-
-.social-icon--youtube::before {
-  background: radial-gradient(circle, rgba(248, 113, 113, 0.5), transparent 70%);
-}
-
-.social-icon--facebook:hover {
-  color: #1877f2;
-  border-color: rgba(96, 165, 250, 0.75);
-  box-shadow:
-    0 14px 28px rgba(59, 130, 246, 0.24),
-    inset 0 1px 0 rgba(255, 255, 255, 0.95);
-}
-
-.social-icon--facebook::before {
-  background: radial-gradient(circle, rgba(96, 165, 250, 0.5), transparent 70%);
-}
-
-.social-icon--twitch:hover {
-  color: #9146ff;
-  border-color: rgba(167, 139, 250, 0.75);
-  box-shadow:
-    0 14px 28px rgba(139, 92, 246, 0.24),
-    inset 0 1px 0 rgba(255, 255, 255, 0.95);
-}
-
-.social-icon--twitch::before {
-  background: radial-gradient(circle, rgba(167, 139, 250, 0.5), transparent 70%);
-}
-
-.social-icon--tiktok:hover {
-  color: #111827;
-  border-color: rgba(75, 85, 99, 0.75);
-  box-shadow:
-    0 14px 28px rgba(17, 24, 39, 0.24),
-    inset 0 1px 0 rgba(255, 255, 255, 0.95);
-}
-
-.social-icon--tiktok::before {
-  background: radial-gradient(circle, rgba(75, 85, 99, 0.5), transparent 70%);
-}
-
-.social-icon--telegram:hover {
-  color: #0ea5e9;
-  border-color: rgba(56, 189, 248, 0.75);
-  box-shadow:
-    0 14px 28px rgba(14, 165, 233, 0.24),
-    inset 0 1px 0 rgba(255, 255, 255, 0.95);
-}
-
-.social-icon--telegram::before {
-  background: radial-gradient(circle, rgba(56, 189, 248, 0.5), transparent 70%);
-}
-
-.social-icon--discord:hover {
-  color: #6366f1;
-  border-color: rgba(129, 140, 248, 0.75);
-  box-shadow:
-    0 14px 28px rgba(99, 102, 241, 0.24),
-    inset 0 1px 0 rgba(255, 255, 255, 0.95);
-}
-
-.social-icon--discord::before {
-  background: radial-gradient(circle, rgba(129, 140, 248, 0.5), transparent 70%);
-}
-
-.social-icon--reddit:hover {
-  color: #ea580c;
-  border-color: rgba(251, 146, 60, 0.75);
-  box-shadow:
-    0 14px 28px rgba(249, 115, 22, 0.24),
-    inset 0 1px 0 rgba(255, 255, 255, 0.95);
-}
-
-.social-icon--reddit::before {
-  background: radial-gradient(circle, rgba(251, 146, 60, 0.5), transparent 70%);
-}
-
-.social-icon--whatsapp:hover {
-  color: #16a34a;
-  border-color: rgba(74, 222, 128, 0.75);
-  box-shadow:
-    0 14px 28px rgba(22, 163, 74, 0.24),
-    inset 0 1px 0 rgba(255, 255, 255, 0.95);
-}
-
-.social-icon--whatsapp::before {
-  background: radial-gradient(circle, rgba(74, 222, 128, 0.5), transparent 70%);
-}
-
-.social-icon--wechat:hover {
-  color: #16a34a;
-  border-color: rgba(74, 222, 128, 0.75);
-  box-shadow:
-    0 14px 28px rgba(22, 163, 74, 0.24),
-    inset 0 1px 0 rgba(255, 255, 255, 0.95);
-}
-
-.social-icon--wechat::before {
-  background: radial-gradient(circle, rgba(74, 222, 128, 0.5), transparent 70%);
-}
-
-.social-icon--weibo:hover {
-  color: #e11d48;
-  border-color: rgba(251, 113, 133, 0.75);
-  box-shadow:
-    0 14px 28px rgba(225, 29, 72, 0.24),
-    inset 0 1px 0 rgba(255, 255, 255, 0.95);
-}
-
-.social-icon--weibo::before {
-  background: radial-gradient(circle, rgba(251, 113, 133, 0.5), transparent 70%);
-}
-
-.social-icon--bilibili:hover {
-  color: #0891b2;
-  border-color: rgba(34, 211, 238, 0.75);
-  box-shadow:
-    0 14px 28px rgba(8, 145, 178, 0.24),
-    inset 0 1px 0 rgba(255, 255, 255, 0.95);
-}
-
-.social-icon--bilibili::before {
-  background: radial-gradient(circle, rgba(34, 211, 238, 0.5), transparent 70%);
-}
-
-.social-icon--xiaohongshu:hover {
-  color: #f43f5e;
-  border-color: rgba(251, 113, 133, 0.75);
-  box-shadow:
-    0 14px 28px rgba(244, 63, 94, 0.24),
-    inset 0 1px 0 rgba(255, 255, 255, 0.95);
-}
-
-.social-icon--xiaohongshu::before {
-  background: radial-gradient(circle, rgba(251, 113, 133, 0.5), transparent 70%);
-}
-
-.social-icon--zhihu:hover {
-  color: #2563eb;
-  border-color: rgba(96, 165, 250, 0.75);
-  box-shadow:
-    0 14px 28px rgba(37, 99, 235, 0.24),
-    inset 0 1px 0 rgba(255, 255, 255, 0.95);
-}
-
-.social-icon--zhihu::before {
-  background: radial-gradient(circle, rgba(96, 165, 250, 0.5), transparent 70%);
-}
-
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   SOCIAL CHIP BUTTONS
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 .social-chip {
   position: relative;
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 7px 12px;
+  padding: 7px 14px;
   border-radius: 999px;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 700;
-  color: #334155;
-  border: 1px solid rgba(226, 232, 240, 0.85);
-  background: linear-gradient(145deg, rgba(255, 255, 255, 0.92), rgba(241, 245, 249, 0.74));
-  box-shadow:
-    0 8px 20px rgba(15, 23, 42, 0.08),
-    inset 0 1px 0 rgba(255, 255, 255, 0.9);
-  transition: transform 0.2s ease, box-shadow 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  color: #c4b5fd;
+  border: 1px solid rgba(167, 139, 250, 0.28);
+  background: rgba(22, 10, 45, 0.72);
+  box-shadow: 0 4px 16px rgba(167, 139, 250, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  transition: transform 0.22s ease, box-shadow 0.22s ease, color 0.22s ease, border-color 0.22s ease;
 }
 
-.social-chip:hover {
-  transform: translateY(-2px);
-}
+.social-chip:hover { transform: translateY(-2px); }
 
 .social-chip::before {
   content: '';
@@ -464,246 +422,159 @@ body::before {
   inset: -5px;
   border-radius: inherit;
   opacity: 0;
-  filter: blur(10px);
-  transition: opacity 0.2s ease;
+  filter: blur(12px);
+  transition: opacity 0.22s ease;
   z-index: -1;
 }
-
-.social-chip:hover::before {
-  opacity: 0.9;
-}
+.social-chip:hover::before { opacity: 1; }
 
 .social-chip__icon {
-  width: 28px;
-  height: 28px;
+  width: 26px;
+  height: 26px;
   border-radius: 999px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid rgba(226, 232, 240, 0.85);
-  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(167, 139, 250, 0.25);
+  background: rgba(167, 139, 250, 0.12);
 }
 
-.social-chip--github:hover {
-  color: #0f172a;
-  border-color: rgba(148, 163, 184, 0.75);
-  box-shadow: 0 12px 24px rgba(51, 65, 85, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.95);
+/* Chip hover states */
+.social-chip--github:hover   { color: #e2e8f0; border-color: rgba(148,163,184,.5); box-shadow: 0 10px 24px rgba(148,163,184,.2), inset 0 1px 0 rgba(255,255,255,.08); }
+.social-chip--github:hover::before { background: radial-gradient(circle, rgba(148,163,184,.4), transparent 70%); }
+.social-chip--twitter:hover  { color: #38bdf8; border-color: rgba(56,189,248,.5);  box-shadow: 0 10px 24px rgba(56,189,248,.2),  inset 0 1px 0 rgba(255,255,255,.08); }
+.social-chip--twitter:hover::before { background: radial-gradient(circle, rgba(56,189,248,.4), transparent 70%); }
+.social-chip--instagram:hover{ color: #f472b6; border-color: rgba(244,114,182,.5); box-shadow: 0 10px 24px rgba(236,72,153,.2),  inset 0 1px 0 rgba(255,255,255,.08); }
+.social-chip--instagram:hover::before { background: radial-gradient(circle, rgba(244,114,182,.4), transparent 70%); }
+.social-chip--mail:hover     { color: #f472b6; border-color: rgba(244,114,182,.5); box-shadow: 0 10px 24px rgba(244,63,94,.2),   inset 0 1px 0 rgba(255,255,255,.08); }
+.social-chip--mail:hover::before { background: radial-gradient(circle, rgba(244,114,182,.4), transparent 70%); }
+.social-chip--qq:hover       { color: #22d3ee; border-color: rgba(34,211,238,.5);  box-shadow: 0 10px 24px rgba(6,182,212,.2),   inset 0 1px 0 rgba(255,255,255,.08); }
+.social-chip--qq:hover::before { background: radial-gradient(circle, rgba(34,211,238,.4), transparent 70%); }
+.social-chip--gitee:hover    { color: #fb923c; border-color: rgba(251,146,60,.5);  box-shadow: 0 10px 24px rgba(249,115,22,.2),  inset 0 1px 0 rgba(255,255,255,.08); }
+.social-chip--gitee:hover::before { background: radial-gradient(circle, rgba(251,146,60,.4), transparent 70%); }
+.social-chip--linkedin:hover { color: #60a5fa; border-color: rgba(59,130,246,.5);  box-shadow: 0 10px 24px rgba(37,99,235,.2),  inset 0 1px 0 rgba(255,255,255,.08); }
+.social-chip--linkedin:hover::before { background: radial-gradient(circle, rgba(59,130,246,.4), transparent 70%); }
+.social-chip--youtube:hover  { color: #ef4444; border-color: rgba(248,113,113,.5); box-shadow: 0 10px 24px rgba(239,68,68,.2),  inset 0 1px 0 rgba(255,255,255,.08); }
+.social-chip--youtube:hover::before { background: radial-gradient(circle, rgba(248,113,113,.4), transparent 70%); }
+.social-chip--facebook:hover { color: #60a5fa; border-color: rgba(96,165,250,.5);  box-shadow: 0 10px 24px rgba(59,130,246,.2), inset 0 1px 0 rgba(255,255,255,.08); }
+.social-chip--facebook:hover::before { background: radial-gradient(circle, rgba(96,165,250,.4), transparent 70%); }
+.social-chip--twitch:hover   { color: #a78bfa; border-color: rgba(167,139,250,.5); box-shadow: 0 10px 24px rgba(139,92,246,.2), inset 0 1px 0 rgba(255,255,255,.08); }
+.social-chip--twitch:hover::before { background: radial-gradient(circle, rgba(167,139,250,.4), transparent 70%); }
+.social-chip--tiktok:hover   { color: #cbd5e1; border-color: rgba(75,85,99,.5);    box-shadow: 0 10px 24px rgba(17,24,39,.3),   inset 0 1px 0 rgba(255,255,255,.08); }
+.social-chip--tiktok:hover::before { background: radial-gradient(circle, rgba(75,85,99,.4), transparent 70%); }
+.social-chip--telegram:hover { color: #38bdf8; border-color: rgba(56,189,248,.5);  box-shadow: 0 10px 24px rgba(14,165,233,.2), inset 0 1px 0 rgba(255,255,255,.08); }
+.social-chip--telegram:hover::before { background: radial-gradient(circle, rgba(56,189,248,.4), transparent 70%); }
+.social-chip--discord:hover  { color: #818cf8; border-color: rgba(129,140,248,.5); box-shadow: 0 10px 24px rgba(99,102,241,.2), inset 0 1px 0 rgba(255,255,255,.08); }
+.social-chip--discord:hover::before { background: radial-gradient(circle, rgba(129,140,248,.4), transparent 70%); }
+.social-chip--reddit:hover   { color: #fb923c; border-color: rgba(251,146,60,.5);  box-shadow: 0 10px 24px rgba(249,115,22,.2), inset 0 1px 0 rgba(255,255,255,.08); }
+.social-chip--reddit:hover::before { background: radial-gradient(circle, rgba(251,146,60,.4), transparent 70%); }
+.social-chip--whatsapp:hover { color: #4ade80; border-color: rgba(74,222,128,.5);  box-shadow: 0 10px 24px rgba(22,163,74,.2),  inset 0 1px 0 rgba(255,255,255,.08); }
+.social-chip--whatsapp:hover::before { background: radial-gradient(circle, rgba(74,222,128,.4), transparent 70%); }
+.social-chip--wechat:hover   { color: #4ade80; border-color: rgba(74,222,128,.5);  box-shadow: 0 10px 24px rgba(22,163,74,.2),  inset 0 1px 0 rgba(255,255,255,.08); }
+.social-chip--wechat:hover::before { background: radial-gradient(circle, rgba(74,222,128,.4), transparent 70%); }
+.social-chip--weibo:hover    { color: #f472b6; border-color: rgba(244,114,182,.5); box-shadow: 0 10px 24px rgba(225,29,72,.2),  inset 0 1px 0 rgba(255,255,255,.08); }
+.social-chip--weibo:hover::before { background: radial-gradient(circle, rgba(244,114,182,.4), transparent 70%); }
+.social-chip--bilibili:hover { color: #22d3ee; border-color: rgba(34,211,238,.5);  box-shadow: 0 10px 24px rgba(8,145,178,.2),  inset 0 1px 0 rgba(255,255,255,.08); }
+.social-chip--bilibili:hover::before { background: radial-gradient(circle, rgba(34,211,238,.4), transparent 70%); }
+.social-chip--xiaohongshu:hover { color: #f472b6; border-color: rgba(244,114,182,.5); box-shadow: 0 10px 24px rgba(244,63,94,.2), inset 0 1px 0 rgba(255,255,255,.08); }
+.social-chip--xiaohongshu:hover::before { background: radial-gradient(circle, rgba(244,114,182,.4), transparent 70%); }
+.social-chip--zhihu:hover    { color: #60a5fa; border-color: rgba(96,165,250,.5);  box-shadow: 0 10px 24px rgba(37,99,235,.2),  inset 0 1px 0 rgba(255,255,255,.08); }
+.social-chip--zhihu:hover::before { background: radial-gradient(circle, rgba(96,165,250,.4), transparent 70%); }
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   SKILL BAR
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.skill-bar-track {
+  height: 6px;
+  background: rgba(167, 139, 250, 0.12);
+  border-radius: 999px;
+  overflow: hidden;
+  border: 1px solid rgba(167, 139, 250, 0.1);
 }
 
-.social-chip--github:hover::before {
-  background: radial-gradient(circle, rgba(148, 163, 184, 0.45), transparent 70%);
+.skill-bar-fill {
+  height: 100%;
+  border-radius: 999px;
+  position: relative;
+  overflow: hidden;
 }
 
-.social-chip--twitter:hover {
-  color: #0284c7;
-  border-color: rgba(56, 189, 248, 0.7);
-  box-shadow: 0 12px 24px rgba(14, 165, 233, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.95);
+.skill-bar-fill::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.3) 50%, transparent 100%);
+  animation: shimmer 2.5s ease-in-out infinite;
 }
 
-.social-chip--twitter:hover::before {
-  background: radial-gradient(circle, rgba(56, 189, 248, 0.45), transparent 70%);
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   SPARKLE DECORATION
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.sparkle-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #f472b6;
+  box-shadow: 0 0 6px #f472b6, 0 0 12px rgba(244, 114, 182, 0.5);
+  animation: twinkle 2s ease-in-out infinite;
 }
 
-.social-chip--instagram:hover {
-  color: #db2777;
-  border-color: rgba(244, 114, 182, 0.72);
-  box-shadow: 0 12px 24px rgba(236, 72, 153, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.95);
-}
-
-.social-chip--instagram:hover::before {
-  background: radial-gradient(circle, rgba(244, 114, 182, 0.45), transparent 70%);
-}
-
-.social-chip--mail:hover {
-  color: #e11d48;
-  border-color: rgba(251, 113, 133, 0.72);
-  box-shadow: 0 12px 24px rgba(244, 63, 94, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.95);
-}
-
-.social-chip--mail:hover::before {
-  background: radial-gradient(circle, rgba(251, 113, 133, 0.45), transparent 70%);
-}
-
-.social-chip--qq:hover {
-  color: #0891b2;
-  border-color: rgba(34, 211, 238, 0.7);
-  box-shadow: 0 12px 24px rgba(6, 182, 212, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.95);
-}
-
-.social-chip--qq:hover::before {
-  background: radial-gradient(circle, rgba(34, 211, 238, 0.45), transparent 70%);
-}
-
-.social-chip--gitee:hover {
-  color: #ea580c;
-  border-color: rgba(251, 146, 60, 0.72);
-  box-shadow: 0 12px 24px rgba(249, 115, 22, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.95);
-}
-
-.social-chip--gitee:hover::before {
-  background: radial-gradient(circle, rgba(251, 146, 60, 0.45), transparent 70%);
-}
-
-.social-chip--linkedin:hover {
-  color: #0a66c2;
-  border-color: rgba(59, 130, 246, 0.72);
-  box-shadow: 0 12px 24px rgba(37, 99, 235, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.95);
-}
-
-.social-chip--linkedin:hover::before {
-  background: radial-gradient(circle, rgba(59, 130, 246, 0.45), transparent 70%);
-}
-
-.social-chip--youtube:hover {
-  color: #ef4444;
-  border-color: rgba(248, 113, 113, 0.72);
-  box-shadow: 0 12px 24px rgba(239, 68, 68, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.95);
-}
-
-.social-chip--youtube:hover::before {
-  background: radial-gradient(circle, rgba(248, 113, 113, 0.45), transparent 70%);
-}
-
-.social-chip--facebook:hover {
-  color: #1877f2;
-  border-color: rgba(96, 165, 250, 0.72);
-  box-shadow: 0 12px 24px rgba(59, 130, 246, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.95);
-}
-
-.social-chip--facebook:hover::before {
-  background: radial-gradient(circle, rgba(96, 165, 250, 0.45), transparent 70%);
-}
-
-.social-chip--twitch:hover {
-  color: #9146ff;
-  border-color: rgba(167, 139, 250, 0.72);
-  box-shadow: 0 12px 24px rgba(139, 92, 246, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.95);
-}
-
-.social-chip--twitch:hover::before {
-  background: radial-gradient(circle, rgba(167, 139, 250, 0.45), transparent 70%);
-}
-
-.social-chip--tiktok:hover {
-  color: #111827;
-  border-color: rgba(75, 85, 99, 0.72);
-  box-shadow: 0 12px 24px rgba(17, 24, 39, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.95);
-}
-
-.social-chip--tiktok:hover::before {
-  background: radial-gradient(circle, rgba(75, 85, 99, 0.45), transparent 70%);
-}
-
-.social-chip--telegram:hover {
-  color: #0ea5e9;
-  border-color: rgba(56, 189, 248, 0.72);
-  box-shadow: 0 12px 24px rgba(14, 165, 233, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.95);
-}
-
-.social-chip--telegram:hover::before {
-  background: radial-gradient(circle, rgba(56, 189, 248, 0.45), transparent 70%);
-}
-
-.social-chip--discord:hover {
-  color: #6366f1;
-  border-color: rgba(129, 140, 248, 0.72);
-  box-shadow: 0 12px 24px rgba(99, 102, 241, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.95);
-}
-
-.social-chip--discord:hover::before {
-  background: radial-gradient(circle, rgba(129, 140, 248, 0.45), transparent 70%);
-}
-
-.social-chip--reddit:hover {
-  color: #ea580c;
-  border-color: rgba(251, 146, 60, 0.72);
-  box-shadow: 0 12px 24px rgba(249, 115, 22, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.95);
-}
-
-.social-chip--reddit:hover::before {
-  background: radial-gradient(circle, rgba(251, 146, 60, 0.45), transparent 70%);
-}
-
-.social-chip--whatsapp:hover {
-  color: #16a34a;
-  border-color: rgba(74, 222, 128, 0.72);
-  box-shadow: 0 12px 24px rgba(22, 163, 74, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.95);
-}
-
-.social-chip--whatsapp:hover::before {
-  background: radial-gradient(circle, rgba(74, 222, 128, 0.45), transparent 70%);
-}
-
-.social-chip--wechat:hover {
-  color: #16a34a;
-  border-color: rgba(74, 222, 128, 0.72);
-  box-shadow: 0 12px 24px rgba(22, 163, 74, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.95);
-}
-
-.social-chip--wechat:hover::before {
-  background: radial-gradient(circle, rgba(74, 222, 128, 0.45), transparent 70%);
-}
-
-.social-chip--weibo:hover {
-  color: #e11d48;
-  border-color: rgba(251, 113, 133, 0.72);
-  box-shadow: 0 12px 24px rgba(225, 29, 72, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.95);
-}
-
-.social-chip--weibo:hover::before {
-  background: radial-gradient(circle, rgba(251, 113, 133, 0.45), transparent 70%);
-}
-
-.social-chip--bilibili:hover {
-  color: #0891b2;
-  border-color: rgba(34, 211, 238, 0.72);
-  box-shadow: 0 12px 24px rgba(8, 145, 178, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.95);
-}
-
-.social-chip--bilibili:hover::before {
-  background: radial-gradient(circle, rgba(34, 211, 238, 0.45), transparent 70%);
-}
-
-.social-chip--xiaohongshu:hover {
-  color: #f43f5e;
-  border-color: rgba(251, 113, 133, 0.72);
-  box-shadow: 0 12px 24px rgba(244, 63, 94, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.95);
-}
-
-.social-chip--xiaohongshu:hover::before {
-  background: radial-gradient(circle, rgba(251, 113, 133, 0.45), transparent 70%);
-}
-
-.social-chip--zhihu:hover {
-  color: #2563eb;
-  border-color: rgba(96, 165, 250, 0.72);
-  box-shadow: 0 12px 24px rgba(37, 99, 235, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.95);
-}
-
-.social-chip--zhihu:hover::before {
-  background: radial-gradient(circle, rgba(96, 165, 250, 0.45), transparent 70%);
-}
-
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   KEYFRAMES
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 @keyframes fall {
-  0% { opacity: 0; top: -10%; transform: translateX(0) rotate(0deg); }
-  10% { opacity: 0.6; }
-  100% { opacity: 0; top: 110%; transform: translateX(50px) rotate(360deg); }
+  0%   { opacity: 0; top: -10%; transform: translateX(0) rotate(0deg); }
+  8%   { opacity: 0.75; }
+  100% { opacity: 0; top: 115%; transform: translateX(60px) rotate(420deg); }
 }
 
 @keyframes drift {
-  0%,
-  100% { transform: translate(0, 0); }
-  50% { transform: translate(-18px, 22px); }
+  0%, 100% { transform: translate(0, 0); }
+  33%       { transform: translate(-20px, 28px); }
+  66%       { transform: translate(14px, -18px); }
 }
 
 @keyframes twinkle {
-  0%,
-  100% { transform: scale(0.9) rotate(0deg); opacity: 0.7; }
-  50% { transform: scale(1.14) rotate(12deg); opacity: 1; }
+  0%, 100% { transform: scale(0.85) rotate(0deg); opacity: 0.65; }
+  50%       { transform: scale(1.18) rotate(15deg); opacity: 1; }
 }
 
 @keyframes floatY {
-  0%,
-  100% { transform: translateY(0); }
-  50% { transform: translateY(-12px); }
+  0%, 100% { transform: translateY(0) rotate(-2deg); }
+  50%       { transform: translateY(-14px) rotate(2deg); }
+}
+
+@keyframes shimmer {
+  0%   { transform: translateX(-120%); }
+  100% { transform: translateX(120%); }
+}
+
+@keyframes holo-shift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes star-drift {
+  0%   { background-position: 0 0, 40px 60px, 100px 20px; }
+  100% { background-position: 0 80px, 40px 140px, 100px 100px; }
+}
+
+@keyframes scan-drift {
+  0%   { background-position: 0 0; }
+  100% { background-position: 0 12px; }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 8px rgba(244, 114, 182, 0.3), 0 0 16px rgba(244, 114, 182, 0.15); }
+  50%       { box-shadow: 0 0 16px rgba(244, 114, 182, 0.5), 0 0 32px rgba(244, 114, 182, 0.25); }
+}
+
+@keyframes rainbow-glow {
+  0%   { filter: drop-shadow(0 0 6px #f472b6); }
+  25%  { filter: drop-shadow(0 0 6px #818cf8); }
+  50%  { filter: drop-shadow(0 0 6px #22d3ee); }
+  75%  { filter: drop-shadow(0 0 6px #34d399); }
+  100% { filter: drop-shadow(0 0 6px #f472b6); }
 }
