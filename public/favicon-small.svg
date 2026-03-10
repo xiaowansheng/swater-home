@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <defs>
+    <radialGradient id="sakuraGradientSmall" cx="35%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#fff"/>
+      <stop offset="50%" stop-color="#fb7185"/>
+      <stop offset="100%" stop-color="#f472b6"/>
+    </radialGradient>
+    <linearGradient id="bgGradientSmall" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e1b4b"/>
+      <stop offset="100%" stop-color="#312e81"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 背景 -->
+  <rect width="32" height="32" rx="8" fill="url(#bgGradientSmall)"/>
+
+  <!-- 樱花 -->
+  <g transform="translate(16, 16)">
+    <ellipse cx="0" cy="-5" rx="3" ry="5" fill="url(#sakuraGradientSmall)" transform="rotate(0)"/>
+    <ellipse cx="0" cy="-5" rx="3" ry="5" fill="url(#sakuraGradientSmall)" transform="rotate(72)"/>
+    <ellipse cx="0" cy="-5" rx="3" ry="5" fill="url(#sakuraGradientSmall)" transform="rotate(144)"/>
+    <ellipse cx="0" cy="-5" rx="3" ry="5" fill="url(#sakuraGradientSmall)" transform="rotate(216)"/>
+    <ellipse cx="0" cy="-5" rx="3" ry="5" fill="url(#sakuraGradientSmall)" transform="rotate(288)"/>
+    <circle cx="0" cy="0" r="2" fill="#ffd6e8"/>
+    <circle cx="0" cy="0" r="1.2" fill="#fb7185"/>
+  </g>
+
+  <!-- 光点 -->
+  <circle cx="9" cy="9" r="1" fill="#22d3ee" opacity="0.8"/>
+  <circle cx="23" cy="23" r="1" fill="#fb7185" opacity="0.8"/>
+</svg>
