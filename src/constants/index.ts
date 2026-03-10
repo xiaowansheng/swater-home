@@ -1,5 +1,5 @@
 import * as Defaults from './templates';
-import * as Local from './config.local';
+import * as Local from './config';
 
 // Export all constants from Defaults as a baseline, but override with any that exist in Local.
 

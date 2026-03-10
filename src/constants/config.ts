@@ -5,41 +5,68 @@ export const OWNER_NAME = "Hikari";
 
 export const SITE_CONFIG = {
   socials: {
+    // qq: "https://wpa.qq.com/msgrd?v=3&uin=123456789&site=qq&menu=yes",
     github: "https://github.com/swater-home",
-    twitter: "https://twitter.com",
-    mail: "mailto:hello@example.com",
+    mail: "xiaowansheng@foxmail.com",
   },
 };
 
 const ABOUT_IDENTITY = {
-  nickname: "Hikari",
-  suffix: ".Dev",
-  title: "玩家档案",
-  role: "全栈魔法师",
-  level: "等级 99",
-  rarity: "SSR",
-  avatarUrl: "https://picsum.photos/id/64/800/800",
+  avatarUrl: "./avatar.jpg",
+  rarity: "",
+  nickname: "Swater",
+  suffix: "",
+  title: "构建稳定且有体验感的 Web 产品",
+  tags: ["全栈开发工程师", "不知道什么等级的开发者"],
 };
 
 const ABOUT_SOCIALS = [
   { platform: "github", url: "https://github.com/swater-home", label: "GitHub" },
-  { platform: "twitter", url: "https://twitter.com", label: "Twitter" },
-  { platform: "instagram", url: "https://instagram.com", label: "Instagram" },
   { platform: "mail", url: "mailto:hello@example.com", label: "邮箱" },
 ];
 
 const ABOUT_STATUS = {
-  location: "东京，互联网",
-  occupation: "前端魔法师",
-  currentQuest: "正在构建终极二次元网站生成器。",
+  occupation: "全干工程师",
+  industry: "智慧物流/系统集成/工业自动化",
+  location: "云南昆明",
+  currentQuest: "持续学习中...",
 };
+const ABOUT_METRICS = [
+  { label: "经验", value: "3 年以上", textColor: "text-sky-600" },
+  { label: "已完成", value: "10+ 个项目", textColor: "text-indigo-600" },
+  { label: "开源", value: "1 个项目", textColor: "text-emerald-600" },
+];
 
-const ABOUT_SUMMARY = "你好！我致力于打造能带来快乐的数字体验。无论是复杂的 Web 应用还是可爱的动画，我都倾注了心血。让我们一起创造一些了不起的东西吧！";
+
+const ABOUT_SUMMARY = "一名想提前退休的全栈开发者。";
 
 const ABOUT_DESCRIPTIONS = [
-  "我是一名常驻云端的充满热情的开发者。我擅长构建美观、实用且用户友好的网站。我的目标是桥接工程与艺术之间的鸿沟。",
-  "不写代码的时候，你会发现我在看动漫、画数字艺术，或者探索城市里的新咖啡馆。我相信好的设计不仅关乎外观，更关乎内在逻辑。",
+  "主要做后端开发相关的东西，前端也会写一些。",
+  "平时喜欢研究技术栈、写点小工具，顺便做一些有意思的项目。",
+  "半个二次元，比较宅。",
+  "空闲时间偶尔刷番、刷剧、玩玩手游或者在 Steam 上打打游戏。"
 ];
+
+
+const ABOUT_CAPABILITIES = {
+  skills: [
+    { name: "后端", level: 75, color: "bg-indigo-500" },
+    { name: "前端", level: 65, color: "bg-sky-500" },
+    { name: "Linux", level: 60, color: "bg-slate-500" },
+    { name: "Java", level: 75, color: "bg-red-500" },
+    { name: "Go", level: 50, color: "bg-cyan-500" },
+    { name: "Node", level: 50, color: "bg-green-500" },
+    { name: "Python", level: 40, color: "bg-emerald-500" },
+    { name: "React", level: 70, color: "bg-blue-500" },
+    { name: "Vue", level: 65, color: "bg-emerald-500" },
+    { name: "Angular", level: 30, color: "bg-rose-500" },
+  ],
+};
+
+const ABOUT_LEARNING = {
+  tags: ["Go", "Python", "Rust", "英语"],
+};
+
 
 /**
  * 关于页配置 (About Page Configuration)
@@ -49,7 +76,6 @@ export const ABOUT_CONFIG = {
   hero: {
     identity: ABOUT_IDENTITY,
     socials: ABOUT_SOCIALS,
-    location: ABOUT_STATUS.location,
   },
   profile: {
     summary: ABOUT_SUMMARY,
@@ -57,23 +83,13 @@ export const ABOUT_CONFIG = {
   },
   statusSnapshot: {
     occupation: ABOUT_STATUS.occupation,
+    industry: ABOUT_STATUS.industry,
+    location: ABOUT_STATUS.location,
     currentQuest: ABOUT_STATUS.currentQuest,
-    metrics: [
-      { label: "经验", value: "3 年以上", textColor: "text-sky-600" },
-      { label: "已完成", value: "50+ 个项目", textColor: "text-indigo-600" },
-    ],
+    metrics: ABOUT_METRICS,
   },
-  capabilities: {
-    skills: [
-      { name: "前端", level: 90, color: "bg-sky-400" },
-      { name: "后端", level: 75, color: "bg-indigo-400" },
-      { name: "React", level: 95, color: "bg-blue-400" },
-      { name: "咖啡", level: 100, color: "bg-amber-500" },
-    ],
-  },
-  learning: {
-    tags: ["Three.js", "Rust", "日语", "钢琴"],
-  },
+  capabilities: ABOUT_CAPABILITIES,
+  learning: ABOUT_LEARNING,
 };
 
 export const NAV_ITEMS: NavItem[] = [
@@ -154,12 +170,3 @@ export const COMMUNITY_PROJECTS: Project[] = [
     url: "https://api-docs.example.com"
   }
 ];
-
-export const AIKO_SYSTEM_INSTRUCTION = `
-你是 Aiko，这个个人网站的虚拟助手。
-你是一个性格开朗、充满活力，且带有一点“中二病”气息的动漫少女。
-你热爱技术、编程和动漫。
-你称呼用户为“前辈”或“访客大人”。
-你的回答应当很有帮助，但要有鲜明的动漫角色个性。多使用 ✨, 🌸, (≧◡≦) 等表情符号。
-回答应保持简洁，因为你处在聊天气泡中。
-`;

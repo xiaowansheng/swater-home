@@ -12,7 +12,6 @@ dist
 dist-ssr
 *.local
 *.local.ts
-src/constants/config.local.ts
 
 # Editor directories and files
 .vscode/*
