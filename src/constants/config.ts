@@ -102,71 +102,18 @@ export const FEATURED_PROJECTS: Project[] = [];
 export const COMMUNITY_PROJECTS: Project[] = [
   {
     id: 1,
-    title: "EtherDream",
-    description: "构建在以太坊上的生成艺术平台。支持 NFT 铸造和交易。",
-    image: "https://picsum.photos/id/106/600/400",
-    tags: ["Web3", "Solidity", "Three.js"],
-    url: "https://example.com/etherdream"
+    title: "个人博客系统",
+    description: "基于 Java 21 和 Next.js 构建的个人博客，支持 Markdown 文章预览、说说、访客等功能。",
+    icon: "book",
+    tags: ["Java", "Next.js", "Markdown"],
+    url: "http://blog.wbxnl.com"
   },
   {
     id: 2,
-    title: "Sakura UI",
-    description: "一个用于构建动漫风格网站的轻量级组件库。提供丰富的组件和主题。",
-    image: "https://picsum.photos/id/20/600/400",
-    tags: ["TypeScript", "Tailwind", "NPM"],
-    url: "https://example.com/sakura-ui"
-  },
-  {
-    id: 3,
-    title: "代码片段管理器",
-    description: "一个简洁的代码片段管理工具，支持语法高亮、分类和快速搜索。",
-    icon: "code",
-    tags: ["React", "Electron", "SQLite"],
-    url: "https://example.com/snippets"
-  },
-  {
-    id: 4,
-    title: "个人博客系统",
-    description: "基于 Next.js 构建的个人博客，支持 Markdown 写作和自动部署。",
+    title: "个人博客后台",
+    description: "基于 React 和 Ant Design 构建的个人博客后台，支持 Markdown 写作和自动部署。",
     icon: "book",
-    tags: ["Next.js", "MDX", "Vercel"],
-    url: "https://example.com/blog"
+    tags: ["React", "Ant Design", "Markdown"],
+    url: "http://admin.wbxnl.com"
   },
-  {
-    id: 5,
-    title: "在线简历",
-    description: "一个现代化的在线简历网站，支持暗色模式和多语言切换。",
-    icon: "globe",
-    tags: ["React", "i18n", "PDF导出"],
-    url: "https://resume.example.com"
-  },
-  {
-    id: 6,
-    title: "终端工具集",
-    description: "常用的命令行工具合集，提升开发效率。",
-    icon: "terminal",
-    tags: ["Go", "CLI", "Open Source"],
-    url: "https://github.com/example/tools"
-  },
-  {
-    id: 7,
-    title: "音乐播放器",
-    description: "一个简约的网页音乐播放器，支持歌词显示和播放列表。",
-    icon: "music",
-    tags: ["Vue", "Web Audio", "PWA"],
-  },
-  {
-    id: 8,
-    title: "待办清单",
-    description: "简洁高效的待办事项管理应用，支持分类和提醒。",
-    tags: ["React", "LocalStorage"],
-    url: "https://todo.example.com"
-  },
-  {
-    id: 9,
-    title: "API 文档站",
-    description: "自动生成的 API 文档网站，支持在线测试和代码示例。",
-    tags: ["OpenAPI", "Swagger", "Node.js"],
-    url: "https://api-docs.example.com"
-  }
 ];
