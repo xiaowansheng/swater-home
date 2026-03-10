@@ -50,7 +50,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   }, []);
 
   return (
-    <div className="min-h-screen relative overflow-hidden" style={{ color: '#e2d9f3', userSelect: 'text' }}>
+    <div className="min-h-screen relative overflow-hidden" style={{ color: 'var(--text-main)', userSelect: 'text' }}>
       {/* Background layers */}
       <div className="anime-grid" />
       <div className="anime-aura anime-aura-cyan" />

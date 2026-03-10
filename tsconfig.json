@@ -37,6 +37,9 @@
       ],
       "@pages/*": [
         "src/pages/*"
+      ],
+      "@contexts/*": [
+        "src/contexts/*"
       ]
     },
     "allowImportingTsExtensions": true,

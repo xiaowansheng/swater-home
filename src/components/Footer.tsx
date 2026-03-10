@@ -49,11 +49,11 @@ const Footer: React.FC = () => {
         <div className="section-divider w-1/2" />
 
         <div className="flex flex-col gap-2">
-          <p className="font-bold font-rounded" style={{ color: '#c4b5fd' }}>
+          <p className="font-bold font-rounded" style={{ color: 'var(--text-sub)' }}>
             © {currentYear} {APP_NAME}. All rights reserved.
           </p>
-          <p className="flex items-center justify-center gap-1 text-xs" style={{ color: '#a78bfa' }}>
-            Made with <Heart size={12} style={{ color: '#f472b6', fill: '#f472b6' }} /> by {APP_NAME.replace('Home', '').replace('Space', '')}
+          <p className="flex items-center justify-center gap-1 text-xs" style={{ color: 'var(--text-dim)' }}>
+            Made with <Heart size={12} style={{ color: 'var(--primary)', fill: 'var(--primary)' }} /> by {APP_NAME.replace('Home', '').replace('Space', '')}
           </p>
         </div>
       </div>

@@ -4,6 +4,7 @@ import Layout from '@components/Layout';
 import About from '@pages/About';
 import Websites from '@pages/Websites';
 import { AnimatePresence, motion } from 'framer-motion';
+import { ThemeProvider } from './contexts/ThemeContext';
 
 const AnimatedLayout: React.FC = () => {
   const location = useLocation();
@@ -48,7 +49,11 @@ const router = createBrowserRouter([
 ]);
 
 const App: React.FC = () => {
-  return <RouterProvider router={router} />;
+  return (
+    <ThemeProvider>
+      <RouterProvider router={router} />
+    </ThemeProvider>
+  );
 };
 
 export default App;

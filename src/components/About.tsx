@@ -91,22 +91,22 @@ const SocialBtn: React.FC<{ icon: React.ReactNode; href: string; label: string; 
 const CardHeader: React.FC<{ icon: React.ReactNode; title: string; color?: string }> = ({
   icon,
   title,
-  color = 'rgba(244,114,182,0.18)',
+  color,
 }) => (
   <div className="flex items-center gap-2.5 mb-4">
     <div
       className="p-1.5 rounded-lg flex-shrink-0"
-      style={{ background: color, boxShadow: '0 0 12px rgba(244,114,182,0.2)' }}
+      style={{ background: color || 'var(--tag-bg-1)', boxShadow: '0 0 12px var(--primary-glow)' }}
     >
       {icon}
     </div>
     <h3
       className="text-sm font-rounded font-black tracking-wide"
-      style={{ color: '#f0abfc', textShadow: '0 0 12px rgba(244,114,182,0.3)' }}
+      style={{ color: 'var(--primary)', textShadow: '0 0 12px var(--primary-glow)' }}
     >
       {title}
     </h3>
-    <div className="flex-1 h-px" style={{ background: 'linear-gradient(90deg, rgba(244,114,182,0.4), transparent)' }} />
+    <div className="flex-1 h-px" style={{ background: 'linear-gradient(90deg, var(--primary-glow), transparent)' }} />
   </div>
 );
 
@@ -152,7 +152,7 @@ const About: React.FC = () => {
           <div
             className="absolute -inset-4 rounded-full opacity-60"
             style={{
-              background: 'conic-gradient(from 0deg, #f472b6, #818cf8, #22d3ee, #34d399, #f472b6)',
+              background: 'var(--holo-border)',
               filter: 'blur(10px)',
               animation: 'holo-shift 4s linear infinite',
               backgroundSize: '200% 200%',
@@ -162,7 +162,7 @@ const About: React.FC = () => {
           <div
             className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-full p-[3px]"
             style={{
-              background: 'linear-gradient(135deg, #f472b6, #818cf8, #22d3ee)',
+              background: 'var(--holo-border)',
               backgroundSize: '200% 200%',
               animation: 'holo-shift 4s linear infinite',
             }}
@@ -181,15 +181,15 @@ const About: React.FC = () => {
               transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
               className="absolute -bottom-2 -right-2 text-[11px] font-black px-2.5 py-1 rounded-full inline-flex items-center gap-1"
               style={{
-                background: 'rgba(15,10,35,0.9)',
-                border: '1px solid rgba(52,211,153,0.5)',
-                color: '#34d399',
-                boxShadow: '0 0 10px rgba(52,211,153,0.3)',
+                background: 'var(--overlay-bg)',
+                border: '1px solid var(--accent-glow)',
+                color: 'var(--accent)',
+                boxShadow: '0 0 10px var(--accent-glow)',
                 fontFamily: 'Orbitron, sans-serif',
                 fontSize: '9px',
               }}
             >
-              <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-400" style={{ boxShadow: '0 0 6px #34d399' }} />
+              <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-400" style={{ boxShadow: '0 0 6px var(--accent)' }} />
               {hero.identity.rarity}
             </motion.span>
           )}
@@ -197,10 +197,10 @@ const About: React.FC = () => {
 
         {/* Name */}
         <h1 className="text-3xl md:text-4xl font-rounded font-black mb-2">
-          <span style={{ color: '#f0e6ff' }}>{hero.identity.nickname}</span>
+          <span style={{ color: 'var(--text-bright)' }}>{hero.identity.nickname}</span>
           <span
             style={{
-              background: 'linear-gradient(135deg, #f472b6, #818cf8, #22d3ee)',
+              background: 'var(--holo-border)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundSize: '200% 200%',
@@ -210,7 +210,7 @@ const About: React.FC = () => {
             {hero.identity.suffix}
           </span>
         </h1>
-        <p className="text-sm sm:text-base font-medium max-w-2xl mx-auto leading-relaxed mb-5" style={{ color: '#a78bfa' }}>
+        <p className="text-sm sm:text-base font-medium max-w-2xl mx-auto leading-relaxed mb-5" style={{ color: 'var(--text-dim)' }}>
           {hero.identity.title}
         </p>
 
@@ -219,9 +219,9 @@ const About: React.FC = () => {
           {isValidArray(hero.identity.tags) &&
             hero.identity.tags.map((tag, index) => {
               const tagStyles = [
-                { bg: 'rgba(244,114,182,0.12)', border: 'rgba(244,114,182,0.35)', color: '#f9a8d4' },
-                { bg: 'rgba(129,140,248,0.12)', border: 'rgba(129,140,248,0.35)', color: '#c4b5fd' },
-                { bg: 'rgba(34,211,238,0.12)', border: 'rgba(34,211,238,0.35)', color: '#67e8f9' },
+                { bg: 'var(--tag-bg-1)', border: 'var(--tag-border-1)', color: 'var(--tag-color-1)' },
+                { bg: 'var(--tag-bg-2)', border: 'var(--tag-border-2)', color: 'var(--tag-color-2)' },
+                { bg: 'var(--tag-bg-3)', border: 'var(--tag-border-3)', color: 'var(--tag-color-3)' },
               ];
               const s = tagStyles[index % tagStyles.length];
               return (
@@ -265,9 +265,9 @@ const About: React.FC = () => {
               title="关于我"
               color="rgba(244,114,182,0.15)"
             />
-            <div className="space-y-2 leading-relaxed text-sm sm:text-base" style={{ color: '#c4b5fd' }}>
+            <div className="space-y-2 leading-relaxed text-sm sm:text-base" style={{ color: 'var(--text-sub)' }}>
               {isValidString(profile.summary) && (
-                <p className="font-semibold" style={{ color: '#e2d9f3' }}>{profile.summary}</p>
+                <p className="font-semibold" style={{ color: 'var(--text-main)' }}>{profile.summary}</p>
               )}
               {cleanDescriptions.map((desc, index) => (
                 <p key={index}>{desc}</p>
@@ -291,55 +291,55 @@ const About: React.FC = () => {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.15 }}
                     className="glass-panel p-5 rounded-2xl"
-                    style={{ borderLeft: '3px solid #f472b6' }}
+                    style={{ borderLeft: '3px solid var(--primary)' }}
                   >
                     <CardHeader
-                      icon={<Compass size={15} style={{ color: '#818cf8' }} />}
+                      icon={<Compass size={15} style={{ color: 'var(--secondary)' }} />}
                       title="当前状态"
-                      color="rgba(129,140,248,0.15)"
+                      color="var(--tag-bg-2)"
                     />
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
                       {isValidString(statusSnapshot.occupation) && (
                         <div
                           className="rounded-xl p-3"
-                          style={{ background: 'rgba(244,114,182,0.07)', border: '1px solid rgba(244,114,182,0.15)' }}
+                          style={{ background: 'var(--tag-bg-1)', border: '1px solid var(--tag-border-1)' }}
                         >
-                          <p className="text-xs font-bold mb-1" style={{ color: '#a78bfa' }}>职业</p>
-                          <p className="font-black text-sm" style={{ color: '#f0e6ff' }}>{statusSnapshot.occupation}</p>
+                          <p className="text-xs font-bold mb-1" style={{ color: 'var(--text-dim)' }}>职业</p>
+                          <p className="font-black text-sm" style={{ color: 'var(--text-bright)' }}>{statusSnapshot.occupation}</p>
                         </div>
                       )}
                       {isValidString(statusSnapshot.industry) && (
                         <div
                           className="rounded-xl p-3"
-                          style={{ background: 'rgba(129,140,248,0.07)', border: '1px solid rgba(129,140,248,0.15)' }}
+                          style={{ background: 'var(--tag-bg-2)', border: '1px solid var(--tag-border-2)' }}
                         >
-                          <p className="text-xs font-bold mb-1" style={{ color: '#a78bfa' }}>行业</p>
-                          <p className="font-black text-sm" style={{ color: '#f0e6ff' }}>{statusSnapshot.industry}</p>
+                          <p className="text-xs font-bold mb-1" style={{ color: 'var(--text-dim)' }}>行业</p>
+                          <p className="font-black text-sm" style={{ color: 'var(--text-bright)' }}>{statusSnapshot.industry}</p>
                         </div>
                       )}
                       {isValidString(statusSnapshot.location) && (
                         <div
                           className="rounded-xl p-3"
-                          style={{ background: 'rgba(34,211,238,0.07)', border: '1px solid rgba(34,211,238,0.15)' }}
+                          style={{ background: 'var(--tag-bg-3)', border: '1px solid var(--tag-border-3)' }}
                         >
-                          <p className="text-xs font-bold mb-1 flex items-center gap-1.5" style={{ color: '#a78bfa' }}>
-                            <MapPin size={11} style={{ color: '#f472b6' }} />
+                          <p className="text-xs font-bold mb-1 flex items-center gap-1.5" style={{ color: 'var(--text-dim)' }}>
+                            <MapPin size={11} style={{ color: 'var(--primary)' }} />
                             位置
                           </p>
-                          <p className="font-black text-sm" style={{ color: '#f0e6ff' }}>{statusSnapshot.location}</p>
+                          <p className="font-black text-sm" style={{ color: 'var(--text-bright)' }}>{statusSnapshot.location}</p>
                         </div>
                       )}
                     </div>
                     {isValidString(statusSnapshot.currentQuest) && (
                       <div
                         className="mt-3 rounded-xl p-3"
-                        style={{ background: 'rgba(244,114,182,0.07)', border: '1px solid rgba(244,114,182,0.18)' }}
+                        style={{ background: 'var(--tag-bg-1)', border: '1px solid var(--tag-border-1)' }}
                       >
-                        <p className="text-xs font-bold mb-1 flex items-center gap-1.5" style={{ color: '#a78bfa' }}>
-                          <Target size={11} style={{ color: '#f472b6' }} />
+                        <p className="text-xs font-bold mb-1 flex items-center gap-1.5" style={{ color: 'var(--text-dim)' }}>
+                          <Target size={11} style={{ color: 'var(--primary)' }} />
                           当前目标
                         </p>
-                        <p className="font-black text-sm sm:text-base" style={{ color: '#f0e6ff' }}>
+                        <p className="font-black text-sm sm:text-base" style={{ color: 'var(--text-bright)' }}>
                           {statusSnapshot.currentQuest}
                         </p>
                       </div>
@@ -356,25 +356,25 @@ const About: React.FC = () => {
                   className="glass-panel p-5 rounded-2xl"
                 >
                   <CardHeader
-                    icon={<Zap size={15} style={{ color: '#22d3ee' }} />}
+                    icon={<Zap size={15} style={{ color: 'var(--cyan)' }} />}
                     title="关键指标"
-                    color="rgba(34,211,238,0.15)"
+                    color="var(--tag-bg-3)"
                   />
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
                     {statusSnapshot.metrics.map((metric, i) => {
-                      const colors = ['#f472b6', '#818cf8', '#22d3ee', '#34d399', '#fb923c', '#a78bfa'];
+                      const colors = ['var(--primary)', 'var(--secondary)', 'var(--cyan)', 'var(--accent)', '#fb923c', '#a78bfa'];
                       const c = colors[i % colors.length];
                       return (
                         <div
                           key={metric.label}
                           className="rounded-xl p-3"
                           style={{
-                            background: `${c}0d`,
-                            border: `1px solid ${c}26`,
+                            background: `${c}1a`,
+                            border: `1px solid ${c}40`,
                           }}
                         >
-                          <p className="text-xs font-bold mb-1" style={{ color: '#a78bfa' }}>{metric.label}</p>
-                          <p className="text-base font-black" style={{ color: c, textShadow: `0 0 10px ${c}66` }}>
+                          <p className="text-xs font-bold mb-1" style={{ color: 'var(--text-dim)' }}>{metric.label}</p>
+                          <p className="text-base font-black" style={{ color: c, textShadow: `0 0 10px ${c}80` }}>
                             {metric.value}
                           </p>
                         </div>
@@ -395,9 +395,9 @@ const About: React.FC = () => {
             className="glass-panel p-5 rounded-2xl"
           >
             <CardHeader
-              icon={<Zap size={15} style={{ color: '#f472b6' }} />}
+              icon={<Zap size={15} style={{ color: 'var(--primary)' }} />}
               title="核心能力"
-              color="rgba(244,114,182,0.15)"
+              color="var(--tag-bg-1)"
             />
             <div className="space-y-4">
               {capabilities.skills.map((skill, index) => {
@@ -408,7 +408,7 @@ const About: React.FC = () => {
                       className="p-1.5 rounded-lg flex-shrink-0 flex items-center justify-center"
                       style={{
                         background: gradient,
-                        boxShadow: `0 0 10px rgba(244,114,182,0.25)`,
+                        boxShadow: `0 0 10px var(--primary-glow)`,
                         color: 'white',
                       }}
                     >
@@ -416,13 +416,13 @@ const About: React.FC = () => {
                     </span>
                     <div className="min-w-0">
                       <div className="flex items-center justify-between text-xs mb-1.5">
-                        <span className="font-bold truncate" style={{ color: '#f0e6ff' }}>{skill.name}</span>
+                        <span className="font-bold truncate" style={{ color: 'var(--text-bright)' }}>{skill.name}</span>
                         <span
                           className="font-black text-[10px] px-2 py-0.5 rounded-full ml-2 flex-shrink-0"
                           style={{
-                            background: 'rgba(244,114,182,0.12)',
-                            border: '1px solid rgba(244,114,182,0.3)',
-                            color: '#f9a8d4',
+                            background: 'var(--tag-bg-1)',
+                            border: '1px solid var(--tag-border-1)',
+                            color: 'var(--tag-color-1)',
                             fontFamily: 'Orbitron, sans-serif',
                           }}
                         >
@@ -463,9 +463,9 @@ const About: React.FC = () => {
             <div className="flex flex-wrap gap-2">
               {learning.tags.map((tag, i) => {
                 const tagColors = [
-                  { bg: 'rgba(244,114,182,0.12)', border: 'rgba(244,114,182,0.3)', color: '#f9a8d4' },
-                  { bg: 'rgba(129,140,248,0.12)', border: 'rgba(129,140,248,0.3)', color: '#c4b5fd' },
-                  { bg: 'rgba(34,211,238,0.12)', border: 'rgba(34,211,238,0.3)', color: '#67e8f9' },
+                  { bg: 'var(--tag-bg-1)', border: 'var(--tag-border-1)', color: 'var(--tag-color-1)' },
+                  { bg: 'var(--tag-bg-2)', border: 'var(--tag-border-2)', color: 'var(--tag-color-2)' },
+                  { bg: 'var(--tag-bg-3)', border: 'var(--tag-border-3)', color: 'var(--tag-color-3)' },
                   { bg: 'rgba(52,211,153,0.12)', border: 'rgba(52,211,153,0.3)', color: '#86efac' },
                   { bg: 'rgba(251,146,60,0.12)', border: 'rgba(251,146,60,0.3)', color: '#fdba74' },
                 ];
