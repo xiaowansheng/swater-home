@@ -16,7 +16,7 @@ const ABOUT_IDENTITY = {
   rarity: "",
   nickname: "Swater",
   suffix: "",
-  title: "构建稳定且有体验感的 Web 产品",
+  title: "我不想努力了",
   tags: ["全栈开发工程师", "不知道什么等级的开发者"],
 };
 
