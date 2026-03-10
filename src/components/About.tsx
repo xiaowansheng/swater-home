@@ -48,7 +48,9 @@ const getSkillIcon = (name: string) => {
 const getSkillLevelLabel = (level: number) => {
   if (level >= 90) return '精通';
   if (level >= 75) return '熟练';
-  return '掌握';
+  if (level >= 60) return '掌握';
+  if (level >= 40) return '入门';
+  return '认识';
 };
 
 const SocialBtn: React.FC<{ icon: React.ReactNode; href: string; label: string; platform: string }> = ({
@@ -192,52 +194,86 @@ const About: React.FC = () => {
           </motion.div>
         )}
 
-        {(isValidString(statusSnapshot.occupation) || isValidArray(statusSnapshot.metrics) || isValidString(statusSnapshot.currentQuest)) && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.15 }}
-            className="glass-panel p-5 rounded-2xl border-l-4 border-cyan-400"
-          >
-            <div className="flex items-center gap-2 mb-4">
-              <div className="p-1.5 bg-cyan-100 rounded-lg text-cyan-500">
-                <Compass size={16} />
-              </div>
-              <h3 className="text-base font-black text-slate-800">当前状态</h3>
-            </div>
-            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-              {isValidString(statusSnapshot.occupation) && (
-                <div className="rounded-xl p-3 bg-white/75 border border-white/85">
-                  <p className="text-xs font-semibold text-slate-500 mb-1">职业</p>
-                  <p className="font-bold text-slate-700 text-sm">{statusSnapshot.occupation}</p>
+        {(isValidString(statusSnapshot.occupation) ||
+          isValidString(statusSnapshot.location) ||
+          isValidString(statusSnapshot.currentQuest) ||
+          isValidArray(statusSnapshot.metrics)) && (
+          <div className="space-y-4">
+            {(isValidString(statusSnapshot.occupation) ||
+              isValidString(statusSnapshot.industry) ||
+              isValidString(statusSnapshot.location) ||
+              isValidString(statusSnapshot.currentQuest)) && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.15 }}
+                className="glass-panel p-5 rounded-2xl border-l-4 border-cyan-400"
+              >
+                <div className="flex items-center gap-2 mb-4">
+                  <div className="p-1.5 bg-cyan-100 rounded-lg text-cyan-500">
+                    <Compass size={16} />
+                  </div>
+                  <h3 className="text-base font-black text-slate-800">当前状态</h3>
                 </div>
-              )}
-              {isValidString(statusSnapshot.location) && (
-                <div className="rounded-xl p-3 bg-white/75 border border-white/85">
-                  <p className="text-xs font-semibold text-slate-500 mb-1 flex items-center gap-1.5">
-                    <MapPin size={12} className="text-rose-500" />
-                    位置
-                  </p>
-                  <p className="font-bold text-slate-700 text-sm">{statusSnapshot.location}</p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                  {isValidString(statusSnapshot.occupation) && (
+                    <div className="rounded-xl p-3 bg-white/75 border border-white/85">
+                      <p className="text-xs font-semibold text-slate-500 mb-1">职业</p>
+                      <p className="font-bold text-slate-700 text-sm">{statusSnapshot.occupation}</p>
+                    </div>
+                  )}
+                  {isValidString(statusSnapshot.industry) && (
+                    <div className="rounded-xl p-3 bg-white/75 border border-white/85">
+                      <p className="text-xs font-semibold text-slate-500 mb-1">行业</p>
+                      <p className="font-bold text-slate-700 text-sm">{statusSnapshot.industry}</p>
+                    </div>
+                  )}
+                  {isValidString(statusSnapshot.location) && (
+                    <div className="rounded-xl p-3 bg-white/75 border border-white/85">
+                      <p className="text-xs font-semibold text-slate-500 mb-1 flex items-center gap-1.5">
+                        <MapPin size={12} className="text-rose-500" />
+                        位置
+                      </p>
+                      <p className="font-bold text-slate-700 text-sm">{statusSnapshot.location}</p>
+                    </div>
+                  )}
                 </div>
-              )}
-              {isValidArray(statusSnapshot.metrics) && statusSnapshot.metrics.map((metric) => (
-                <div key={metric.label} className="rounded-xl p-3 bg-white/75 border border-white/85">
-                  <p className="text-xs font-semibold text-slate-500 mb-1">{metric.label}</p>
-                  <p className={`text-base font-black ${metric.textColor}`}>{metric.value}</p>
-                </div>
-              ))}
-            </div>
-            {isValidString(statusSnapshot.currentQuest) && (
-              <div className="mt-3 rounded-xl p-3 bg-white/75 border border-white/85">
-                <p className="text-xs font-semibold text-slate-500 mb-1 flex items-center gap-1.5">
-                  <Target size={12} className="text-rose-500" />
-                  当前目标
-                </p>
-                <p className="font-bold text-slate-700 text-sm sm:text-base">{statusSnapshot.currentQuest}</p>
-              </div>
+                {isValidString(statusSnapshot.currentQuest) && (
+                  <div className="mt-3 rounded-xl p-3 bg-white/75 border border-white/85">
+                    <p className="text-xs font-semibold text-slate-500 mb-1 flex items-center gap-1.5">
+                      <Target size={12} className="text-rose-500" />
+                      当前目标
+                    </p>
+                    <p className="font-bold text-slate-700 text-sm sm:text-base">{statusSnapshot.currentQuest}</p>
+                  </div>
+                )}
+              </motion.div>
             )}
-          </motion.div>
+
+            {isValidArray(statusSnapshot.metrics) && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+                className="glass-panel p-5 rounded-2xl border border-white/80"
+              >
+                <div className="flex items-center gap-2 mb-4">
+                  <div className="p-1.5 bg-sky-100 rounded-lg text-sky-500">
+                    <Zap size={16} />
+                  </div>
+                  <h3 className="text-base font-black text-slate-800">关键指标</h3>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                  {statusSnapshot.metrics.map((metric) => (
+                    <div key={metric.label} className="rounded-xl p-3 bg-white/75 border border-white/85">
+                      <p className="text-xs font-semibold text-slate-500 mb-1">{metric.label}</p>
+                      <p className={`text-base font-black ${metric.textColor}`}>{metric.value}</p>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            )}
+          </div>
         )}
 
         {isValidArray(capabilities.skills) && (
