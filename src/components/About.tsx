@@ -80,7 +80,9 @@ const SocialBtn: React.FC<{ icon: React.ReactNode; href: string; label: string; 
 const About: React.FC = () => {
   const { hero, profile, statusSnapshot, capabilities, learning } = ABOUT_CONFIG;
   const configuredSocials = (SITE_CONFIG?.socials ?? {}) as Record<string, string>;
-  const aboutLabelMap = new Map(hero.socials.map((social) => [social.platform, social.label]));
+  const aboutLabelMap = new Map<string, string>(
+    hero.socials.map((social) => [String(social.platform), String(social.label)]),
+  );
   const mergedSocials = Object.entries(configuredSocials).reduce<Array<{ platform: string; url: string; label: string }>>(
     (acc, [platform, url]) => {
       if (!isSocialPlatform(platform)) return acc;
