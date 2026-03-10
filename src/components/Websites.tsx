@@ -127,14 +127,13 @@ const Websites: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.08 }}
-            className="group"
           >
             {project.image ? (
               <div className="relative h-64 rounded-2xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 border border-white/40">
                 <img
                   src={project.image}
                   alt={project.title}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/45 to-transparent"></div>
 
@@ -142,7 +141,14 @@ const Websites: React.FC = () => {
 
                 <div className="absolute bottom-0 left-0 right-0 p-5">
                   <h3 className="text-lg font-black text-white mb-1">{project.title}</h3>
-                  <p className="text-white/80 text-sm line-clamp-2 mb-3">{project.description}</p>
+                  <div className="relative group mb-3">
+                    <p className="text-white/80 text-sm line-clamp-2">
+                      {project.description}
+                    </p>
+                    <div className="pointer-events-none absolute left-0 top-full mt-2 w-64 rounded-lg bg-slate-900/95 px-3 py-2 text-xs text-white shadow-lg opacity-0 translate-y-1 transition-all duration-200 group-hover:opacity-100 group-hover:translate-y-0">
+                      {project.description}
+                    </div>
+                  </div>
 
                   {renderTags(project.tags, true)}
 
@@ -172,7 +178,14 @@ const Websites: React.FC = () => {
                 </div>
 
                 <h3 className="text-lg font-black text-slate-800 mb-2">{project.title}</h3>
-                <p className="text-slate-500 text-sm leading-relaxed mb-4 flex-1">{project.description}</p>
+                <div className="relative group mb-4 flex-1">
+                  <p className="text-slate-500 text-sm leading-relaxed line-clamp-2">
+                    {project.description}
+                  </p>
+                  <div className="pointer-events-none absolute left-0 top-full mt-2 w-64 rounded-lg bg-white px-3 py-2 text-xs text-slate-700 shadow-lg border border-slate-200 opacity-0 translate-y-1 transition-all duration-200 group-hover:opacity-100 group-hover:translate-y-0">
+                    {project.description}
+                  </div>
+                </div>
 
                 {renderTags(project.tags)}
 
