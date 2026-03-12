@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { Home, Globe, BookOpen, Sun, Moon, Monitor } from 'lucide-react';
+import { Home, Globe, BookOpen, Sun, Moon } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 import { NAV_ITEMS } from '@constants';
@@ -92,7 +92,7 @@ const Navbar: React.FC = () => {
               transition={{ duration: 0.2 }}
               className="relative z-10"
             >
-              {theme === 'dark' ? <Moon size={18} /> : theme === 'light' ? <Sun size={18} /> : <Monitor size={18} />}
+              {theme === 'dark' ? <Moon size={18} /> : <Sun size={18} />}
             </motion.div>
           </AnimatePresence>
         </motion.button>
