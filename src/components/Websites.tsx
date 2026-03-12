@@ -146,7 +146,7 @@ const Websites: React.FC = () => {
                 <div className="absolute bottom-0 left-0 right-0 p-5">
                   <h3 className="text-lg font-black text-white mb-1">{project.title}</h3>
                   <div className="relative group/desc mb-3">
-                    <p className="text-white/75 text-sm line-clamp-2">{project.description}</p>
+                    <p className="text-sm line-clamp-2" style={{ color: 'var(--text-on-image)' }}>{project.description}</p>
                     <div
                       className="pointer-events-none absolute left-0 top-full mt-2 w-64 rounded-lg px-3 py-2 text-xs shadow-lg opacity-0 translate-y-1 transition-all duration-200 group-hover/desc:opacity-100 group-hover/desc:translate-y-0 z-20"
                       style={{ background: 'var(--overlay-bg)', color: 'var(--text-main)', border: '1px solid var(--overlay-border)' }}
