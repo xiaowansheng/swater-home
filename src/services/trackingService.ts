@@ -20,9 +20,14 @@ export function parseUtmParams(search: string): Pick<TrackEnterParams, 'utmSourc
   };
 }
 
+function getTrackApiUrl(path: string): string {
+  const base = import.meta.env.VITE_TRACK_API_BASE || '/api';
+  return `${base}${path}`;
+}
+
 export async function trackEnter(params: TrackEnterParams): Promise<TrackEnterResult | null> {
   try {
-    const res = await fetch('/api/public/track/enter', {
+    const res = await fetch(getTrackApiUrl('/public/track/enter'), {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(params),
