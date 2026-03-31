@@ -13,13 +13,6 @@ export interface Project {
   url?: string;
 }
 
-export interface ChatMessage {
-  id: string;
-  role: 'user' | 'model';
-  text: string;
-  timestamp: Date;
-}
-
 export enum ViewState {
   HOME = 'HOME',
   ABOUT = 'ABOUT',

@@ -8,8 +8,6 @@ export const OWNER_NAME = (Local as any).OWNER_NAME ?? Defaults.OWNER_NAME;
 export const SITE_CONFIG = (Local as any).SITE_CONFIG ?? Defaults.SITE_CONFIG;
 export const ABOUT_CONFIG = (Local as any).ABOUT_CONFIG ?? Defaults.ABOUT_CONFIG;
 export const NAV_ITEMS = (Local as any).NAV_ITEMS ?? Defaults.NAV_ITEMS;
-export const AIKO_SYSTEM_INSTRUCTION = (Local as any).AIKO_SYSTEM_INSTRUCTION ?? Defaults.AIKO_SYSTEM_INSTRUCTION;
-
 // Projects logic:
 // FEATURED_PROJECTS comes from Local (if defined) or Defaults (which is empty by default).
 export const FEATURED_PROJECTS = (Local as any).FEATURED_PROJECTS ?? Defaults.FEATURED_PROJECTS;
