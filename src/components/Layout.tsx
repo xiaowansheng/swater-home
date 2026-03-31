@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import Navbar from './Navbar';
 import Footer from './Footer';
+import VisitorTracker from './VisitorTracker';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -75,6 +76,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
       <Navbar />
 
+      <VisitorTracker />
       <main className="relative z-10">{children}</main>
 
       <Footer />

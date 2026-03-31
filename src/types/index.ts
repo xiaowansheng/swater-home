@@ -26,3 +26,24 @@ export enum ViewState {
   WEBSITES = 'WEBSITES',
   BLOG = 'BLOG'
 }
+
+export interface TrackEnterParams {
+  visitorUuid?: string;
+  pageKey?: string;
+  pageUrl?: string;
+  referer?: string;
+  utmSource?: string;
+  utmMedium?: string;
+  utmCampaign?: string;
+  contentType?: string;
+  contentId?: number;
+}
+
+export interface TrackEnterResult {
+  visitorUuid: string;
+  sessionId: string;
+  newVisitor: boolean;
+  newSession: boolean;
+  pagePvCounted: boolean;
+  contentReadCounted: boolean;
+}
