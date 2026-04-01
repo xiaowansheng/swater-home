@@ -47,7 +47,7 @@ export function parseUtmParams(search: string): Pick<TrackEnterParams, 'utmSourc
   };
 }
 
-const TRACK_API_BASE = import.meta.env.VITE_TRACK_API_BASE || '/api';
+const TRACK_API_BASE = import.meta.env.VITE_TRACK_API_BASE || '/';
 
 function getTrackApiUrl(path: string): string {
   return `${TRACK_API_BASE}${path}`;
