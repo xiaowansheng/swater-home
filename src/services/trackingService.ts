@@ -4,25 +4,27 @@ const VISITOR_UUID_KEY = 'visitor_uuid';
 const THROTTLE_KEY = 'track_last_sent';
 const THROTTLE_INTERVAL = 15_000; // 15秒内同一页面不上报
 
-interface ThrottleRecord {
-  [pageKey: string]: number;
-}
+// 内存缓存，避免每次读取都 JSON.parse
+const lastSentCache = new Map<string, number>();
 
-function getLastSentMap(): ThrottleRecord {
-  try {
-    return JSON.parse(sessionStorage.getItem(THROTTLE_KEY) || '{}');
-  } catch {
-    return {};
+try {
+  const stored = JSON.parse(sessionStorage.getItem(THROTTLE_KEY) || '{}');
+  for (const [k, v] of Object.entries(stored)) {
+    if (typeof v === 'number') lastSentCache.set(k, v);
   }
+} catch { /* ignore */ }
+
+function persistLastSent(): void {
+  // 淘汰过期条目后再持久化
+  const now = Date.now();
+  for (const [k, t] of lastSentCache) {
+    if (now - t >= THROTTLE_INTERVAL) lastSentCache.delete(k);
+  }
+  sessionStorage.setItem(THROTTLE_KEY, JSON.stringify(Object.fromEntries(lastSentCache)));
 }
 
-function setLastSentMap(map: ThrottleRecord): void {
-  sessionStorage.setItem(THROTTLE_KEY, JSON.stringify(map));
-}
-
-export function isThrottled(pageKey: string): boolean {
-  const map = getLastSentMap();
-  const lastSent = map[pageKey];
+function isThrottled(pageKey: string): boolean {
+  const lastSent = lastSentCache.get(pageKey);
   if (!lastSent) return false;
   return Date.now() - lastSent < THROTTLE_INTERVAL;
 }
@@ -45,9 +47,10 @@ export function parseUtmParams(search: string): Pick<TrackEnterParams, 'utmSourc
   };
 }
 
+const TRACK_API_BASE = import.meta.env.VITE_TRACK_API_BASE || '/api';
+
 function getTrackApiUrl(path: string): string {
-  const base = import.meta.env.VITE_TRACK_API_BASE || '/api';
-  return `${base}${path}`;
+  return `${TRACK_API_BASE}${path}`;
 }
 
 export async function trackEnter(params: TrackEnterParams): Promise<TrackEnterResult | null> {
@@ -56,9 +59,8 @@ export async function trackEnter(params: TrackEnterParams): Promise<TrackEnterRe
   const result = await trackEnterRequest(params);
 
   if (result && params.pageKey) {
-    const map = getLastSentMap();
-    map[params.pageKey] = Date.now();
-    setLastSentMap(map);
+    lastSentCache.set(params.pageKey, Date.now());
+    persistLastSent();
   }
 
   return result;
